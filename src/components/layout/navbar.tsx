@@ -8,100 +8,116 @@ import { useState } from "react"
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
+  const handleSectionClick = (section: string) => {
+    window.location.href = `/#${section}`
+  }
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-light">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="text-xl font-bold text-primary">
+          <Link href="/" className="text-2xl font-bold text-primary">
             CoNest
           </Link>
 
-          {/* Navigation Links - Desktop */}
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="#benefits" className="link">
-              Benefits
-            </Link>
-            <Link href="#how-it-works" className="link">
-              How It Works
-            </Link>
-            <Link href="#testimonials" className="link">
-              Testimonials
-            </Link>
-            <Link href="#faq" className="link">
+            <button
+              onClick={() => handleSectionClick("benefits")}
+              className="text-gray-600 hover:text-primary transition-colors"
+            >
+              Beneficios
+            </button>
+            <button
+              onClick={() => handleSectionClick("how-it-works")}
+              className="text-gray-600 hover:text-primary transition-colors"
+            >
+              Cómo Funciona
+            </button>
+            <button
+              onClick={() => handleSectionClick("testimonials")}
+              className="text-gray-600 hover:text-primary transition-colors"
+            >
+              Testimonios
+            </button>
+            <button
+              onClick={() => handleSectionClick("faq")}
+              className="text-gray-600 hover:text-primary transition-colors"
+            >
               FAQ
-            </Link>
-            <Link href="#contact" className="link">
-              Contact
-            </Link>
+            </button>
+            <button
+              onClick={() => handleSectionClick("contact")}
+              className="text-gray-600 hover:text-primary transition-colors"
+            >
+              Contacto
+            </button>
           </div>
 
-          {/* Auth Buttons - Desktop */}
+          {/* Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" className="btn-ghost" asChild>
-              <Link href="/login">Login</Link>
+            <Button variant="ghost" asChild>
+              <Link href="/login">Iniciar Sesión</Link>
             </Button>
-            <Button className="btn-primary" asChild>
-              <Link href="/register">Sign Up</Link>
+            <Button asChild>
+              <Link href="/register">Registrarse</Link>
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden p-2 link"
+          <button
+            className="md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 bg-white border-t border-light">
+          <div className="md:hidden py-4">
             <div className="flex flex-col space-y-4">
-              <Link 
-                href="#benefits" 
-                className="link"
-                onClick={() => setIsMenuOpen(false)}
+              <button
+                onClick={() => handleSectionClick("benefits")}
+                className="text-gray-600 hover:text-primary transition-colors"
               >
-                Benefits
-              </Link>
-              <Link 
-                href="#how-it-works" 
-                className="link"
-                onClick={() => setIsMenuOpen(false)}
+                Beneficios
+              </button>
+              <button
+                onClick={() => handleSectionClick("how-it-works")}
+                className="text-gray-600 hover:text-primary transition-colors"
               >
-                How It Works
-              </Link>
-              <Link 
-                href="#testimonials" 
-                className="link"
-                onClick={() => setIsMenuOpen(false)}
+                Cómo Funciona
+              </button>
+              <button
+                onClick={() => handleSectionClick("testimonials")}
+                className="text-gray-600 hover:text-primary transition-colors"
               >
-                Testimonials
-              </Link>
-              <Link 
-                href="#faq" 
-                className="link"
-                onClick={() => setIsMenuOpen(false)}
+                Testimonios
+              </button>
+              <button
+                onClick={() => handleSectionClick("faq")}
+                className="text-gray-600 hover:text-primary transition-colors"
               >
                 FAQ
-              </Link>
-              <Link 
-                href="#contact" 
-                className="link"
-                onClick={() => setIsMenuOpen(false)}
+              </button>
+              <button
+                onClick={() => handleSectionClick("contact")}
+                className="text-gray-600 hover:text-primary transition-colors"
               >
-                Contact
-              </Link>
-              <div className="pt-4 border-t border-light">
-                <Button variant="ghost" className="w-full mb-2 btn-ghost" asChild>
-                  <Link href="/login">Login</Link>
-                </Button>
-                <Button className="w-full btn-primary" asChild>
-                  <Link href="/register">Sign Up</Link>
-                </Button>
-              </div>
+                Contacto
+              </button>
+              <Button variant="ghost" className="w-full" asChild>
+                <Link href="/login">Iniciar Sesión</Link>
+              </Button>
+              <Button className="w-full" asChild>
+                <Link href="/register">Registrarse</Link>
+              </Button>
             </div>
           </div>
         )}
