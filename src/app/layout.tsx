@@ -6,6 +6,7 @@ import { cookies } from "next/headers"
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
 import { Navbar } from "@/components/layout/navbar"
 import { Toaster } from "sonner"
+import { Footer } from "@/components/layout/footer"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -69,6 +70,7 @@ export default async function RootLayout({
           <div className="flex min-h-full flex-col">
             <Navbar />
             <main className="flex-1 pt-16">{children}</main>
+            <Footer />
           </div>
         </ThemeProvider>
         <Toaster richColors position="top-right" />
