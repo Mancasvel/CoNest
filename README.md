@@ -1,201 +1,104 @@
-# CoNest - Student Accommodation Platform
+<a href="https://demo-nextjs-with-supabase.vercel.app/">
+  <img alt="Next.js and Supabase Starter Kit - the fastest way to build apps with Next.js and Supabase" src="https://demo-nextjs-with-supabase.vercel.app/opengraph-image.png">
+  <h1 align="center">Next.js and Supabase Starter Kit</h1>
+</a>
 
-CoNest is a modern web application that connects international students with local host families in Mexico, providing a seamless and secure platform for finding and managing student accommodations.
+<p align="center">
+ The fastest way to build apps with Next.js and Supabase
+</p>
 
-## 🌟 Features
+<p align="center">
+  <a href="#features"><strong>Features</strong></a> ·
+  <a href="#demo"><strong>Demo</strong></a> ·
+  <a href="#deploy-to-vercel"><strong>Deploy to Vercel</strong></a> ·
+  <a href="#clone-and-run-locally"><strong>Clone and run locally</strong></a> ·
+  <a href="#feedback-and-issues"><strong>Feedback and issues</strong></a>
+  <a href="#more-supabase-examples"><strong>More Examples</strong></a>
+</p>
+<br/>
 
-### For Students
-- Create and manage student profiles
-- Search for host families based on preferences
-- Real-time chat with potential hosts
-- Secure payment system for matching fees
-- Contract management and digital signatures
-- Payment tracking for accommodation fees
+## Features
 
-### For Host Families
-- Create and manage host profiles
-- List available rooms and amenities
-- Chat with potential students
-- Contract management and digital signatures
-- Payment tracking for accommodation fees
+- Works across the entire [Next.js](https://nextjs.org) stack
+  - App Router
+  - Pages Router
+  - Middleware
+  - Client
+  - Server
+  - It just works!
+- supabase-ssr. A package to configure Supabase Auth to use cookies
+- Styling with [Tailwind CSS](https://tailwindcss.com)
+- Components with [shadcn/ui](https://ui.shadcn.com/)
+- Optional deployment with [Supabase Vercel Integration and Vercel deploy](#deploy-your-own)
+  - Environment variables automatically assigned to Vercel project
 
-### General Features
-- Responsive design for all devices
-- Real-time notifications
-- Secure authentication
-- Multi-language support
-- Dark/Light mode
+## Demo
 
-## 🛠️ Tech Stack
+You can view a fully working demo at [demo-nextjs-with-supabase.vercel.app](https://demo-nextjs-with-supabase.vercel.app/).
 
-- **Frontend:**
-  - Next.js 14 (App Router)
-  - TypeScript
-  - Tailwind CSS
-  - Shadcn/ui
-  - React Email
-  - Stripe Elements
+## Deploy to Vercel
 
-- **Backend:**
-  - Supabase (PostgreSQL)
-  - Supabase Auth
-  - Supabase Storage
-  - Stripe API
-  - Resend (Email)
+Vercel deployment will guide you through creating a Supabase account and project.
 
-## 🚀 Getting Started
+After installation of the Supabase integration, all relevant environment variables will be assigned to the project so the deployment is fully functioning.
 
-### Prerequisites
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&project-name=nextjs-with-supabase&repository-name=nextjs-with-supabase&demo-title=nextjs-with-supabase&demo-description=This+starter+configures+Supabase+Auth+to+use+cookies%2C+making+the+user%27s+session+available+throughout+the+entire+Next.js+app+-+Client+Components%2C+Server+Components%2C+Route+Handlers%2C+Server+Actions+and+Middleware.&demo-url=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2F&external-id=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&demo-image=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2Fopengraph-image.png)
 
-- Node.js 18.17 or later
-- npm or yarn
-- Supabase account
-- Stripe account
-- Resend account
+The above will also clone the Starter kit to your GitHub, you can clone that locally and develop locally.
 
-### Environment Variables
+If you wish to just develop locally and not deploy to Vercel, [follow the steps below](#clone-and-run-locally).
 
-Create a `.env.local` file in the root directory with the following variables:
+## Clone and run locally
 
-```env
-# Supabase
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+1. You'll first need a Supabase project which can be made [via the Supabase dashboard](https://database.new)
 
-# Stripe
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
-STRIPE_SECRET_KEY=your_stripe_secret_key
+2. Create a Next.js app using the Supabase Starter template npx command
 
-# Resend
-RESEND_API_KEY=your_resend_api_key
+   ```bash
+   npx create-next-app --example with-supabase with-supabase-app
+   ```
 
-# App
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-```
+   ```bash
+   yarn create next-app --example with-supabase with-supabase-app
+   ```
 
-### Installation
+   ```bash
+   pnpm create next-app --example with-supabase with-supabase-app
+   ```
 
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/conest.git
-cd conest
-```
+3. Use `cd` to change into the app's directory
 
-2. Install dependencies:
-```bash
-npm install
-# or
-yarn install
-```
+   ```bash
+   cd with-supabase-app
+   ```
 
-3. Run the development server:
-```bash
-npm run dev
-# or
-yarn dev
-```
+4. Rename `.env.example` to `.env.local` and update the following:
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+   ```
+   NEXT_PUBLIC_SUPABASE_URL=[INSERT SUPABASE PROJECT URL]
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=[INSERT SUPABASE PROJECT API ANON KEY]
+   ```
 
-## 📁 Project Structure
+   Both `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` can be found in [your Supabase project's API settings](https://app.supabase.com/project/_/settings/api)
 
-```
-conest/
-├── src/
-│   ├── app/                 # Next.js app router pages
-│   │   ├── layout/         # Layout components
-│   │   ├── sections/       # Page sections
-│   │   ├── ui/            # UI components
-│   │   └── emails/        # Email templates
-│   ├── hooks/             # Custom React hooks
-│   ├── lib/               # Utility functions
-│   ├── types/             # TypeScript types
-│   └── styles/            # Global styles
-├── public/                # Static assets
-├── supabase/             # Supabase migrations
-└── prisma/               # Database schema
-```
+5. You can now run the Next.js local development server:
 
-## 🎨 Design System
+   ```bash
+   npm run dev
+   ```
 
-### Colors
-- Primary: `#1E40AF` (Blue)
-- Secondary: `#4B5563` (Gray)
-- Background: White
-- Text: Various shades of gray
+   The starter kit should now be running on [localhost:3000](http://localhost:3000/).
 
-### Typography
-- Font Family: Inter
-- Headings: Bold
-- Body: Regular
+6. This template comes with the default shadcn/ui style initialized. If you instead want other ui.shadcn styles, delete `components.json` and [re-install shadcn/ui](https://ui.shadcn.com/docs/installation/next)
 
-### Components
-- Custom button styles
-- Card components
-- Form inputs
-- Navigation elements
+> Check out [the docs for Local Development](https://supabase.com/docs/guides/getting-started/local-development) to also run Supabase locally.
 
-## 🔒 Security
+## Feedback and issues
 
-- Row Level Security (RLS) in Supabase
-- Secure authentication flow
-- Protected API routes
-- Secure payment processing
-- Data encryption
+Please file feedback and issues over on the [Supabase GitHub org](https://github.com/supabase/supabase/issues/new/choose).
 
-## 📱 Responsive Design
+## More Supabase examples
 
-- Mobile-first approach
-- Breakpoints:
-  - sm: 640px
-  - md: 768px
-  - lg: 1024px
-  - xl: 1280px
-  - 2xl: 1400px
-
-## 🌐 Internationalization
-
-- English (default)
-- Spanish
-- More languages coming soon
-
-## 📦 Deployment
-
-The application can be deployed to Vercel:
-
-```bash
-vercel deploy
-```
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👥 Team
-
-- [Your Name] - Lead Developer
-- [Team Member 2] - Frontend Developer
-- [Team Member 3] - Backend Developer
-- [Team Member 4] - UI/UX Designer
-
-## 📞 Support
-
-For support, email support@conest.com or join our Slack channel.
-
-## 🙏 Acknowledgments
-
-- [Next.js](https://nextjs.org/)
-- [Supabase](https://supabase.com/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Shadcn/ui](https://ui.shadcn.com/)
-- [Stripe](https://stripe.com/)
-- [Resend](https://resend.com/)
+- [Next.js Subscription Payments Starter](https://github.com/vercel/nextjs-subscription-payments)
+- [Cookie-based Auth and the Next.js 13 App Router (free course)](https://youtube.com/playlist?list=PL5S4mPUpp4OtMhpnp93EFSo42iQ40XjbF)
+- [Supabase Auth and the Next.js App Router](https://github.com/supabase/supabase/tree/master/examples/auth/nextjs)
