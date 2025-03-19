@@ -1,44 +1,62 @@
-import NextLogo from "./next-logo";
-import SupabaseLogo from "./supabase-logo";
+"use client";
+import React, { useState } from "react";
+import { motion } from "framer-motion"; // Asegúrate de importar desde framer-motion
 
-export default function Header() {
+interface HeroProps {
+  text: string; // El valor del texto se pasa como prop
+  duration?: number;
+}
+
+const Hero: React.FC<HeroProps> = ({ text, duration = 0.5 }) => {
+  const [hovered, setHovered] = useState(false);
+
   return (
-    <div className="flex flex-col gap-16 items-center">
-      <div className="flex gap-8 justify-center items-center">
-        <a
-          href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <SupabaseLogo />
-        </a>
-        <span className="border-l rotate-45 h-6" />
-        <a href="https://nextjs.org/" target="_blank" rel="noreferrer">
-          <NextLogo />
-        </a>
-      </div>
-      <h1 className="sr-only">Supabase and Next.js Starter Template</h1>
-      <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center">
-        The fastest way to build apps with{" "}
-        <a
-          href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-          target="_blank"
-          className="font-bold hover:underline"
-          rel="noreferrer"
-        >
-          Supabase
-        </a>{" "}
-        and{" "}
-        <a
-          href="https://nextjs.org/"
-          target="_blank"
-          className="font-bold hover:underline"
-          rel="noreferrer"
-        >
-          Next.js
-        </a>
-      </p>
-      <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent my-8" />
+    <div
+      className="relative flex justify-center items-center w-full h-[100px] text-center"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Texto con gradiente de fondo */}
+      <motion.div
+        className="absolute text-7xl font-bold text-transparent"
+        style={{
+          background: hovered
+            ? "linear-gradient(to right, #eab308, #ef4444, #3b82f6, #06b6d4, #8b5cf6)"
+            : "transparent",
+          WebkitBackgroundClip: "text", // Hace que el gradiente se vea solo en el texto
+        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: hovered ? 1 : 0 }}
+        transition={{ duration, ease: "easeOut" }}
+      >
+        {text} {/* Aquí se coloca el valor dinámico del texto */}
+      </motion.div>
+
+      {/* Texto con contorno */}
+      <motion.div
+        className="absolute text-7xl font-bold"
+        style={{
+          color: "transparent", // Hace el texto transparente
+          WebkitTextStroke: "2px black", // Efecto de contorno
+        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: hovered ? 0.7 : 1 }}
+        transition={{ duration, ease: "easeOut" }}
+      >
+        {text} {/* Aquí también se coloca el valor dinámico del texto */}
+      </motion.div>
+
+      {/* Texto normal (sin animación, solo visible por defecto) */}
+      <motion.div
+        className="absolute text-7xl font-bold"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: hovered ? 0 : 1 }}
+        transition={{ duration, ease: "easeOut" }}
+      >
+        {text} {/* Y aquí también se coloca el valor dinámico del texto */}
+      </motion.div>
     </div>
   );
-}
+};
+
+export default Hero;
