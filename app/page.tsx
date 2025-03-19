@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 
 export default function Home() {
   const [data, setData] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -15,11 +16,30 @@ export default function Home() {
       setData(result);
     }
     fetchData();
+    
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      if (offset > 100) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
+
   return (
     <>
       {/* Header */}
-      <Navbar maxWidth="xl" position="sticky" className="shadow-sm bg-white">
+      <Navbar 
+        maxWidth="xl" 
+        position="sticky" 
+        className={`shadow-sm bg-white transition-all duration-300 ${scrolled ? 'opacity-90 shadow-md' : ''}`}
+      >
         <NavbarBrand>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="mr-2">
             <path d="M12 6C15.3137 6 18 8.68629 18 12C18 15.3137 15.3137 18 12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6Z" fill="#1A5653" />
@@ -62,26 +82,26 @@ export default function Home() {
             </CardBody>
           </Card>
         </div>
-        
-
       </section>
 
       {/* Central Button */}
-      <div className="relative -mt-24 px-12 z-30 flex justify-center">
+      <div className="relative -mt-24 z-30 flex justify-center">
         <Button 
           size="lg"
+          as="a"
+          href="/sign-in"
           color="warning"
-          className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg transform transition hover:scale-105"
+          className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-6 px-10 rounded-full text-xl shadow-lg transform transition hover:scale-105"
         >
           Haz match con una mejor vida
         </Button>
       </div>
 
       {/* Features Section */}
-      <main className="mt-24 max-w-6xl mx-auto px-6">
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-teal-800 mb-6">Encuentra tu espacio ideal</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <main className="mt-36 max-w-6xl mx-auto px-6">
+        <section className="mb-20">
+          <h2 className="text-3xl font-bold text-teal-800 mb-10 text-center">Encuentra tu espacio ideal</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {['Alojamiento Asequible', 'Compañía para Personas Mayores', 'Comunidad de Confianza'].map((feature, index) => (
               <motion.div
                 key={feature}
@@ -107,9 +127,9 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-teal-800 mb-6">Cómo Funciona</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <section className="mb-20">
+          <h2 className="text-3xl font-bold text-teal-800 mb-10 text-center">Cómo Funciona</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
               <p className="text-lg text-gray-700 mb-6">
                 CoNest conecta a estudiantes con opciones de alojamiento asequible mientras brinda compañía a personas mayores.
@@ -121,9 +141,56 @@ export default function Home() {
             <div className="bg-gray-200 rounded-lg h-64"></div>
           </div>
         </section>
+
+        {/* Testimonios Section */}
+        <section className="mb-20">
+          <h2 className="text-3xl font-bold text-teal-800 mb-10 text-center">Lo que dicen nuestros usuarios</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              { 
+                name: 'María González', 
+                role: 'Propietaria', 
+                text: 'CoNest ha sido una bendición para mí. No solo obtengo ayuda con las tareas diarias sino que me encanta la compañía de mi estudiante.', 
+                image: 'https://i.pravatar.cc/150?img=32'
+              },
+              { 
+                name: 'Carlos Rodríguez', 
+                role: 'Estudiante', 
+                text: 'Gracias a CoNest pude encontrar alojamiento asequible mientras estudio, y me encanta ayudar a mi anfitriona con sus tareas diarias.', 
+                image: 'https://i.pravatar.cc/150?img=68'
+              },
+            ].map((testimonial, index) => (
+              <motion.div
+                key={testimonial.name}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.2, duration: 0.5 }}
+              >
+                <Card className="shadow-md h-full">
+                  <CardBody className="p-6">
+                    <div className="flex items-center mb-4">
+                      <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
+                        <img 
+                          src={testimonial.image}
+                          alt={testimonial.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-semibold">{testimonial.name}</h3>
+                        <p className="text-sm text-gray-500">{testimonial.role}</p>
+                      </div>
+                    </div>
+                    <p className="text-gray-700 italic">"{testimonial.text}"</p>
+                  </CardBody>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </section>
       </main>
 
-      <footer className="bg-gray-100 py-8">
+      <footer className="bg-gray-100 py-12 mt-12">
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex flex-wrap justify-between">
             <div className="mb-6 w-full md:w-auto">
