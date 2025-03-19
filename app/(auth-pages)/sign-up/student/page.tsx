@@ -314,4 +314,4 @@ const StudentSignUp = () => {
   );
 };
 
-export default StudentSignUp; 
+export default StudentSignUp;

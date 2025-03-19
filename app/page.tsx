@@ -1,9 +1,10 @@
 "use client";
 
 import Image from 'next/image';
-import { Card, Button, Input, Navbar, NavbarBrand, NavbarContent, NavbarItem, CardBody, CardHeader, CardFooter } from '@nextui-org/react';
+import { Card, Button, CardBody, CardHeader, CardFooter } from '@nextui-org/react';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import NavbarTerracota from "@/app/components/Navbar";
 
 export default function Home() {
   const [data, setData] = useState(null);
@@ -35,30 +36,7 @@ export default function Home() {
   return (
     <>
       {/* Header */}
-      <Navbar 
-        maxWidth="xl" 
-        position="sticky" 
-        className={`shadow-sm bg-white transition-all duration-300 ${scrolled ? 'opacity-90 shadow-md' : ''}`}
-      >
-        <NavbarBrand>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="mr-2">
-            <path d="M12 6C15.3137 6 18 8.68629 18 12C18 15.3137 15.3137 18 12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6Z" fill="#1A5653" />
-          </svg>
-          <p className="text-2xl font-bold text-teal-800">CoNest</p>
-        </NavbarBrand>
-        <NavbarContent justify="end">
-          <NavbarItem>
-            <Button as="a" href="/sign-in" variant="light" color="primary" className="text-teal-700">
-              Iniciar sesión
-            </Button>
-          </NavbarItem>
-          <NavbarItem>
-            <Button as="a" href="/sign-up" color="primary" className="bg-teal-700">
-              Regístrate
-            </Button>
-          </NavbarItem>
-        </NavbarContent>
-      </Navbar>
+      <NavbarTerracota />
 
       {/* Hero Section */}
       <section className="relative h-screen">

@@ -169,6 +169,7 @@ function RoleSelectionScreen() {
             Regístrate aquí
           </Button>
         </div>
+
       </div>
     </div>
   );

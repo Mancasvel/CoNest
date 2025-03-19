@@ -86,7 +86,7 @@ const NavbarTerracota = () => {
               />
             </DropdownTrigger>
             <DropdownMenu aria-label="Acciones de perfil">
-              <DropdownItem key="profile" className="h-14 gap-2">
+              <DropdownItem key="profile" className="h-14 gap-2" as={Link} href="/profile">
                 <p className="font-bold">Mi Perfil</p>
                 <p className="text-tiny">Gestiona tu información personal</p>
               </DropdownItem>
