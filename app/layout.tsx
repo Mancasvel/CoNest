@@ -1,8 +1,12 @@
+
+
 import HeaderAuth from "@/components/header-auth";
 import { hasEnvVars } from "@/utils/supabase/check-env-vars";
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
+import Navbar from "@/components/Navbar"; // Importamos el Navbar
+import Footer from "@/components/Footer"; // Importamos el Footer
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -34,7 +38,17 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="flex-1 flex flex-col">{children}</main>
+          {/* Contenedor principal */}
+          <div className="flex flex-col min-h-screen">
+            {/* Navbar agregado aquí */}
+            <Navbar />
+            
+            {/* Contenido principal */}
+            <main className="flex-1">{children}</main>
+
+            {/* Footer agregado aquí */}
+            <Footer />
+          </div>
         </ThemeProvider>
       </body>
     </html>

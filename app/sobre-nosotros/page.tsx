@@ -3,7 +3,6 @@
 import React from "react";
 import { Card, CardBody, CardHeader, Divider, Button, Tabs, Tab } from "@heroui/react";
 import NavbarTerracota from "@/app/components/Navbar";
-import Footer from "@/app/components/Footer";
 
 export default function HowItWorksPage() {
   return (
@@ -344,7 +343,6 @@ export default function HowItWorksPage() {
         </div>
       </main>
       
-      <Footer />
     </div>
   );
 }

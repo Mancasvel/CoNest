@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from "react";
-import { Card, CardBody, Input, Textarea, Button, Select, SelectItem } from "@nextui-org/react";
+import { Card, CardBody, Input, Textarea, Button, Select, SelectItem, Dropdown } from "@nextui-org/react";
 import NavbarTerracota from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 
@@ -120,154 +120,43 @@ export default function ContactPage() {
           
           {/* Formulario de contacto */}
           <div>
-            <Card className="p-4">
-              <CardBody>
-                {submitted ? (
-                  <div className="text-center py-8">
-                    <svg className="w-16 h-16 text-teal-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    <h3 className="text-xl font-medium text-gray-900 mb-2">¡Gracias por contactarnos!</h3>
-                    <p className="text-gray-600 mb-6">Hemos recibido tu mensaje y te responderemos lo antes posible.</p>
-                    <Button 
-                      color="primary" 
-                      className="bg-teal-700 text-white"
-                      onClick={() => {
-                        setSubmitted(false);
-                        setFormData({
-                          name: "",
-                          email: "",
-                          userType: "",
-                          subject: "",
-                          message: ""
-                        });
-                      }}
-                    >
-                      Enviar otro mensaje
-                    </Button>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit}>
-                    <h2 className="text-xl font-semibold mb-6 text-teal-700">Envíanos un mensaje</h2>
-                    
-                    {error && (
-                      <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-md">
-                        {error}
-                      </div>
-                    )}
-                    
-                    <div className="space-y-4">
-                      <div>
-                        <Input
-                          type="text"
-                          label="Nombre completo"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleChange}
-                          variant="bordered"
-                          color="primary"
-                          isRequired
-                          className="w-full"
-                          classNames={{
-                            input: "bg-white",
-                            inputWrapper: "bg-white"
-                          }}
-                        />
-                      </div>
-                      
-                      <div>
-                        <Input
-                          type="email"
-                          label="Correo electrónico"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          variant="bordered"
-                          color="primary"
-                          isRequired
-                          className="w-full"
-                          classNames={{
-                            input: "bg-white",
-                            inputWrapper: "bg-white"
-                          }}
-                        />
-                      </div>
-                      
-                      <div>
-                        <Select
-                          label="¿Eres...?"
-                          name="userType"
-                          selectedKeys={formData.userType ? [formData.userType] : []}
-                          onChange={(e) => {
-                            setFormData({
-                              ...formData,
-                              userType: e.target.value
-                            });
-                          }}
-                          variant="bordered"
-                          color="primary"
-                          className="w-full"
-                          classNames={{
-                            trigger: "bg-white",
-                            value: "bg-white"
-                          }}
-                        >
-                          <SelectItem key="elder" value="elder">Anfitrión (persona mayor)</SelectItem>
-                          <SelectItem key="student" value="student">Estudiante</SelectItem>
-                          <SelectItem key="other" value="other">Otro</SelectItem>
-                        </Select>
-                      </div>
-                      
-                      <div>
-                        <Input
-                          type="text"
-                          label="Asunto"
-                          name="subject"
-                          value={formData.subject}
-                          onChange={handleChange}
-                          variant="bordered"
-                          color="primary"
-                          className="w-full"
-                          classNames={{
-                            input: "bg-white",
-                            inputWrapper: "bg-white"
-                          }}
-                        />
-                      </div>
-                      
-                      <div>
-                        <Textarea
-                          label="Mensaje"
-                          name="message"
-                          value={formData.message}
-                          onChange={handleChange}
-                          variant="bordered"
-                          color="primary"
-                          isRequired
-                          minRows={4}
-                          className="w-full"
-                          classNames={{
-                            input: "bg-white",
-                            inputWrapper: "bg-white"
-                          }}
-                        />
-                      </div>
-                      
-                      <div className="pt-2">
-                        <Button 
-                          type="submit" 
-                          color="primary" 
-                          className="w-full bg-teal-700 text-white"
-                          isLoading={isSubmitting}
-                        >
-                          {isSubmitting ? "Enviando..." : "Enviar mensaje"}
-                        </Button>
-                      </div>
-                    </div>
-                  </form>
-                )}
-              </CardBody>
-            </Card>
+          <form onSubmit={handleSubmit} className="space-y-4">
+      <Input
+        name="name"
+        label="Name"
+        value={formData.name}
+        onChange={handleChange}
+        required
+      />
+      <Input
+        name="email"
+        type="email"
+        label="Email"
+        value={formData.email}
+        onChange={handleChange}
+        required
+      />
+      <Select
+        name="category"
+        label="Category"
+        selectedKeys={[formData.category]}
+        onSelectionChange={(keys) =>
+          setFormData((prev) => ({ ...prev, category: Array.from(keys)[0] }))
+        }
+      >
+        <SelectItem key="general">General Inquiry</SelectItem>
+        <SelectItem key="support">Support</SelectItem>
+        <SelectItem key="feedback">Feedback</SelectItem>
+      </Select>
+      <Textarea
+        name="message"
+        label="Message"
+        value={formData.message}
+        onChange={handleChange}
+        required
+      />
+      <Button type="submit">Submit</Button>
+    </form>
           </div>
         </div>
         
@@ -307,7 +196,7 @@ export default function ContactPage() {
         </div>
       </main>
       
-      <Footer />
+
     </div>
   );
 } 
