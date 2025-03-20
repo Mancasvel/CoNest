@@ -61,46 +61,58 @@ export default function Home() {
       <NavbarTerracota />
 
       {/* Hero Section */}
-      <section className="relative h-screen">
-      {/* Fondo con imagen */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent z-10"></div>
-      <div className="absolute inset-0">
-        <Image 
-          src="/images/main.jpg"
-          alt="Modern living space"
-          width={1200}
-          height={800}
-          className="w-full h-full object-cover"
-        />
-      </div>
 
-      {/* Carrusel de opiniones */}
-      <div className="absolute top-1/4 right-10 z-20 flex justify-end">
-        <div className="bg-white/80 backdrop-blur-md p-6 rounded-xl shadow-lg max-w-sm w-full">
-          <Slider {...settings}>
-            {testimonials.map(({ id, name, text }) => (
-              <div key={id} className="text-center">
-                <p className="text-lg font-semibold text-teal-900">"{text}"</p>
-                <span className="block mt-2 text-gray-700 font-medium">- {name}</span>
-              </div>
-            ))}
-          </Slider>
-        </div>
-      </div>
+<section className="relative h-screen">
+  {/* Efecto de gradiente y desenfoque */}
+  <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-teal-700/50 to-transparent z-10"></div>
+  
+  {/* Imagen con efecto Parallax */}
+  <div className="absolute inset-0 overflow-hidden">
+    <Image 
+      src="/images/main.jpg"
+      alt="Modern living space"
+      width={1200}
+      height={800}
+      className="w-full h-full object-cover transform scale-110 transition-transform duration-1000 ease-in-out"
+    />
+  </div>
 
-      {/* Contenido principal */}
-      <div className="absolute left-0 top-1/3 p-12 z-20 max-w-xl">
-        <Card className="bg-white/85 backdrop-blur-sm p-8 shadow-xl">
-          <CardBody>
-            <h1 className="text-5xl font-bold text-teal-800 mb-6">Una mejor manera de alojarte</h1>
-            <p className="text-lg text-gray-800 mb-2">
-              Encuentra alojamiento ayudando a la comunidad y al mejor precio.
-            </p>
-            <p className="text-lg text-gray-800 mb-6">Forma parte de este camino.</p>
-          </CardBody>
-        </Card>
-      </div>
-    </section>
+  {/* Contenido Principal */}
+  <div className="absolute left-0 top-1/3 p-12 z-20 max-w-xl">
+    <Card className="bg-white/85 backdrop-blur-sm p-8 shadow-xl">
+      <CardBody>
+        <h1 className="text-5xl font-bold text-teal-800 mb-6">Una mejor manera de alojarte</h1>
+        <p className="text-lg text-gray-800 mb-2">Encuentra alojamiento ayudando a la comunidad y al mejor precio.</p>
+      </CardBody>
+    </Card>
+  </div>
+
+  {/* Carrusel de Testimonios */}
+  <div className="absolute top-1/4 right-10 z-20 flex justify-end">
+    <div className="bg-white/80 backdrop-blur-md p-6 rounded-xl shadow-lg max-w-sm w-full">
+      <Slider {...settings}>
+        {testimonials.map(({ id, name, text }) => (
+          <div key={id} className="text-center">
+            <p className="text-lg font-semibold text-teal-900">"{text}"</p>
+            <span className="block mt-2 text-gray-700 font-medium">- {name}</span>
+          </div>
+        ))}
+      </Slider>
+    </div>
+  </div>
+
+  {/* Estrellas y clasificación - Más cerca de las reviews */}
+  <div className="absolute top-[calc(25%+240px)] right-10 z-20 bg-white/80 backdrop-blur-md p-6 rounded-xl shadow-lg max-w-xs w-full text-center">
+    <div className="mb-4">
+      <span className="text-xl text-yellow-500">
+        ⭐⭐⭐⭐⭐
+      </span>
+      <p className="text-lg text-gray-700 font-medium">4.8/5 basado en 120 opiniones</p>
+    </div>
+    <p className="text-sm text-gray-500">Clasificado como un proyecto para la comunidad</p>
+  </div>
+</section>
+
 
       {/* Central Button */}
       <div className="relative -mt-24 z-30 flex justify-center">
@@ -117,33 +129,43 @@ export default function Home() {
 
       {/* Features Section */}
       <main className="mt-36 max-w-6xl mx-auto px-6">
-        <section className="mb-20">
-          <h2 className="text-3xl font-bold text-teal-800 mb-10 text-center">Encuentra tu espacio ideal</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {['Alojamiento Asequible', 'Compañía para Personas Mayores', 'Comunidad de Confianza'].map((feature, index) => (
-              <motion.div
-                key={feature}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: index * 0.2, duration: 0.5 }}
-              >
-                <Card className="shadow-md h-full">
-                  <CardHeader className="p-0">
-                    <div className="h-48 bg-gray-200 w-full"></div>
-                  </CardHeader>
-                  <CardBody>
-                    <h3 className="text-xl font-semibold mb-2">{feature}</h3>
-                    <p className="text-gray-600">
-                      {feature === 'Alojamiento Asequible' && 'Estudiantes pueden encontrar alojamiento más económico.'}
-                      {feature === 'Compañía para Personas Mayores' && 'Estudiantes ofrecen compañía a personas mayores.'}
-                      {feature === 'Comunidad de Confianza' && 'Plataforma segura y confiable.'}
-                    </p>
-                  </CardBody>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </section>
+      <section className="mb-20">
+  <h2 className="text-3xl font-bold text-teal-800 mb-10 text-center">Encuentra tu espacio ideal</h2>
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    {['Alojamiento Asequible', 'Compañía para Personas Mayores', 'Comunidad de Confianza'].map((feature, index) => (
+      <motion.div
+        key={feature}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: index * 0.2, duration: 0.5 }}
+      >
+        <Card className="shadow-md h-full">
+          <CardHeader className="p-0">
+            {/* Contenedor con el tamaño y recorte igual para todas las imágenes */}
+            <div className="relative w-full h-48 overflow-hidden">
+              <Image
+                src={`/images/${feature.toLowerCase().replace(/\s+/g, '-')}.jpg`} // Asumiendo que las imágenes tengan nombres relacionados con el texto
+                alt={`${feature} Image`}
+                layout="fill" // Esto asegura que la imagen ocupe el espacio del contenedor
+                objectFit="cover" // Asegura que la imagen se recorte y se ajuste correctamente
+                className="transition-all duration-300 ease-in-out"
+              />
+            </div>
+          </CardHeader>
+          <CardBody>
+            <h3 className="text-xl font-semibold mb-2">{feature}</h3>
+            <p className="text-gray-600">
+              {feature === 'Alojamiento Asequible' && 'Estudiantes pueden encontrar alojamiento más económico.'}
+              {feature === 'Compañía para Personas Mayores' && 'Estudiantes ofrecen compañía a personas mayores.'}
+              {feature === 'Comunidad de Confianza' && 'Plataforma segura y confiable.'}
+            </p>
+          </CardBody>
+        </Card>
+      </motion.div>
+    ))}
+  </div>
+</section>
+
 
         <section className="mb-20">
           <h2 className="text-3xl font-bold text-teal-800 mb-10 text-center">Cómo Funciona</h2>
@@ -156,13 +178,22 @@ export default function Home() {
                 Más Información
               </Link>
             </div>
-            <div className="bg-gray-200 rounded-lg h-64"></div>
+            <div className="relative bg-gray-200 rounded-lg h-80 overflow-hidden">
+              <Image
+                src="/images/how-it-works.jpg" // Asegúrate de que la ruta sea correcta
+                alt="Cómo Funciona"
+                layout="fill"  // Ocupa todo el contenedor
+                objectFit="cover"  // Recorta y ajusta la imagen
+                className="transition-all duration-300 ease-in-out"
+              />
+            </div>
           </div>
         </section>
 
+
         {/* Testimonios Section */}
         <section className="mb-20">
-          <h2 className="text-3xl font-bold text-teal-800 mb-10 text-center">Lo que dicen nuestros usuarios</h2>
+          <h2 className="text-3xl font-bold text-teal-800 mb-10 text-center">Lo que opinan nuestros usuarios</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
               { 
