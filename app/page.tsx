@@ -1,10 +1,13 @@
 "use client";
 
 import Image from 'next/image';
-import { Card, Button, CardBody, CardHeader, CardFooter, Link } from '@nextui-org/react';
+import { Card, Button, CardBody, CardHeader, CardFooter, Link } from '@heroui/react';
+import Slider from "react-slick";
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import NavbarTerracota from "@/app/components/Navbar";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 // Interfaz para el tipo de datos que se espera de la API
 interface ApiData {
@@ -15,6 +18,11 @@ interface ApiData {
 export default function Home() {
   const [data, setData] = useState<ApiData | null>(null);
   const [scrolled, setScrolled] = useState<boolean>(false);
+  const testimonials = [
+    { id: 1, name: "María López", text: "Gracias a CoNest encontré un hogar acogedor y económico." },
+    { id: 2, name: "Carlos Ruiz", text: "Una experiencia increíble ayudando a personas mayores." },
+    { id: 3, name: "Laura Gómez", text: "Recomiendo CoNest a todos los estudiantes que buscan alojamiento." },
+  ];
 
   useEffect(() => {
     async function fetchData() {
@@ -38,6 +46,14 @@ export default function Home() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    arrows: false,
+  };
 
   return (
     <>
@@ -46,8 +62,9 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="relative h-screen">
-        <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent z-10"></div>
-        <div className="absolute inset-0">
+      {/* Fondo con imagen */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent z-10"></div>
+      <div className="absolute inset-0">
         <Image 
           src="/images/main.jpg"
           alt="Modern living space"
@@ -55,18 +72,35 @@ export default function Home() {
           height={800}
           className="w-full h-full object-cover"
         />
+      </div>
+
+      {/* Carrusel de opiniones */}
+      <div className="absolute top-1/4 right-10 z-20 flex justify-end">
+        <div className="bg-white/80 backdrop-blur-md p-6 rounded-xl shadow-lg max-w-sm w-full">
+          <Slider {...settings}>
+            {testimonials.map(({ id, name, text }) => (
+              <div key={id} className="text-center">
+                <p className="text-lg font-semibold text-teal-900">"{text}"</p>
+                <span className="block mt-2 text-gray-700 font-medium">- {name}</span>
+              </div>
+            ))}
+          </Slider>
         </div>
-        
-        <div className="absolute left-0 top-1/3 p-12 z-20 max-w-xl">
-          <Card className="bg-white/85 backdrop-blur-sm p-8 shadow-xl">
-            <CardBody>
-              <h1 className="text-5xl font-bold text-teal-800 mb-6">Una mejor manera de alojarte</h1>
-              <p className="text-lg text-gray-800 mb-2">Encuentra alojamiento ayudando a la comunidad y al mejor precio.</p>
-              <p className="text-lg text-gray-800 mb-6">Forma parte de este camino.</p>
-            </CardBody>
-          </Card>
-        </div>
-      </section>
+      </div>
+
+      {/* Contenido principal */}
+      <div className="absolute left-0 top-1/3 p-12 z-20 max-w-xl">
+        <Card className="bg-white/85 backdrop-blur-sm p-8 shadow-xl">
+          <CardBody>
+            <h1 className="text-5xl font-bold text-teal-800 mb-6">Una mejor manera de alojarte</h1>
+            <p className="text-lg text-gray-800 mb-2">
+              Encuentra alojamiento ayudando a la comunidad y al mejor precio.
+            </p>
+            <p className="text-lg text-gray-800 mb-6">Forma parte de este camino.</p>
+          </CardBody>
+        </Card>
+      </div>
+    </section>
 
       {/* Central Button */}
       <div className="relative -mt-24 z-30 flex justify-center">
