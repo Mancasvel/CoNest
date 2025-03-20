@@ -1,374 +1,338 @@
 'use client';
 
-import React from "react";
-import { Card, CardBody, CardHeader, Divider, Button, Tabs, Tab } from "@heroui/react";
+import Image from 'next/image';
+import React, { useState, useEffect } from "react";
+import { Card, CardBody, CardHeader, Divider, Button } from "@nextui-org/react";
 import NavbarTerracota from "@/app/components/Navbar";
 
-export default function HowItWorksPage() {
+export default function SobreNosotrosPage() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-white text-gray-800">
       <NavbarTerracota />
       
-      <main className="flex-grow container mx-auto px-4 py-12 max-w-5xl">
-        <h1 className="text-4xl font-bold text-center mb-12">Cómo Funciona CoNest</h1>
-        
-        <p className="text-lg text-center mb-12 max-w-3xl mx-auto">
-          Conectamos estudiantes que buscan alojamiento asequible con personas mayores 
-          que tienen espacio extra en sus hogares. Conoce el proceso para cada tipo de usuario:
-        </p>
-        
-        <Tabs 
-          aria-label="Opciones"
-          color="primary"
-          variant="bordered"
-          classNames={{
-            tabList: "gap-6 w-full relative rounded-none p-0 border-b border-divider",
-            cursor: "w-full bg-teal-700",
-            tab: "max-w-fit px-2 h-12",
-            tabContent: "group-data-[selected=true]:text-white"
-          }}
-          className="mb-12"
-        >
-          <Tab
-            key="hosts"
-            title={
-              <div className="flex items-center space-x-2">
-                <span className="[selected=true]:text-white">Para Anfitriones</span>
-              </div>
-            }
-          >
-            <div className="py-6">
-              <h2 className="text-2xl font-semibold mb-8 text-teal-700">Para Anfitriones (Personas Mayores)</h2>
-              
-              <div className="space-y-8">
-                <Card className="border-none shadow">
-                  <CardBody className="p-6">
-                    <div className="flex items-start">
-                      <div className="bg-teal-700 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">
-                        1
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-medium mb-2">Registro y Verificación</h3>
-                        <p>
-                          Crea tu cuenta de anfitrión con información básica sobre ti y tu hogar.
-                          Nuestro equipo verificará tu identidad y propiedad para garantizar la seguridad.
-                        </p>
-                      </div>
-                    </div>
-                  </CardBody>
-                </Card>
-                
-                <Card className="border-none shadow">
-                  <CardBody className="p-6">
-                    <div className="flex items-start">
-                      <div className="bg-teal-700 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">
-                        2
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-medium mb-2">Crea tu Perfil</h3>
-                        <p>
-                          Completa tu perfil con fotos de tu hogar, habitaciones disponibles, 
-                          comodidades, tus intereses y lo que buscas en un compañero de vivienda.
-                          Cuanta más información, más probabilidades de encontrar una buena compatibilidad.
-                        </p>
-                      </div>
-                    </div>
-                  </CardBody>
-                </Card>
-                
-                <Card className="border-none shadow">
-                  <CardBody className="p-6">
-                    <div className="flex items-start">
-                      <div className="bg-teal-700 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">
-                        3
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-medium mb-2">Establece tus Condiciones</h3>
-                        <p>
-                          Define la duración de la estancia, el alquiler (si aplica), reglas de la casa 
-                          y cualquier ayuda que necesites (como tareas del hogar, compras, etc.). 
-                          Nuestro sistema te guiará para establecer expectativas claras.
-                        </p>
-                      </div>
-                    </div>
-                  </CardBody>
-                </Card>
-                
-                <Card className="border-none shadow">
-                  <CardBody className="p-6">
-                    <div className="flex items-start">
-                      <div className="bg-teal-700 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">
-                        4
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-medium mb-2">Conoce Posibles Compañeros</h3>
-                        <p>
-                          Recibe perfiles de estudiantes compatibles. 
-                          Revisa sus perfiles y haz videollamadas para conocerlos mejor.
-                          Tú decides quién es adecuado para compartir tu hogar.
-                        </p>
-                      </div>
-                    </div>
-                  </CardBody>
-                </Card>
-                
-                <Card className="border-none shadow">
-                  <CardBody className="p-6">
-                    <div className="flex items-start">
-                      <div className="bg-teal-700 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">
-                        5
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-medium mb-2">Acuerdo y Bienvenida</h3>
-                        <p>
-                          Una vez seleccionado un estudiante, firmarán un acuerdo a través de 
-                          nuestra plataforma. Te ayudaremos a prepararte para su llegada y te 
-                          daremos consejos para una convivencia exitosa.
-                        </p>
-                      </div>
-                    </div>
-                  </CardBody>
-                </Card>
-              </div>
-              
-              <div className="mt-12 text-center">
-                <Button 
-                  color="primary" 
-                  size="lg"
-                  className="bg-teal-700 text-white"
-                  as="a" 
-                  href="/sign-up/elder"
-                >
-                  Regístrate como Anfitrión
-                </Button>
-              </div>
-            </div>
-          </Tab>
-          
-          <Tab
-            key="students"
-            title={
-              <div className="flex items-center space-x-2">
-                <span className="text-lg">Para Estudiantes</span>
-              </div>
-            }
-          >
-            <div className="py-6">
-              <h2 className="text-2xl font-semibold mb-8 text-yellow-600">Para Estudiantes</h2>
-              
-              <div className="space-y-8">
-                <Card className="border-none shadow">
-                  <CardBody className="p-6">
-                    <div className="flex items-start">
-                      <div className="bg-yellow-500 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">
-                        1
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-medium mb-2">Registro y Verificación</h3>
-                        <p>
-                          Crea tu cuenta de estudiante proporcionando información básica.
-                          Verifica tu identidad y estatus de estudiante para acceder a todas las funciones.
-                        </p>
-                      </div>
-                    </div>
-                  </CardBody>
-                </Card>
-                
-                <Card className="border-none shadow">
-                  <CardBody className="p-6">
-                    <div className="flex items-start">
-                      <div className="bg-yellow-500 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">
-                        2
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-medium mb-2">Completa tu Perfil</h3>
-                        <p>
-                          Añade información sobre ti, tus estudios, intereses, horarios habituales, 
-                          y lo que buscas en un alojamiento. Esta información nos ayudará a 
-                          encontrar anfitriones compatibles.
-                        </p>
-                      </div>
-                    </div>
-                  </CardBody>
-                </Card>
-                
-                <Card className="border-none shadow">
-                  <CardBody className="p-6">
-                    <div className="flex items-start">
-                      <div className="bg-yellow-500 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">
-                        3
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-medium mb-2">Define tus Preferencias</h3>
-                        <p>
-                          Especifica la ubicación deseada, tu presupuesto, duración de la estancia, 
-                          y qué tipo de ayuda estás dispuesto a ofrecer a cambio del alojamiento 
-                          (compañía, tareas del hogar, enseñanza de tecnología, etc.).
-                        </p>
-                      </div>
-                    </div>
-                  </CardBody>
-                </Card>
-                
-                <Card className="border-none shadow">
-                  <CardBody className="p-6">
-                    <div className="flex items-start">
-                      <div className="bg-yellow-500 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">
-                        4
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-medium mb-2">Explora Opciones</h3>
-                        <p>
-                          Revisa los perfiles de anfitriones compatibles con tus criterios.
-                          Contacta a los que te interesen a través de nuestra plataforma 
-                          y programa videollamadas para conocerlos mejor.
-                        </p>
-                      </div>
-                    </div>
-                  </CardBody>
-                </Card>
-                
-                <Card className="border-none shadow">
-                  <CardBody className="p-6">
-                    <div className="flex items-start">
-                      <div className="bg-yellow-500 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">
-                        5
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-medium mb-2">Acuerdo y Mudanza</h3>
-                        <p>
-                          Cuando encuentres el anfitrión ideal, firmarán un acuerdo a través de 
-                          nuestra plataforma. Te proporcionaremos orientación para la mudanza 
-                          y consejos para una convivencia respetuosa y enriquecedora.
-                        </p>
-                      </div>
-                    </div>
-                  </CardBody>
-                </Card>
-              </div>
-              
-              <div className="mt-12 text-center">
-                <Button 
-                  color="warning" 
-                  size="lg"
-                  className="bg-yellow-500 text-white"
-                  as="a" 
-                  href="/sign-up/student"
-                >
-                  Regístrate como Estudiante
-                </Button>
-              </div>
-            </div>
-          </Tab>
-        </Tabs>
-        
-        <Divider className="my-12" />
-        
-        <div className="mb-12">
-          <h2 className="text-2xl font-semibold mb-8 text-center">Preguntas Frecuentes</h2>
-          
-          <div className="space-y-6">
-            <Accordion title="¿Cómo se garantiza la seguridad?">
-              <p>
-                Todos los usuarios pasan por un proceso de verificación de identidad. 
-                Para los anfitriones, verificamos la propiedad de la vivienda y realizamos 
-                comprobaciones de antecedentes. Además, nuestra plataforma cuenta con 
-                un sistema de evaluaciones y referencias para construir confianza.
-              </p>
-            </Accordion>
-            
-            <Accordion title="¿Qué tipo de acuerdos se establecen?">
-              <p>
-                Los acuerdos varían según las necesidades de ambas partes. Pueden incluir:
-              </p>
-              <ul className="list-disc pl-5 mt-2">
-                <li>Alquiler reducido a cambio de compañía y ayuda con tareas</li>
-                <li>Alojamiento gratuito por un número específico de horas de ayuda semanal</li>
-                <li>Combinaciones de pago y servicios</li>
-              </ul>
-              <p className="mt-2">
-                Nuestra plataforma proporciona plantillas de acuerdos que pueden personalizarse.
-              </p>
-            </Accordion>
-            
-            <Accordion title="¿Qué pasa si la convivencia no funciona?">
-              <p>
-                Entendemos que no todas las combinaciones funcionan perfectamente. Por eso:
-              </p>
-              <ul className="list-disc pl-5 mt-2">
-                <li>Recomendamos comenzar con un período de prueba de 2-4 semanas</li>
-                <li>Ofrecemos mediación en caso de conflictos</li>
-                <li>Los acuerdos incluyen términos claros para la finalización anticipada</li>
-                <li>Nuestro equipo de soporte está disponible para ayudar en transiciones</li>
-              </ul>
-            </Accordion>
-            
-            <Accordion title="¿Hay algún costo por usar CoNest?">
-              <p>
-                El registro y la búsqueda son gratuitos. Cobramos una pequeña tarifa de servicio 
-                solo cuando se establece un acuerdo exitoso entre un estudiante y un anfitrión. 
-                Esta tarifa nos permite mantener la plataforma y proporcionar servicios de 
-                verificación y soporte.
-              </p>
-            </Accordion>
+      {/* Hero Section */}
+      <section className="relative pt-20 pb-16 overflow-hidden">
+        {/* Contenido del Hero */}
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-3xl mx-auto text-center fade-in-up">
+            <h1 className="text-5xl font-bold mb-6 tracking-tight text-gray-800">
+              Sobre <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-yellow-500">Nosotros</span>
+            </h1>
+            <p className="text-xl text-gray-600 mb-8">
+              Conoce quiénes somos, nuestra misión y cómo estamos transformando el concepto de vivienda 
+              compartida entre generaciones.
+            </p>
+            <div className="h-1 w-32 bg-gradient-to-r from-teal-500 to-yellow-500 rounded-full mt-2 mx-auto"></div>
           </div>
         </div>
-        
-        <div className="text-center">
-          <h2 className="text-2xl font-semibold mb-6">¿Listo para comenzar?</h2>
-          <p className="text-lg mb-8 max-w-2xl mx-auto">
-            Únete a nuestra comunidad y descubre una nueva forma de vivir, 
-            compartir y crecer junto a personas de diferentes generaciones.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              color="primary" 
-              size="lg"
-              className="bg-teal-700 text-white"
-              as="a" 
-              href="/sign-up/elder"
-            >
-              Ofrezco Alojamiento
-            </Button>
-            <Button 
-              color="warning" 
-              size="lg"
-              className="bg-yellow-500 text-white"
-              as="a" 
-              href="/sign-up/student"
-            >
-              Busco Alojamiento
-            </Button>
-          </div>
-        </div>
-      </main>
+      </section>
       
-    </div>
-  );
-}
-interface AccordionProps {
-  title: string;
-  children: React.ReactNode;
-}
-function Accordion({ title, children }: AccordionProps) {
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  return (
-    <Card className="border-none shadow">
-      <CardHeader 
-        className="cursor-pointer p-4" 
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <div className="flex justify-between items-center w-full">
-          <h3 className="text-lg font-medium">{title}</h3>
-          <span className="text-xl">{isOpen ? '−' : '+'}</span>
+      {/* Mission Section */}
+      <section className="py-16 relative z-10 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+              <div className="fade-in-right">
+                <Image 
+                  src="/images/us.jpg" 
+                  alt="Nuestra misión" 
+                  width={500} 
+                  height={400}
+                  className="rounded-lg shadow-lg object-cover w-full h-auto transform hover:scale-102 transition-transform duration-500 ease-in-out"
+                />
+              </div>
+              <div className="fade-in-left">
+                <h2 className="text-3xl font-bold mb-6 text-gray-800">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-yellow-500">
+                    Nuestra Misión
+                  </span>
+                </h2>
+                <p className="text-gray-600 mb-4">
+                  En <strong>CoNest</strong>, nuestra misión es crear puentes entre generaciones, 
+                  facilitando hogares compartidos que beneficien tanto a personas mayores como a 
+                  estudiantes. Creemos en el poder de la convivencia intergeneracional para 
+                  enriquecer vidas y crear comunidades más fuertes.
+                </p>
+                <p className="text-gray-600 mb-4">
+                  Trabajamos para combatir la soledad de los mayores mientras ofrecemos opciones de 
+                  vivienda asequible a los estudiantes. Cada conexión que facilitamos representa una 
+                  oportunidad de aprendizaje mutuo, compañerismo y crecimiento personal.
+                </p>
+                <div className="flex items-center mt-8">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-teal-500 to-teal-700 flex items-center justify-center text-white text-xl mr-4">
+                    <span>🤝</span>
+                  </div>
+                  <p className="text-gray-600 font-medium">
+                    Más de <span className="text-teal-600 font-bold">500 hogares</span> conectados desde 2020
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </CardHeader>
-      {isOpen && (
-        <CardBody className="px-4 pb-4 pt-0">
-          {children}
-        </CardBody>
-      )}
-    </Card>
+      </section>
+      
+      {/* Values Section */}
+      <section className="py-16 relative z-10">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center mb-16 fade-in-up">
+            <h2 className="text-3xl font-bold mb-6 text-gray-800">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-yellow-500">
+                Nuestros Valores
+              </span>
+            </h2>
+            <p className="text-gray-600">
+              Estos son los principios que guían nuestro trabajo y nos inspiran a crear un impacto 
+              positivo en la sociedad a través de la convivencia intergeneracional.
+            </p>
+          </div>
+          
+          <div className="max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <Card className="bg-white shadow-md border border-gray-100 value-card" style={{ animationDelay: "0.1s" }}>
+                <CardBody className="p-6">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-r from-teal-500 to-teal-700 flex items-center justify-center text-white text-2xl mb-4">
+                    <span>❤️</span>
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3 text-teal-600">Conexión Humana</h3>
+                  <p className="text-gray-600">
+                    Creemos que las relaciones significativas entre personas de diferentes generaciones 
+                    enriquecen vidas y crean sociedades más unidas.
+                  </p>
+                </CardBody>
+              </Card>
+              
+              <Card className="bg-white shadow-md border border-gray-100 value-card" style={{ animationDelay: "0.2s" }}>
+                <CardBody className="p-6">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-r from-yellow-500 to-yellow-700 flex items-center justify-center text-white text-2xl mb-4">
+                    <span>🌱</span>
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3 text-yellow-600">Sostenibilidad</h3>
+                  <p className="text-gray-600">
+                    Optimizamos recursos existentes y promovemos un estilo de vida colaborativo que 
+                    reduce nuestra huella ecológica y social.
+                  </p>
+                </CardBody>
+              </Card>
+              
+              <Card className="bg-white shadow-md border border-gray-100 value-card" style={{ animationDelay: "0.3s" }}>
+                <CardBody className="p-6">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-r from-teal-500 to-teal-700 flex items-center justify-center text-white text-2xl mb-4">
+                    <span>🔒</span>
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3 text-teal-600">Confianza</h3>
+                  <p className="text-gray-600">
+                    Trabajamos para crear relaciones basadas en la confianza mutua, la transparencia 
+                    y el respeto entre todos los participantes.
+                  </p>
+                </CardBody>
+              </Card>
+              
+              <Card className="bg-white shadow-md border border-gray-100 value-card" style={{ animationDelay: "0.4s" }}>
+                <CardBody className="p-6">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-r from-yellow-500 to-yellow-700 flex items-center justify-center text-white text-2xl mb-4">
+                    <span>🌈</span>
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3 text-yellow-600">Inclusión</h3>
+                  <p className="text-gray-600">
+                    Valoramos la diversidad y nos esforzamos por crear oportunidades de convivencia 
+                    accesibles para personas de diferentes orígenes y circunstancias.
+                  </p>
+                </CardBody>
+              </Card>
+              
+              <Card className="bg-white shadow-md border border-gray-100 value-card" style={{ animationDelay: "0.5s" }}>
+                <CardBody className="p-6">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-r from-teal-500 to-teal-700 flex items-center justify-center text-white text-2xl mb-4">
+                    <span>🚀</span>
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3 text-teal-600">Innovación</h3>
+                  <p className="text-gray-600">
+                    Buscamos constantemente formas creativas de mejorar nuestra plataforma y 
+                    expandir el impacto de nuestro modelo de convivencia.
+                  </p>
+                </CardBody>
+              </Card>
+              
+              <Card className="bg-white shadow-md border border-gray-100 value-card" style={{ animationDelay: "0.6s" }}>
+                <CardBody className="p-6">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-r from-yellow-500 to-yellow-700 flex items-center justify-center text-white text-2xl mb-4">
+                    <span>🤲</span>
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3 text-yellow-600">Compromiso Social</h3>
+                  <p className="text-gray-600">
+                    Nos comprometemos a generar un impacto social positivo, abordando desafíos 
+                    como la soledad, la escasez de vivienda y la desconexión intergeneracional.
+                  </p>
+                </CardBody>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* History Section */}
+      <section className="py-16 bg-gray-50 relative z-10">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center mb-12 fade-in-up">
+            <h2 className="text-3xl font-bold mb-6 text-gray-800">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-yellow-500">
+                Nuestra Historia
+              </span>
+            </h2>
+            <p className="text-gray-600">
+              El camino que nos ha llevado hasta donde estamos hoy y nuestra visión para el futuro.
+            </p>
+          </div>
+          
+          <div className="max-w-4xl mx-auto">
+            <div className="border-l-4 border-teal-500 ml-6">
+              <div className="relative pl-10 pb-10 fade-in-left" style={{ animationDelay: "0.1s" }}>
+                <div className="absolute -left-8 top-0 w-14 h-14 rounded-full bg-gradient-to-r from-teal-500 to-teal-700 flex items-center justify-center text-white text-xl">
+                  <span>2020</span>
+                </div>
+                <h3 className="text-2xl font-semibold mb-4 text-gray-800">Nuestros inicios</h3>
+                <p className="text-gray-600 mb-4">
+                  CoNest nace como una startup con la visión de conectar a personas mayores con 
+                  habitaciones disponibles en sus hogares con estudiantes que buscan alojamiento 
+                  asequible. Comenzamos con un pequeño piloto en Madrid.
+                </p>
+              </div>
+              
+              <div className="relative pl-10 pb-10 fade-in-left" style={{ animationDelay: "0.3s" }}>
+                <div className="absolute -left-8 top-0 w-14 h-14 rounded-full bg-gradient-to-r from-yellow-500 to-yellow-700 flex items-center justify-center text-white text-xl">
+                  <span>2021</span>
+                </div>
+                <h3 className="text-2xl font-semibold mb-4 text-gray-800">Primeros éxitos</h3>
+                <p className="text-gray-600 mb-4">
+                  Tras resultados positivos, expandimos nuestras operaciones a Barcelona y Valencia.
+                  Recibimos nuestro primer reconocimiento como empresa social innovadora.
+                </p>
+              </div>
+              
+              <div className="relative pl-10 pb-10 fade-in-left" style={{ animationDelay: "0.5s" }}>
+                <div className="absolute -left-8 top-0 w-14 h-14 rounded-full bg-gradient-to-r from-teal-500 to-teal-700 flex items-center justify-center text-white text-xl">
+                  <span>2022</span>
+                </div>
+                <h3 className="text-2xl font-semibold mb-4 text-gray-800">Crecimiento y mejoras</h3>
+                <p className="text-gray-600 mb-4">
+                  Lanzamos nuestra plataforma digital mejorada, facilitando conexiones más rápidas y 
+                  seguras. Cerramos alianzas con universidades y administraciones locales.
+                </p>
+              </div>
+              
+              <div className="relative pl-10 fade-in-left" style={{ animationDelay: "0.7s" }}>
+                <div className="absolute -left-8 top-0 w-14 h-14 rounded-full bg-gradient-to-r from-yellow-500 to-yellow-700 flex items-center justify-center text-white text-xl">
+                  <span>2023</span>
+                </div>
+                <h3 className="text-2xl font-semibold mb-4 text-gray-800">Presente y futuro</h3>
+                <p className="text-gray-600 mb-4">
+                  Actualmente, estamos presentes en 10 ciudades españolas y preparando nuestra 
+                  expansión a otros países europeos. Hemos facilitado más de 500 convivencias 
+                  exitosas y seguimos creciendo.
+                </p>
+                <p className="text-gray-600">
+                  Nuestro objetivo para los próximos años es consolidarnos como la plataforma de 
+                  referencia en convivencia intergeneracional en Europa.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* CTA Section */}
+      <section className="container mx-auto px-4 py-16 text-center relative z-10">
+        <div className="max-w-3xl mx-auto bg-gray-50 p-8 rounded-xl shadow-lg border border-gray-100 overflow-hidden fade-in-up-delay">
+          <div className="absolute inset-0 bg-gradient-to-br from-transparent to-teal-50"></div>
+          <div className="relative z-10">
+            <h2 className="text-3xl font-bold mb-6 text-gray-800">
+              ¿Listo para comenzar tu experiencia en <span className="text-yellow-600">CoNest</span>?
+            </h2>
+            <p className="text-xl mb-8 text-gray-600">
+              Únete a nuestra comunidad y descubre una nueva forma de convivencia que beneficia a todos.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                size="lg"
+                as="a"
+                href="/sign-up/elder"
+                className="relative bg-gradient-to-r from-teal-500 to-teal-700 hover:from-teal-600 hover:to-teal-800 text-white font-bold py-6 px-8 rounded-full text-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-teal-500/20 hover:shadow-xl overflow-hidden group cta-button"
+              >
+                <span className="relative z-10">Regístrate como Anfitrión</span>
+                <div className="absolute -inset-1 rounded-full blur-sm bg-gradient-to-r from-teal-400/50 to-teal-600/50 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </Button>
+              <Button 
+                size="lg"
+                as="a"
+                href="/sign-up/student"
+                className="relative bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-bold py-6 px-8 rounded-full text-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-yellow-500/20 hover:shadow-xl overflow-hidden group cta-button-delayed"
+              >
+                <span className="relative z-10">Regístrate como Estudiante</span>
+                <div className="absolute -inset-1 rounded-full blur-sm bg-gradient-to-r from-yellow-400/50 to-amber-600/50 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <style jsx global>{`
+        /* Animaciones para el contenido */
+        .fade-in-up {
+          opacity: 0;
+          animation: fadeInUp 0.7s forwards;
+        }
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in-up-delay {
+          opacity: 0;
+          animation: fadeInUp 0.7s forwards;
+          animation-delay: 0.3s;
+        }
+
+        /* Animaciones para las tarjetas de valores */
+        .value-card {
+          opacity: 0;
+          animation: fadeInUp 0.7s forwards;
+        }
+
+        /* Animaciones para botones CTA */
+        .cta-button {
+          opacity: 0;
+          animation: scaleButton 0.5s forwards;
+          animation-delay: 0.5s;
+        }
+        .cta-button-delayed {
+          opacity: 0;
+          animation: scaleButton 0.5s forwards;
+          animation-delay: 0.7s;
+        }
+        @keyframes scaleButton {
+          from { opacity: 0; transform: scale(0.8); }
+          to { opacity: 1; transform: scale(1); }
+        }
+
+        .fade-in-right {
+          opacity: 0;
+          animation: fadeInRight 0.7s forwards;
+        }
+        @keyframes fadeInRight {
+          from { opacity: 0; transform: translateX(-20px); }
+          to { opacity: 1; transform: translateX(0); }
+        }
+
+        .fade-in-left {
+          opacity: 0;
+          animation: fadeInLeft 0.7s forwards;
+        }
+        @keyframes fadeInLeft {
+          from { opacity: 0; transform: translateX(20px); }
+          to { opacity: 1; transform: translateX(0); }
+        }
+      `}</style>
+    </div>
   );
 }

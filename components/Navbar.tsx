@@ -21,7 +21,7 @@ const Navbar = () => {
 
         {/* Menú en Desktop */}
         <div className="hidden lg:flex space-x-6">
-          {["Sobre Nosotros", "Contacto"].map((item, index) => (
+          {["Como funciona", "Sobre Nosotros", "Contacto"].map((item, index) => (
             <Link key={index} href={`/${item.toLowerCase().replace(" ", "-")}`} className="text-white hover:text-yellow-300 transition-colors mt-3">
               {item}
             </Link>
@@ -62,7 +62,7 @@ const Navbar = () => {
             className="lg:hidden absolute top-full left-0 w-full bg-teal-800 shadow-md"
           >
             <div className="flex flex-col items-center py-4 space-y-4">
-              {["Sobre Nosotros", "Contacto"].map((item, index) => (
+              {["Como funciona", "Sobre Nosotros", "Contacto"].map((item, index) => (
                 <Link key={index} href={`/${item.toLowerCase().replace(" ", "-")}`} className="text-white text-lg hover:text-yellow-300 transition-colors">
                   {item}
                 </Link>
