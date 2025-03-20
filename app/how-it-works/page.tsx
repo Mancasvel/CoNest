@@ -1,7 +1,7 @@
 'use client';
 
 import React from "react";
-import { Card, CardBody, CardHeader, Divider, Button, Tabs, Tab } from "@nextui-org/react";
+import { Card, CardBody, CardHeader, Divider, Button, Tabs, Tab } from "@heroui/react";
 import NavbarTerracota from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 
@@ -26,7 +26,7 @@ export default function HowItWorksPage() {
             tabList: "gap-6 w-full relative rounded-none p-0 border-b border-divider",
             cursor: "w-full bg-teal-700",
             tab: "max-w-fit px-2 h-12",
-            tabContent: "group-data-[selected=true]:text-teal-800"
+            tabContent: "group-data-[selected=true]:text-white"
           }}
           className="mb-12"
         >
@@ -34,7 +34,7 @@ export default function HowItWorksPage() {
             key="hosts"
             title={
               <div className="flex items-center space-x-2">
-                <span className="text-lg">Para Anfitriones</span>
+                <span className="[selected=true]:text-white">Para Anfitriones</span>
               </div>
             }
           >

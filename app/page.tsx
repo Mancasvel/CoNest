@@ -1,7 +1,7 @@
 "use client";
 
 import Image from 'next/image';
-import { Card, Button, CardBody, CardHeader, CardFooter } from '@nextui-org/react';
+import { Card, Button, CardBody, CardHeader, CardFooter, Link } from '@nextui-org/react';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import NavbarTerracota from "@/app/components/Navbar";
@@ -118,9 +118,9 @@ export default function Home() {
               <p className="text-lg text-gray-700 mb-6">
                 CoNest conecta a estudiantes con opciones de alojamiento asequible mientras brinda compañía a personas mayores.
               </p>
-              <Button color="primary" className="bg-teal-700">
+              <Link href="/about" className="bg-teal-700 text-white px-4 py-2 rounded-md">
                 Más Información
-              </Button>
+              </Link>
             </div>
             <div className="bg-gray-200 rounded-lg h-64"></div>
           </div>
