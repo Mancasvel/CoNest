@@ -6,9 +6,15 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import NavbarTerracota from "@/app/components/Navbar";
 
+// Interfaz para el tipo de datos que se espera de la API
+interface ApiData {
+  // Añadir las propiedades específicas aquí cuando sepamos qué devuelve la API
+  [key: string]: any;
+}
+
 export default function Home() {
-  const [data, setData] = useState(null);
-  const [scrolled, setScrolled] = useState(false);
+  const [data, setData] = useState<ApiData | null>(null);
+  const [scrolled, setScrolled] = useState<boolean>(false);
 
   useEffect(() => {
     async function fetchData() {

@@ -11,7 +11,8 @@ const defaultUrl = process.env.VERCEL_URL
 export const metadata = {
   metadataBase: new URL(defaultUrl),
   title: "CoNest - Una mejor manera de alojarte",
-  description: "Conectamos estudiantes con opciones de alojamiento asequible mientras brindamos compañía a personas mayores",
+  description:
+    "Conectamos estudiantes con opciones de alojamiento asequible mientras brindamos compañía a personas mayores",
 };
 
 const geistSans = Geist({
@@ -26,16 +27,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={geistSans.className} suppressHydrationWarning>
-      <body className="bg-background text-foreground">
+      <body className="h-screen flex flex-col bg-background text-foreground">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <main className="min-h-screen flex flex-col">
-            {children}
-          </main>
+          <main className="flex-1 flex flex-col">{children}</main>
         </ThemeProvider>
       </body>
     </html>

@@ -4,8 +4,6 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input, Button, Checkbox } from "@nextui-org/react";
 import Link from "next/link";
-import NavbarTerracota from "@/app/components/Navbar";
-import Footer from "@/app/components/Footer";
 
 const ElderSignUp = () => {
   const router = useRouter();
@@ -64,7 +62,6 @@ const ElderSignUp = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <NavbarTerracota />
       <div className="max-w-7xl mx-auto px-5 w-full flex flex-col flex-grow">
         <div className="container flex justify-center items-center mt-10 mb-10">
           <div className="w-full max-w-2xl bg-white shadow-lg rounded-lg p-8">
@@ -253,7 +250,6 @@ const ElderSignUp = () => {
         </div>
       </div>
 
-      <Footer />
     </div>
   );
 };

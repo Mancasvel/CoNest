@@ -5,8 +5,16 @@ import { Card, CardBody, Input, Textarea, Button, Select, SelectItem } from "@ne
 import NavbarTerracota from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 
+interface FormData {
+  name: string;
+  email: string;
+  userType: string;
+  subject: string;
+  message: string;
+}
+
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     userType: "",
@@ -17,7 +25,7 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -25,25 +33,18 @@ export default function ContactPage() {
     });
   };
 
-  const handleSelectChange = (value) => {
-    setFormData({
-      ...formData,
-      userType: value
-    });
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setError("");
-
+    setError("");  // Resetea el error antes de comenzar la validación
+  
     // Validación básica
     if (!formData.name || !formData.email || !formData.message) {
       setError("Por favor completa todos los campos obligatorios");
       setIsSubmitting(false);
       return;
     }
-
+  
     // Simulación de envío del formulario
     setTimeout(() => {
       setIsSubmitting(false);
@@ -51,6 +52,7 @@ export default function ContactPage() {
       console.log("Formulario enviado:", formData);
     }, 1500);
   };
+  
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -196,7 +198,12 @@ export default function ContactPage() {
                           label="¿Eres...?"
                           name="userType"
                           selectedKeys={formData.userType ? [formData.userType] : []}
-                          onChange={(e) => handleSelectChange(e.target.value)}
+                          onChange={(e) => {
+                            setFormData({
+                              ...formData,
+                              userType: e.target.value
+                            });
+                          }}
                           variant="bordered"
                           color="primary"
                           className="w-full"

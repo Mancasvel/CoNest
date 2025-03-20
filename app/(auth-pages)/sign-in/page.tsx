@@ -1,6 +1,7 @@
 'use client';
 
 import { signInAction } from "@/app/actions";
+import NavbarTerracota from "@/app/components/Navbar";
 import { FormMessage, Message } from "@/components/form-message";
 import { SubmitButton } from "@/components/submit-button";
 import { Card, Button, Input, CardBody, CardHeader } from '@nextui-org/react';
@@ -109,8 +110,7 @@ export default function Login(props: { searchParams: Promise<Message> }) {
 
 function RoleSelectionScreen() {
   return (
-    <div className="flex-1 flex flex-col items-center justify-center py-10 bg-white min-h-screen">
-      <div className="w-full max-w-4xl px-4 mx-auto">
+    <div className="flex flex-col h-screen">
         <h1 className="text-3xl font-bold text-center text-teal-800 mb-12">¿Cómo quieres iniciar sesión en CoNest?</h1>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12 justify-items-center">
@@ -171,6 +171,5 @@ function RoleSelectionScreen() {
         </div>
 
       </div>
-    </div>
   );
 }

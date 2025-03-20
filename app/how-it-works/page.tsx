@@ -348,11 +348,13 @@ export default function HowItWorksPage() {
     </div>
   );
 }
-
-// Componente de acordeón simple
-function Accordion({ title, children }) {
+interface AccordionProps {
+  title: string;
+  children: React.ReactNode;
+}
+function Accordion({ title, children }: AccordionProps) {
   const [isOpen, setIsOpen] = React.useState(false);
-  
+
   return (
     <Card className="border-none shadow">
       <CardHeader 
@@ -371,4 +373,4 @@ function Accordion({ title, children }) {
       )}
     </Card>
   );
-} 
+}

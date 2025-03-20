@@ -2,8 +2,7 @@
 
 import { Button, Card, CardBody } from "@nextui-org/react";
 import Link from "next/link";
-import NavbarTerracota from "@/app/components/Navbar";
-import Footer from "@/app/components/Footer";
+
 
 const RoleSelectionScreen = () => {
   return (
@@ -73,9 +72,7 @@ const RoleSelectionScreen = () => {
 export default function SignUpPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      <NavbarTerracota />
       <RoleSelectionScreen />
-      <Footer />
     </div>
   );
 }
