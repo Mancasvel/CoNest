@@ -3,7 +3,6 @@ import { FormMessage, Message } from "@/components/form-message";
 import { SubmitButton } from "@/components/submit-button";
 import { Input } from "@heroui/react";
 import Link from "next/link";
-import { SmtpMessage } from "../smtp-message";
 
 export default async function ForgotPassword(props: {
   searchParams: Promise<Message>;
@@ -29,7 +28,6 @@ export default async function ForgotPassword(props: {
           <FormMessage message={searchParams} />
         </div>
       </form>
-      <SmtpMessage />
     </>
   );
 }
