@@ -238,38 +238,47 @@ export default function NavbarConest() {
               />
             </DropdownTrigger>
             <DropdownMenu aria-label="User Actions">
-              <DropdownItem key="profile" textValue="profile">
-                <div className="text-sm font-semibold">{user.email}</div>
-                <div className="text-xs text-gray-500">
-                  {userRole === 'student' ? 'Estudiante' : userRole === 'elder' ? 'Adulto mayor' : 'Usuario'}
-                </div>
-              </DropdownItem>
-              <DropdownItem key="settings" href="/profile">
-                Mi Perfil
-              </DropdownItem>
-              {userRole === 'student' && (
-                <>
-                  <DropdownItem key="applications" href="/student/applications">
-                    Mis Solicitudes
-                  </DropdownItem>
-                  <DropdownItem key="housing" href="/student/housing">
-                    Buscar Alojamiento
-                  </DropdownItem>
-                </>
-              )}
-              {userRole === 'elder' && (
-                <>
-                  <DropdownItem key="elder-applications" href="/elder/applications">
-                    Solicitudes Recibidas
-                  </DropdownItem>
-                  <DropdownItem key="elder-housing" href="/elder/housing">
-                    Mi Vivienda
-                  </DropdownItem>
-                </>
-              )}
-              <DropdownItem key="logout" color="danger" onClick={handleSignOut}>
-                Cerrar Sesión
-              </DropdownItem>
+            <DropdownItem key="profile" textValue="profile">
+              <div className="text-sm font-semibold">{user.email}</div>
+              <div className="text-xs text-gray-500">
+                {userRole === 'student'
+                  ? 'Estudiante'
+                  : userRole === 'elder'
+                  ? 'Adulto mayor'
+                  : 'Usuario'}
+              </div>
+            </DropdownItem>
+
+            <DropdownItem key="settings" href="/profile">
+              Mi Perfil
+            </DropdownItem>
+
+            {userRole === 'student' ? (
+              <>
+                <DropdownItem key="applications" href="/student/applications">
+                  Mis Solicitudes
+                </DropdownItem>
+                <DropdownItem key="housing" href="/student/housing">
+                  Buscar Alojamiento
+                </DropdownItem>
+              </>
+            ) : null}
+
+            {userRole === 'elder' ? (
+              <>
+                <DropdownItem key="elder-applications" href="/elder/applications">
+                  Solicitudes Recibidas
+                </DropdownItem>
+                <DropdownItem key="elder-housing" href="/elder/housing">
+                  Mi Vivienda
+                </DropdownItem>
+              </>
+            ) : null}
+
+            <DropdownItem key="logout" color="danger" onClick={handleSignOut}>
+              Cerrar Sesión
+            </DropdownItem>
+
             </DropdownMenu>
           </Dropdown>
         ) : (
