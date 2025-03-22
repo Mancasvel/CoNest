@@ -1,8 +1,8 @@
 import { signInAction } from "@/app/actions";
 import { FormMessage, Message } from "@/components/form-message";
 import { SubmitButton } from "@/components/submit-button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Input } from "@heroui/react";
+import { InputLabel, TextField } from "@mui/material";
 import Link from "next/link";
 
 export default async function Login(props: { searchParams: Promise<Message> }) {
@@ -17,10 +17,10 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
         </Link>
       </p>
       <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
-        <Label htmlFor="email">Email</Label>
+        <InputLabel htmlFor="email">Email</InputLabel>
         <Input name="email" placeholder="you@example.com" required />
         <div className="flex justify-between items-center">
-          <Label htmlFor="password">Password</Label>
+          <InputLabel htmlFor="password">Password</InputLabel>
           <Link
             className="text-xs text-foreground underline"
             href="/forgot-password"

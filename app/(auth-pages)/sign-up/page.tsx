@@ -5,8 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { signUpAction } from "@/app/actions";
 import { FormMessage } from "@/components/form-message";
 import { SubmitButton } from "@/components/submit-button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Input } from "@heroui/react";
 import Link from "next/link";
 import { SmtpMessage } from "../smtp-message";
 
@@ -91,6 +90,7 @@ function SignupForm() {
           {/* Botón de envío */}
           <SubmitButton formAction={signUpAction} pendingText="Registrando...">
             Registrarse
+
           </SubmitButton>
         </div>
       </form>
@@ -107,3 +107,4 @@ export default function Signup() {
     </Suspense>
   );
 }
+
