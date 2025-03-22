@@ -7,7 +7,6 @@ import { FormMessage } from "@/components/form-message";
 import { SubmitButton } from "@/components/submit-button";
 import { Input } from "@heroui/react";
 import Link from "next/link";
-import { SmtpMessage } from "../smtp-message";
 
 function SignupForm() {
   const searchParams = useSearchParams();
@@ -87,7 +86,6 @@ function SignupForm() {
         </div>
       </form>
 
-      <SmtpMessage />
     </>
   );
 }
