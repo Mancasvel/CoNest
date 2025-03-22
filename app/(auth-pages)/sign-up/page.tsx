@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { signUpAction } from "@/app/actions";
 import { FormMessage } from "@/components/form-message";
@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { SmtpMessage } from "../smtp-message";
 
-export default function Signup() {
+function SignupForm() {
   const searchParams = useSearchParams();
   const [message, setMessage] = useState<string | null>(null);
   const [role, setRole] = useState("student");
@@ -97,5 +97,13 @@ export default function Signup() {
 
       <SmtpMessage />
     </>
+  );
+}
+
+export default function Signup() {
+  return (
+    <Suspense fallback={<p>Cargando...</p>}>
+      <SignupForm />
+    </Suspense>
   );
 }
