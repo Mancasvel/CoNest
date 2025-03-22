@@ -9,8 +9,7 @@ import { useForm, Controller, Control, FieldValues, UseFormSetValue } from "reac
 import { yupResolver } from "@hookform/resolvers/yup";
 // @ts-ignore
 import * as yup from "yup";
-import NavbarTerracota from "@/app/components/Navbar";
-import Footer from "@/app/components/Footer";
+import Footer from "@/components/Footer";
 
 // Definir interfaces para los datos
 interface PersonalInfo {
@@ -197,7 +196,6 @@ export default function ProfilePage() {
   if (isLoading) {
     return (
       <div className="flex flex-col h-screen">
-        <NavbarTerracota />
         <div className="flex-1 flex justify-center items-center">
           <Card>
             <CardBody>
@@ -215,7 +213,6 @@ export default function ProfilePage() {
 
   return (
     <div className="flex flex-col h-screen">
-      <NavbarTerracota />
       <div className="flex-1 flex flex-col py-12 px-4 max-w-4xl mx-auto w-full">
         <h1 className="text-3xl font-bold text-gray-800 mb-8">Mi Perfil</h1>
 

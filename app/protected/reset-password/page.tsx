@@ -1,8 +1,7 @@
 import { resetPasswordAction } from "@/app/actions";
 import { FormMessage, Message } from "@/components/form-message";
 import { SubmitButton } from "@/components/submit-button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Input } from "@heroui/react";
 
 export default async function ResetPassword(props: {
   searchParams: Promise<Message>;
@@ -14,16 +13,16 @@ export default async function ResetPassword(props: {
       <p className="text-sm text-foreground/60">
         Please enter your new password below.
       </p>
-      <Label htmlFor="password">New password</Label>
       <Input
         type="password"
+        label="Contraseña"
         name="password"
         placeholder="New password"
         required
       />
-      <Label htmlFor="confirmPassword">Confirm password</Label>
       <Input
         type="password"
+        label="Confirmar contraseña"
         name="confirmPassword"
         placeholder="Confirm password"
         required

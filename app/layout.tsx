@@ -1,8 +1,9 @@
-import HeaderAuth from "@/components/header-auth";
-import { hasEnvVars } from "@/utils/supabase/check-env-vars";
+
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
+import Navbar from "@/components/Navbar"; 
+import Footer from "@/components/Footer";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -19,7 +20,6 @@ const geistSans = Geist({
   display: "swap",
   subsets: ["latin"],
 });
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -34,7 +34,20 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="flex-1 flex flex-col">{children}</main>
+          {/* Contenedor principal */}
+          <div className="relative min-h-screen">
+            {/* Navbar con mayor prioridad */}
+            <div className="fixed top-0 left-0 w-full z-50">
+              <Navbar />
+            </div>
+
+            {/* Aseguramos espacio para el Navbar */}
+            <div className="pt-[4rem] md:pt-[5rem]">
+              <main className="flex-1">{children}</main>
+            </div>
+
+            <Footer />
+          </div>
         </ThemeProvider>
       </body>
     </html>

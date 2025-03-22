@@ -8,35 +8,74 @@ import { redirect } from "next/navigation";
 export const signUpAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
+  const role = formData.get("role")?.toString(); // "student" o "elder"
+
+  // Datos específicos de cada rol
+  const birth_date = formData.get("birth_date")?.toString();
+  let additionalData: any = {};
+
+  if (role === "student") {
+    additionalData = {
+      university: formData.get("university")?.toString(),
+      course: formData.get("course")?.toString(),
+    };
+  } else if (role === "elder") {
+    additionalData = {
+      apartment_address: formData.get("apartment_address")?.toString(),
+      monthly_rent: parseFloat(formData.get("monthly_rent")?.toString() || "0"),
+    };
+  }
+
   const supabase = await createClient();
   const origin = (await headers()).get("origin");
 
-  if (!email || !password) {
+  if (!email || !password || !role || !birth_date) {
     return encodedRedirect(
       "error",
       "/sign-up",
-      "Email and password are required",
+      "All fields are required"
     );
   }
 
-  const { error } = await supabase.auth.signUp({
+  // Crear usuario en auth.users con metadata
+  const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
       emailRedirectTo: `${origin}/auth/callback`,
+      data: { role }, // Guardar el rol en metadata
     },
   });
 
   if (error) {
     console.error(error.code + " " + error.message);
     return encodedRedirect("error", "/sign-up", error.message);
-  } else {
-    return encodedRedirect(
-      "success",
-      "/sign-up",
-      "Thanks for signing up! Please check your email for a verification link.",
-    );
   }
+
+  const userId = data.user?.id;
+  if (!userId) {
+    return encodedRedirect("error", "/sign-up", "User ID not found");
+  }
+
+  // Insertar en la tabla correspondiente (students o elders)
+  const table = role === "student" ? "students" : "elders";
+  const { error: insertError } = await supabase.from(table).insert({
+    id: userId,
+    birth_date,
+    status: "REGISTERED",
+    ...additionalData,
+  });
+
+  if (insertError) {
+    console.error(insertError.message);
+    return encodedRedirect("error", "/sign-up", "Error creating profile");
+  }
+
+  return encodedRedirect(
+    "success",
+    "/sign-in",
+    "Gracias por registrarte! Por favor, revisa tu correo electrónico para verificar tu cuenta."
+  );
 };
 
 export const signInAction = async (formData: FormData) => {
