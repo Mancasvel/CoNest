@@ -80,7 +80,7 @@ export default function Home() {
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
                 <Link href="/sign-up">
-                  <Button className="bg-conest-blue hover:bg-conest-mediumBlue text-white font-medium py-3 px-6 rounded-md shadow-soft transition-all duration-200 flex items-center">
+                  <Button className="bg-conest-blue hover:bg-conest-mediumBlue text-white font-medium py-3 px-6 rounded-md shadow-soft transition-all duration-200 flex items-center focus:outline-none active:bg-opacity-80 touch-none">
                     Encuentra tu Match
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -88,7 +88,7 @@ export default function Home() {
                   </Button>
                 </Link>
                 <Link href="/como-funciona">
-                  <Button className="bg-white border border-conest-blue text-conest-blue hover:bg-conest-lightBlue/10 font-medium py-3 px-6 rounded-md transition-all duration-200 flex items-center">
+                  <Button className="bg-white border border-conest-blue text-conest-blue hover:bg-conest-lightBlue/10 font-medium py-3 px-6 rounded-md transition-all duration-200 flex items-center focus:outline-none active:bg-white touch-none">
                     Cómo Funciona
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -375,7 +375,7 @@ export default function Home() {
           
           <div className="text-center mt-16">
             <Link href="/como-funciona">
-              <Button className="bg-conest-blue hover:bg-conest-mediumBlue text-white font-bold py-3 px-8 rounded-xl shadow-soft">
+              <Button className="bg-conest-blue hover:bg-conest-mediumBlue text-white font-bold py-3 px-8 rounded-xl shadow-soft focus:outline-none active:bg-opacity-80 touch-none">
                 Más información sobre el proceso
               </Button>
             </Link>
@@ -399,14 +399,14 @@ export default function Home() {
                 <div className="space-y-4">
                   <Link href="/sign-up/student" className="block">
                     <Button 
-                      className="w-full bg-conest-blue hover:bg-conest-mediumBlue text-white font-bold py-4 rounded-xl shadow-soft"
+                      className="w-full bg-conest-blue hover:bg-conest-mediumBlue text-white font-bold py-4 rounded-xl shadow-soft focus:outline-none active:bg-opacity-80 touch-none"
                     >
                       Soy Estudiante
                     </Button>
                   </Link>
                   <Link href="/sign-up/elder" className="block">
                     <Button 
-                      className="w-full bg-white border border-conest-blue text-conest-blue hover:bg-conest-lightBlue/50 font-bold py-4 rounded-xl"
+                      className="w-full bg-white border border-conest-blue text-conest-blue hover:bg-conest-lightBlue/50 font-bold py-4 rounded-xl focus:outline-none active:bg-white touch-none"
                     >
                       Soy Anfitrión
                     </Button>
