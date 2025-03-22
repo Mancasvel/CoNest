@@ -9,7 +9,7 @@ import { useForm, Controller, Control, FieldValues, UseFormSetValue } from "reac
 import { yupResolver } from "@hookform/resolvers/yup";
 // @ts-ignore
 import * as yup from "yup";
-import Footer from "@/components/Footer_1";
+import Footer from "@/components/Footer";
 
 // Definir interfaces para los datos
 interface PersonalInfo {

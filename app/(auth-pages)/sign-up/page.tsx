@@ -40,15 +40,13 @@ function SignupForm() {
 
         <div className="flex flex-col gap-2 mt-8">
           {/* Correo electrónico */}
-          <Label htmlFor="email">Correo electrónico</Label>
+
           <Input name="email" placeholder="tucorreo@ejemplo.com" required />
 
           {/* Contraseña */}
-          <Label htmlFor="password">Contraseña</Label>
           <Input type="password" name="password" placeholder="Tu contraseña" minLength={6} required />
 
           {/* Selección de rol */}
-          <Label htmlFor="role">Tipo de usuario</Label>
           <select name="role" value={role} onChange={(e) => setRole(e.target.value)} required>
             <option value="student">Estudiante</option>
             <option value="elder">Adulto mayor</option>
@@ -57,10 +55,8 @@ function SignupForm() {
           {/* Campos para estudiantes */}
           {role === "student" && (
             <>
-              <Label htmlFor="university">Universidad</Label>
               <Input name="university" placeholder="Tu universidad" required />
 
-              <Label htmlFor="course">Año de curso</Label>
               <select name="course" required>
                 <option value="1">1° Año</option>
                 <option value="2">2° Año</option>
@@ -68,7 +64,6 @@ function SignupForm() {
                 <option value="4">4° Año</option>
               </select>
 
-              <Label htmlFor="birth_date">Fecha de nacimiento</Label>
               <Input type="date" name="birth_date" required />
             </>
           )}
@@ -76,13 +71,10 @@ function SignupForm() {
           {/* Campos para adultos mayores */}
           {role === "elder" && (
             <>
-              <Label htmlFor="birth_date">Fecha de nacimiento</Label>
               <Input type="date" name="birth_date" required />
 
-              <Label htmlFor="apartment_address">Dirección del apartamento</Label>
               <Input name="apartment_address" placeholder="Tu dirección" required />
 
-              <Label htmlFor="monthly_rent">Renta mensual</Label>
               <Input type="number" name="monthly_rent" placeholder="Precio de la renta" required />
             </>
           )}

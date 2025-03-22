@@ -73,7 +73,6 @@ export default function HeroSection({
                 className="inline-block rounded-full bg-conest-blue/10 px-4 py-1.5 text-sm font-medium text-conest-blue mb-4 shadow-sm"
                 style={{ 
                   transitionDelay: '150ms',
-                  animation: isVisible ? 'fadeInUp 0.6s ease-out forwards' : 'none' 
                 }}
               >
                 {badge}
@@ -83,8 +82,6 @@ export default function HeroSection({
             <h1 
               className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-conest-darkGray tracking-tight leading-tight"
               style={{ 
-                transitionDelay: '300ms',
-                animation: isVisible ? 'fadeInUp 0.6s ease-out 0.1s forwards' : 'none' 
               }}
             >
               {title}
@@ -93,10 +90,6 @@ export default function HeroSection({
             {subtitle && (
               <h2 
                 className="text-2xl md:text-3xl mb-4 text-conest-blue font-medium"
-                style={{ 
-                  transitionDelay: '450ms',
-                  animation: isVisible ? 'fadeInUp 0.6s ease-out 0.2s forwards' : 'none' 
-                }}
               >
                 {subtitle}
               </h2>
@@ -104,20 +97,12 @@ export default function HeroSection({
             
             <p 
               className="text-lg text-conest-darkGray/80 leading-relaxed mb-8"
-              style={{ 
-                transitionDelay: '600ms',
-                animation: isVisible ? 'fadeInUp 0.6s ease-out 0.3s forwards' : 'none' 
-              }}
             >
               {description}
             </p>
             
             <div 
               className="flex flex-wrap gap-4 mt-8"
-              style={{ 
-                transitionDelay: '750ms',
-                animation: isVisible ? 'fadeInUp 0.6s ease-out 0.4s forwards' : 'none' 
-              }}
             >
               {primaryButtonText && primaryButtonUrl && (
                 <Link href={primaryButtonUrl}>
@@ -146,10 +131,6 @@ export default function HeroSection({
           {/* Image Section */}
           <div 
             className="relative"
-            style={{ 
-              transitionDelay: '750ms',
-              animation: isVisible ? 'fadeInRight 1s ease-out 0.3s forwards' : 'none' 
-            }}
           >
             <div className="p-2 rounded-2xl bg-gradient-to-br from-conest-blue via-conest-mediumBlue to-conest-lightBlue shadow-medium">
               <div className="bg-white p-3 rounded-xl overflow-hidden">
@@ -185,31 +166,6 @@ export default function HeroSection({
           ></path>
         </svg>
       </div>
-      
-      {/* Keyframes for animations */}
-      <style jsx global>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        @keyframes fadeInRight {
-          from {
-            opacity: 0;
-            transform: translateX(40px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-      `}</style>
     </section>
   );
 } 

@@ -65,7 +65,7 @@ export default function SobreNosotrosPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="flex flex-col lg:flex-row gap-16 items-center">
-              <div className="w-full lg:w-1/2" style={{ animation: 'fadeInLeft 1s ease-out 0.1s both' }}>
+              <div className="w-full lg:w-1/2" >
                 <h2 className="text-3xl font-bold mb-6 text-conest-darkGray">
                   <span className="text-conest-blue">Nuestra Historia</span>
                 </h2>
@@ -90,7 +90,7 @@ export default function SobreNosotrosPage() {
                 </div>
               </div>
               
-              <div className="w-full lg:w-1/2 relative" style={{ animation: 'fadeInRight 1s ease-out 0.3s both' }}>
+              <div className="w-full lg:w-1/2 relative" >
                 <div className="p-2 rounded-2xl bg-gradient-to-br from-conest-blue via-conest-mediumBlue to-conest-lightBlue shadow-medium">
                   <div className="bg-white p-3 rounded-xl overflow-hidden">
                     <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
@@ -138,7 +138,7 @@ export default function SobreNosotrosPage() {
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {/* Value 1 */}
-              <div className="group" style={{ animation: 'fadeInUp 0.8s ease-out 0.1s both' }}>
+              <div className="group" >
                 <Card className="bg-white shadow-soft border border-gray-100 h-full transition-all duration-300 hover:shadow-medium hover:border-conest-blue/20 hover:-translate-y-1">
                   <CardBody className="p-6 flex flex-col items-center text-center">
                     <div className="w-16 h-16 rounded-full bg-conest-lightBlue flex items-center justify-center text-conest-blue text-2xl mb-6 group-hover:bg-conest-blue group-hover:text-white transition-colors duration-300">
@@ -160,7 +160,7 @@ export default function SobreNosotrosPage() {
               </div>
               
               {/* Value 2 */}
-              <div className="group" style={{ animation: 'fadeInUp 0.8s ease-out 0.2s both' }}>
+              <div className="group" >
                 <Card className="bg-white shadow-soft border border-gray-100 h-full transition-all duration-300 hover:shadow-medium hover:border-conest-blue/20 hover:-translate-y-1">
                   <CardBody className="p-6 flex flex-col items-center text-center">
                     <div className="w-16 h-16 rounded-full bg-conest-lightBlue flex items-center justify-center text-conest-blue text-2xl mb-6 group-hover:bg-conest-blue group-hover:text-white transition-colors duration-300">
@@ -180,7 +180,7 @@ export default function SobreNosotrosPage() {
               </div>
               
               {/* Value 3 */}
-              <div className="group" style={{ animation: 'fadeInUp 0.8s ease-out 0.3s both' }}>
+              <div className="group" >
                 <Card className="bg-white shadow-soft border border-gray-100 h-full transition-all duration-300 hover:shadow-medium hover:border-conest-blue/20 hover:-translate-y-1">
                   <CardBody className="p-6 flex flex-col items-center text-center">
                     <div className="w-16 h-16 rounded-full bg-conest-lightBlue flex items-center justify-center text-conest-blue text-2xl mb-6 group-hover:bg-conest-blue group-hover:text-white transition-colors duration-300">
@@ -198,7 +198,7 @@ export default function SobreNosotrosPage() {
               </div>
               
               {/* Value 4 */}
-              <div className="group" style={{ animation: 'fadeInUp 0.8s ease-out 0.4s both' }}>
+              <div className="group" >
                 <Card className="bg-white shadow-soft border border-gray-100 h-full transition-all duration-300 hover:shadow-medium hover:border-conest-blue/20 hover:-translate-y-1">
                   <CardBody className="p-6 flex flex-col items-center text-center">
                     <div className="w-16 h-16 rounded-full bg-conest-lightBlue flex items-center justify-center text-conest-blue text-2xl mb-6 group-hover:bg-conest-blue group-hover:text-white transition-colors duration-300">
@@ -217,7 +217,7 @@ export default function SobreNosotrosPage() {
               </div>
               
               {/* Value 5 */}
-              <div className="group" style={{ animation: 'fadeInUp 0.8s ease-out 0.5s both' }}>
+              <div className="group" >
                 <Card className="bg-white shadow-soft border border-gray-100 h-full transition-all duration-300 hover:shadow-medium hover:border-conest-blue/20 hover:-translate-y-1">
                   <CardBody className="p-6 flex flex-col items-center text-center">
                     <div className="w-16 h-16 rounded-full bg-conest-lightBlue flex items-center justify-center text-conest-blue text-2xl mb-6 group-hover:bg-conest-blue group-hover:text-white transition-colors duration-300">
@@ -236,7 +236,7 @@ export default function SobreNosotrosPage() {
               </div>
               
               {/* Value 6 */}
-              <div className="group" style={{ animation: 'fadeInUp 0.8s ease-out 0.6s both' }}>
+              <div className="group" >
                 <Card className="bg-white shadow-soft border border-gray-100 h-full transition-all duration-300 hover:shadow-medium hover:border-conest-blue/20 hover:-translate-y-1">
                   <CardBody className="p-6 flex flex-col items-center text-center">
                     <div className="w-16 h-16 rounded-full bg-conest-lightBlue flex items-center justify-center text-conest-blue text-2xl mb-6 group-hover:bg-conest-blue group-hover:text-white transition-colors duration-300">
@@ -279,7 +279,6 @@ export default function SobreNosotrosPage() {
                 <div 
                   key={index} 
                   className="group" 
-                  style={{ animation: `fadeInUp 0.8s ease-out ${0.1 + index * 0.1}s both` }}
                 >
                   <Card className="bg-white shadow-soft border border-gray-100 h-full transition-all duration-300 hover:shadow-medium hover:border-conest-blue/20 hover:-translate-y-1">
                     <CardBody className="p-0">
@@ -325,7 +324,6 @@ export default function SobreNosotrosPage() {
                 <div 
                   key={index}
                   className="bg-white p-6 rounded-xl shadow-soft flex items-center justify-center h-32"
-                  style={{ animation: `fadeIn 1s ease-out ${0.1 + index * 0.1}s both` }}
                 >
                   <div className="relative w-full h-16">
                     <Image
