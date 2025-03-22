@@ -499,7 +499,7 @@ export default function ComoFuncionaPage() {
                   estamos aquí para acompañarte en todo el proceso.
                 </p>
                 <div className="space-y-4">
-                  <Link href="/sign-up/elder" className="block">
+                  <Link href="/sign-up" className="block">
                     <Button 
                       className="w-full bg-conest-blue hover:bg-conest-mediumBlue text-white font-bold py-4 rounded-xl shadow-soft transition-transform hover:scale-105 duration-200"
                       size="lg"
@@ -507,7 +507,7 @@ export default function ComoFuncionaPage() {
                       Soy Anfitrión
                     </Button>
                   </Link>
-                  <Link href="/sign-up/student" className="block">
+                  <Link href="/sign-up" className="block">
                     <Button 
                       className="w-full bg-white border-2 border-conest-blue text-conest-blue hover:bg-conest-lightBlue/20 font-bold py-4 rounded-xl transition-transform hover:scale-105 duration-200"
                       size="lg"

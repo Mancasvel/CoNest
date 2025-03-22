@@ -10,39 +10,42 @@ export default function SobreNosotrosPage() {
   // Team members data
   const teamMembers = [
     {
-      name: "Carlos Rodríguez",
-      role: "CEO & Co-Fundador",
-      bio: "Trabajó en el sector de la vivienda social durante 10 años antes de fundar CoNest para abordar el desafío de la vivienda asequible.",
-      image: "/images/team/carlos.jpg"
+      name: "José María de Cossío",
+      role: "CEO y Fundador",
+      bio: "Visionario y creador de CoNest. Especialista en innovación social con años de experiencia en el sector.",
+      image: "/images/team/ceo.png"
     },
     {
-      name: "Elena Martínez",
-      role: "COO & Co-Fundadora",
-      bio: "Experta en gerontología social con amplia experiencia en programas de acompañamiento a personas mayores.",
-      image: "/images/team/elena.jpg"
+      name: "Natalia Olmo",
+      role: "COO",
+      bio: "Responsable de gestión y operaciones. Experta en desarrollo de negocios con enfoque en impacto social positivo.",
+      image: "/images/team/coo.png"
     },
     {
-      name: "Javier López",
-      role: "CTO",
-      bio: "Ingeniero informático especializado en plataformas digitales que conectan servicios sociales con usuarios finales.",
-      image: "/images/team/javier.jpg"
+      name: "Manuel Castillejo",
+      role: "Co-CTO",
+      bio: "Responsable de la estrategia tecnológica y desarrollo de plataformas digitales. Experto en tecnologías emergentes e inteligencia artificial.",
+      image: "/images/team/cto1.png"
     },
     {
-      name: "Marta Sánchez",
-      role: "Directora de Operaciones",
-      bio: "Socióloga especializada en economía colaborativa y creación de comunidades intergeneracionales.",
-      image: "/images/team/marta.jpg"
+      name: "Luis Mellado",
+      role: "Co-CTO",
+      bio: "Lidera junto a Manuel el área tecnológica. Especialista en desarrollo de sistemas innovadores y arquitectura de software.",
+      image: "/images/team/cto2.png"
+    },
+    {
+      name: "María Toscano",
+      role: "CMO",
+      bio: "Lidera la estrategia de marketing y comunicación. Especializada en narrativas de marca con propósito y comunicación impactante.",
+      image: "/images/team/cmo.png"
     }
   ];
 
   // Partners data
   const partners = [
-    { name: "Universidad Complutense", logo: "/images/partners/ucm.jpg" },
-    { name: "Ayuntamiento de Madrid", logo: "/images/partners/madrid.jpg" },
-    { name: "Fundación La Caixa", logo: "/images/partners/lacaixa.jpg" },
-    { name: "IMSERSO", logo: "/images/partners/imserso.jpg" },
-    { name: "ONCE", logo: "/images/partners/once.jpg" },
-    { name: "Comunidad de Madrid", logo: "/images/partners/comunidad.jpg" }
+    { name: "Universidad de Sevilla", logo: "/images/partners/us.png" },
+    { name: "Espacio Res", logo: "/images/partners/espacio_res.png" },
+
   ];
 
   return (
@@ -52,10 +55,10 @@ export default function SobreNosotrosPage() {
         subtitle="Conoce quiénes somos"
         description="CoNest nació con una visión clara: transformar el modo en que entendemos la vivienda y la conexión intergeneracional, creando comunidades más inclusivas y solidarias."
         primaryButtonText="Únete a nosotros"
-        primaryButtonUrl="/sign-up/options"
+        primaryButtonUrl="/sign-up"
         secondaryButtonText="Contáctanos"
         secondaryButtonUrl="/contacto"
-        imageSrc="/images/about-hero.jpg"
+        imageSrc="/images/compañía-para-personas-mayores.jpg"
         imageAlt="Equipo de CoNest"
         badge="Sobre Nosotros"
       />
@@ -71,21 +74,21 @@ export default function SobreNosotrosPage() {
                 </h2>
                 <div className="space-y-4 text-conest-darkGray/80">
                   <p>
-                    CoNest fue fundado en 2022 por Carlos Rodríguez y Elena Martínez tras observar dos 
-                    realidades paralelas: el aumento de precios de alquiler que afectaba a los estudiantes 
-                    y la soledad no deseada que experimentaban muchas personas mayores con espacio 
-                    disponible en sus hogares.
+                    CoNest surge como una idea revolucionaria en 2024, desarrollada por un grupo de estudiantes 
+                    innovadores de la Universidad de Sevilla que identificaron dos realidades sociales urgentes: 
+                    la dificultad de acceso a vivienda asequible para estudiantes y la soledad no deseada 
+                    que experimentan muchas personas mayores.
                   </p>
                   <p>
-                    Inspirados por modelos internacionales exitosos de convivencia intergeneracional, 
-                    creamos una plataforma adaptada a la realidad española, con énfasis en la seguridad, 
-                    compatibilidad y creación de relaciones significativas entre generaciones.
+                    Lo que comenzó como un proyecto académico ambicioso pronto capturó la atención de 
+                    inversores y colaboradores que vieron su enorme potencial. En 2025, CoNest dejó de ser 
+                    sólo una idea para convertirse en realidad, lanzando su plataforma oficialmente y 
+                    comenzando a crear sus primeras conexiones intergeneracionales.
                   </p>
                   <p>
-                    En menos de dos años, hemos facilitado más de 500 conexiones exitosas en 12 ciudades 
-                    españolas, transformando vidas y construyendo puentes entre generaciones. 
-                    Nuestro equipo multidisciplinar sigue creciendo, siempre guiado por valores 
-                    de respeto, empatía e innovación social.
+                    Nuestro equipo multidisciplinar, formado por jóvenes talentos comprometidos con la innovación 
+                    social, trabaja incansablemente para expandir esta iniciativa por toda España, con la misión 
+                    de construir puentes entre generaciones y transformar positivamente la vida de miles de personas.
                   </p>
                 </div>
               </div>
@@ -95,7 +98,7 @@ export default function SobreNosotrosPage() {
                   <div className="bg-white p-3 rounded-xl overflow-hidden">
                     <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
                       <Image
-                        src="/images/our-story.jpg"
+                        src="/images/comunidad-de-confianza.jpg"
                         alt="Historia de CoNest"
                         fill
                         className="object-cover"
@@ -110,7 +113,7 @@ export default function SobreNosotrosPage() {
                 <div className="absolute -bottom-12 right-10 bg-white rounded-xl shadow-medium p-4 max-w-xs border border-gray-100">
                   <div className="flex items-center gap-3 mb-2">
                     <div className="w-8 h-8 rounded-full bg-conest-blue flex items-center justify-center text-white text-sm font-bold">
-                      <span>2022</span>
+                      <span>2024</span>
                     </div>
                     <p className="font-medium text-conest-darkGray">Año de fundación</p>
                   </div>
@@ -274,7 +277,7 @@ export default function SobreNosotrosPage() {
           </div>
           
           <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {teamMembers.map((member, index) => (
                 <div 
                   key={index} 
@@ -354,7 +357,7 @@ export default function SobreNosotrosPage() {
                   las relaciones intergeneracionales, creando un futuro más conectado e inclusivo.
                 </p>
                 <div className="flex flex-wrap gap-4 justify-center">
-                  <Link href="/sign-up/options">
+                  <Link href="/sign-up">
                     <Button 
                       className="bg-white text-conest-blue font-bold py-3 px-6 rounded-xl transition-transform hover:scale-105 duration-200"
                       size="lg"

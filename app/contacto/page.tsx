@@ -79,7 +79,6 @@ export default function ContactoPage() {
                             <Input
                               type="text"
                               label="Nombre"
-                              placeholder="Tu nombre"
                               classNames={{
                                 inputWrapper: "bg-conest-lightBlue/10 border-2 border-transparent focus-within:border-conest-blue/30 data-[hover=true]:border-conest-blue/20 shadow-none",
                                 input: "text-conest-darkGray",
@@ -91,7 +90,6 @@ export default function ContactoPage() {
                             <Input
                               type="email"
                               label="Email"
-                              placeholder="Tu email"
                               classNames={{
                                 inputWrapper: "bg-conest-lightBlue/10 border-2 border-transparent focus-within:border-conest-blue/30 data-[hover=true]:border-conest-blue/20 shadow-none",
                                 input: "text-conest-darkGray",
@@ -105,7 +103,6 @@ export default function ContactoPage() {
                           <Input
                             type="text"
                             label="Asunto"
-                            placeholder="Asunto de tu mensaje"
                             classNames={{
                               inputWrapper: "bg-conest-lightBlue/10 border-2 border-transparent focus-within:border-conest-blue/30 data-[hover=true]:border-conest-blue/20 shadow-none",
                               input: "text-conest-darkGray",
@@ -117,7 +114,6 @@ export default function ContactoPage() {
                         <div>
                           <Textarea
                             label="Mensaje"
-                            placeholder="Escribe tu mensaje aquí..."
                             minRows={4}
                             classNames={{
                               inputWrapper: "bg-conest-lightBlue/10 border-2 border-transparent focus-within:border-conest-blue/30 data-[hover=true]:border-conest-blue/20 shadow-none",

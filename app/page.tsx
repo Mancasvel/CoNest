@@ -90,9 +90,6 @@ export default function Home() {
                 <Link href="/como-funciona">
                   <Button className="bg-white border border-conest-blue text-conest-blue hover:bg-conest-lightBlue/10 font-medium py-3 px-6 rounded-md transition-all duration-200 flex items-center focus:outline-none active:bg-white touch-none">
                     Cómo Funciona
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                    </svg>
                   </Button>
                 </Link>
               </div>
@@ -102,16 +99,16 @@ export default function Home() {
               {/* Stats */}
               <div className="flex flex-wrap gap-12 mt-8 border-t border-gray-100 pt-8">
                 <div className="text-center">
-                  <p className="text-3xl font-bold text-conest-blue">200+</p>
-                  <p className="text-sm text-gray-500">Matches Exitosos</p>
+                  <p className="text-3xl font-bold text-conest-blue">50+</p>
+                  <p className="text-sm text-gray-500">Conexiones Futuras</p>
                 </div>
                 <div className="text-center">
                   <p className="text-3xl font-bold text-conest-blue">97%</p>
-                  <p className="text-sm text-gray-500">Satisfacción</p>
+                  <p className="text-sm text-gray-500">Satisfacción Estimada</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-3xl font-bold text-conest-blue">15+</p>
-                  <p className="text-sm text-gray-500">Ciudades</p>
+                  <p className="text-3xl font-bold text-conest-blue">3+</p>
+                  <p className="text-sm text-gray-500">Ciudades Objetivo</p>
                 </div>
               </div>
             </div>
@@ -132,21 +129,9 @@ export default function Home() {
 
                 {/* Satisfaction badge */}
                 <div className="absolute top-4 right-4 bg-white rounded-lg shadow-soft py-2 px-3 flex items-center space-x-2">
-                  <Image 
-                    src="/images/logo-icon.png" 
-                    width={20} 
-                    height={20} 
-                    alt="CoNest"
-                    className="rounded"
-                  />
                   <div>
-                    <div className="text-xs font-medium text-gray-800">97% satisfacción</div>
+                    <div className="text-xs font-medium text-gray-800">Lanzamiento 2025</div>
                     <div className="flex items-center">
-                      {Array(5).fill(0).map((_, i) => (
-                        <svg key={i} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3 text-amber-400">
-                          <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clipRule="evenodd" />
-                        </svg>
-                      ))}
                     </div>
                   </div>
                 </div>
@@ -397,14 +382,14 @@ export default function Home() {
                   que beneficia a todos los implicados.
                 </p>
                 <div className="space-y-4">
-                  <Link href="/sign-up/student" className="block">
+                  <Link href="/sign-up" className="block">
                     <Button 
                       className="w-full bg-conest-blue hover:bg-conest-mediumBlue text-white font-bold py-4 rounded-xl shadow-soft focus:outline-none active:bg-opacity-80 touch-none"
                     >
                       Soy Estudiante
                     </Button>
                   </Link>
-                  <Link href="/sign-up/elder" className="block">
+                  <Link href="/sign-up" className="block">
                     <Button 
                       className="w-full bg-white border border-conest-blue text-conest-blue hover:bg-conest-lightBlue/50 font-bold py-4 rounded-xl focus:outline-none active:bg-white touch-none"
                     >
