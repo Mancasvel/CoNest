@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Eliminar efecto de tap/click en botones para todos los dispositivos */
+button, a {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-touch-callout: none;
+  outline: none;
+}
+
+/* Desactivar animaciones de entrada en toda la aplicación */
+* {
+  animation: none !important;
+  -webkit-animation: none !important;
+  transition: none !important;
+  animation-delay: 0s !important;
+  animation-duration: 0s !important;
+  transition-duration: 0s !important;
+  transition-delay: 0s !important;
+}
+
+/* Exceptuar animaciones específicas en acciones del usuario (hover, active) */
+*:hover, *:active, *:focus {
+  transition: all 0.2s ease !important;
+}
+
+/* Mantener transiciones suaves en botones y enlaces */
+button, a {
+  transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease, transform 0.2s ease !important;
+}
+
+/* Resto del CSS existente */ 
