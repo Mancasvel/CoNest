@@ -37,6 +37,7 @@ export default function NavbarConest() {
   }, []);
 
   const menuItems = [
+    { name: 'Inicio', href: '/' },
     { name: 'Cómo Funciona', href: '/como-funciona' },
     { name: 'Sobre Nosotros', href: '/sobre-nosotros' },
     { name: 'Contacto', href: '/contacto' },
@@ -64,7 +65,7 @@ export default function NavbarConest() {
         <NavbarBrand>
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="/images/conest_logo.png"
+              src="/logo.png"
               alt="CoNest Logo"
               width={32}
               height={32}
@@ -83,7 +84,7 @@ export default function NavbarConest() {
         <NavbarBrand>
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="/images/conest_logo.png"
+              src="/logo.png"
               alt="CoNest Logo"
               width={scrolled ? 32 : 40}
               height={scrolled ? 32 : 40}
@@ -127,7 +128,7 @@ export default function NavbarConest() {
           </Button>
           <Button 
             as={Link} 
-            href="/sign-up" 
+            href="/sign-up/options" 
             className="bg-conest-blue text-white shadow-soft hover:bg-conest-mediumBlue font-medium transition-transform hover:scale-105 duration-200 min-w-[120px]"
           >
             Registrarse
@@ -168,7 +169,7 @@ export default function NavbarConest() {
             </Button>
             <Button 
               as={Link} 
-              href="/sign-up" 
+              href="/sign-up/options" 
               className="bg-conest-blue text-white shadow-soft hover:bg-conest-mediumBlue font-medium"
               fullWidth
             >

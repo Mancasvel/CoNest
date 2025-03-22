@@ -1,115 +1,23 @@
 "use client";
 
 import Image from 'next/image';
-import { Card, Button, CardBody, CardHeader, CardFooter, Link } from '@heroui/react';
-import Slider from "react-slick";
-import { useEffect, useState } from 'react';
-import Navbar from "@/app/components/Navbar";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import Link from 'next/link';
+import { Button } from '@nextui-org/react';
+import { useState, useEffect } from 'react';
 
 // Interfaz para el tipo de datos que se espera de la API
 interface ApiData {
-  // Añadir las propiedades específicas aquí cuando sepamos qué devuelve la API
   [key: string]: any;
 }
 
-// Cliente-only component for particles to avoid hydration errors
-const BackgroundParticles = () => {
-  const [mounted, setMounted] = useState(false);
-  const [particles, setParticles] = useState<Array<{
-    id: number;
-    width: number;
-    height: number;
-    left: string;
-    top: string;
-    yOffset: number;
-    duration: number;
-  }>>([]);
-
-  useEffect(() => {
-    setMounted(true);
-    // Generate particle data once to avoid regenerating on each render
-    const particleData = Array.from({ length: 20 }, (_, i) => ({
-      id: i,
-      width: Math.random() * 15 + 5,
-      height: Math.random() * 15 + 5,
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
-      yOffset: Math.random() * 100,
-      duration: Math.random() * 10 + 15
-    }));
-    setParticles(particleData);
-  }, []);
-
-  if (!mounted) return null;
-
-  return (
-    <div className="absolute inset-0 z-0 opacity-30">
-      {particles.map((particle) => (
-        <div
-          key={particle.id}
-          className="absolute rounded-full bg-teal-500"
-          style={{
-            width: particle.width,
-            height: particle.height,
-            left: particle.left,
-            top: particle.top,
-            opacity: 0.5,
-            transition: `transform ${particle.duration}s ease-in-out, opacity ${particle.duration}s ease-in-out`,
-            animation: `float-${particle.id % 5} ${particle.duration}s infinite alternate`
-          }}
-        />
-      ))}
-      <style jsx>{`
-        @keyframes float-0 { 
-          0% { transform: translateY(0) scale(1); opacity: 0.2; }
-          50% { transform: translateY(-20px) scale(1.5); opacity: 0.8; }
-          100% { transform: translateY(0) scale(1); opacity: 0.2; }
-        }
-        @keyframes float-1 { 
-          0% { transform: translateY(0) scale(1); opacity: 0.2; }
-          50% { transform: translateY(-30px) scale(1.5); opacity: 0.8; }
-          100% { transform: translateY(0) scale(1); opacity: 0.2; }
-        }
-        @keyframes float-2 { 
-          0% { transform: translateY(0) scale(1); opacity: 0.2; }
-          50% { transform: translateY(-25px) scale(1.5); opacity: 0.8; }
-          100% { transform: translateY(0) scale(1); opacity: 0.2; }
-        }
-        @keyframes float-3 { 
-          0% { transform: translateY(0) scale(1); opacity: 0.2; }
-          50% { transform: translateY(-15px) scale(1.5); opacity: 0.8; }
-          100% { transform: translateY(0) scale(1); opacity: 0.2; }
-        }
-        @keyframes float-4 { 
-          0% { transform: translateY(0) scale(1); opacity: 0.2; }
-          50% { transform: translateY(-22px) scale(1.5); opacity: 0.8; }
-          100% { transform: translateY(0) scale(1); opacity: 0.2; }
-        }
-      `}</style>
-    </div>
-  );
-};
-
 export default function Home() {
-  const [data, setData] = useState<ApiData | null>(null);
   const [scrolled, setScrolled] = useState<boolean>(false);
-  const testimonials = [
-    { id: 1, name: "María López", text: "Gracias a CoNest encontré un hogar acogedor y económico." },
-    { id: 2, name: "Carlos Ruiz", text: "Una experiencia increíble ayudando a personas mayores." },
-    { id: 3, name: "Laura Gómez", text: "Recomiendo CoNest a todos los estudiantes que buscan alojamiento." },
-  ];
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    async function fetchData() {
-      const response = await fetch("/api/data"); // Reemplaza con tu API real
-      const result = await response.json();
-      setData(result);
-    }
-    fetchData();
+    setIsLoading(false);
     
-    const handleScroll = () => {
+    const handleScroll = (): void => {
       const offset = window.scrollY;
       if (offset > 100) {
         setScrolled(true);
@@ -124,507 +32,400 @@ export default function Home() {
     };
   }, []);
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    arrows: false,
-  };
-
   return (
-    <>
-      {/* Navbar */}
-      <Navbar />
-
-      {/* Hero Section */}
-      <section className="relative h-screen overflow-hidden bg-gradient-to-br from-teal-950 to-black">
-        {/* Partículas y formas geométricas de fondo */}
-        <BackgroundParticles />
-
-        {/* Malla geométrica futurista */}
-        <div className="absolute inset-0 z-0">
-          <svg 
-            width="100%" 
-            height="100%" 
-            className="opacity-10"
-          >
-            <pattern 
-              id="grid" 
-              width="40" 
-              height="40" 
-              patternUnits="userSpaceOnUse"
-            >
-              <path 
-                d="M 40 0 L 0 0 0 40" 
-                fill="none" 
-                stroke="rgba(20, 184, 166, 0.5)" 
-                strokeWidth="0.5"
-              />
-            </pattern>
-            <rect width="100%" height="100%" fill="url(#grid)" />
-          </svg>
+    <div className="flex flex-col min-h-screen bg-white text-conest-darkGray">
+      {/* Modern Hero Section */}
+      <section className="relative overflow-hidden bg-white py-12 lg:py-20">
+        {/* Background bubbles decorative elements */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          {/* Larger bubbles */}
+          <div className="absolute top-[-10%] right-[-5%] w-[40%] h-[40%] rounded-full bg-conest-lightBlue/30 blur-xl"></div>
+          <div className="absolute bottom-[10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-conest-lightBlue/20 blur-xl"></div>
+          <div className="absolute top-[40%] right-[20%] w-[20%] h-[20%] rounded-full bg-conest-lightBlue/10 blur-lg"></div>
+          
+          {/* Smaller bubbles */}
+          <div className="absolute top-[5%] left-[15%] w-[15%] h-[15%] rounded-full bg-conest-lightBlue/15 blur-md"></div>
+          <div className="absolute bottom-[30%] right-[10%] w-[10%] h-[10%] rounded-full bg-conest-lightBlue/10 blur-md"></div>
+          <div className="absolute top-[60%] left-[30%] w-[5%] h-[5%] rounded-full bg-conest-lightBlue/20 blur-sm"></div>
         </div>
 
-        {/* Formas abstractas */}
-        <div 
-          className="absolute right-0 top-20 w-64 h-64 rounded-full bg-gradient-to-r from-yellow-400/30 to-yellow-600/10 blur-3xl abstract-shape shape1"
-        />
-        <div 
-          className="absolute left-10 bottom-20 w-80 h-80 rounded-full bg-gradient-to-r from-teal-400/20 to-blue-600/10 blur-3xl abstract-shape shape2"
-        />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+            <div className="order-2 lg:order-1 pt-10 lg:pt-0">
+              {/* Small pill badge */}
+              <div className="inline-block bg-amber-100 rounded-full px-4 py-1.5 text-amber-800 text-sm font-medium mb-6">
+                Una Revolución en la Convivencia Intergeneracional
+              </div>
 
-        {/* Efecto de glassmorphism y gradiente futurista */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/40 z-10"></div>
-        
-        {/* Imagen con efecto 3D */}
-        <div className="absolute inset-0 overflow-hidden z-0">
-          <div
-            className="h-full w-full perspective-1000 transform-gpu image-parallax"
-          >
-            <Image 
-              src="/images/main.jpg"
-              alt="Modern living space"
-              width={1200}
-              height={800}
-              className="w-full h-full object-cover brightness-75 contrast-125 saturate-120"
-              priority
-            />
-          </div>
-        </div>
+              {/* Hero title with color variations */}
+              <h1 className="font-bold leading-tight mb-6">
+                <span className="text-4xl md:text-5xl lg:text-6xl text-conest-blue block mb-3">
+                  Conectando<br />
+                  Generaciones
+                </span>
+                <span className="text-4xl md:text-5xl lg:text-6xl text-gray-700 block">
+                  A Través del <span className="text-amber-500">Hogar</span>
+                </span>
+                <span className="text-4xl md:text-5xl lg:text-6xl text-amber-500 block">
+                  Compartido
+                </span>
+              </h1>
 
-        {/* Líneas animadas diagonales - Cliente only para evitar errores de hidratación */}
-        <ClientLines />
+              {/* Hero description */}
+              <p className="text-lg text-gray-600 mb-8 max-w-xl leading-relaxed">
+                CoNest une a estudiantes con personas mayores en Sevilla 
+                creando una comunidad donde todos ganan: <span className="text-conest-blue font-medium">alojamiento asequible</span> para jóvenes y <span className="text-amber-500 font-medium">compañía valiosa</span> para mayores.
+              </p>
 
-        {/* Contenido Principal con animación 3D */}
-        <div className="absolute left-0 top-1/3 p-12 z-20 max-w-2xl">
-          <div
-            className="opacity-0 fade-in-slide"
-          >
-            <div
-              className="perspective-1000 transform-gpu card-hover"
-            >
-              <Card className="bg-white/10 backdrop-blur-lg p-8 shadow-2xl border-l-4 border-yellow-500 rounded-xl overflow-hidden relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-transparent to-teal-900/20"></div>
-                <CardBody className="relative z-10">
-                  <div
-                    className="opacity-0 fade-in-up"
-                  >
-                    <h1 className="text-6xl font-bold text-white mb-6 tracking-tight">
-                      Una <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-yellow-400">mejor</span> manera de <span className="text-yellow-400">alojarte</span>
-                    </h1>
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 mb-12">
+                <Link href="/sign-up">
+                  <Button className="bg-conest-blue hover:bg-conest-mediumBlue text-white font-medium py-3 px-6 rounded-md shadow-soft transition-all duration-200 flex items-center">
+                    Encuentra tu Match
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </Button>
+                </Link>
+                <Link href="/como-funciona">
+                  <Button className="bg-white border border-conest-blue text-conest-blue hover:bg-conest-lightBlue/10 font-medium py-3 px-6 rounded-md transition-all duration-200 flex items-center">
+                    Cómo Funciona
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </Button>
+                </Link>
+              </div>
+
+
+
+              {/* Stats */}
+              <div className="flex flex-wrap gap-12 mt-8 border-t border-gray-100 pt-8">
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-conest-blue">200+</p>
+                  <p className="text-sm text-gray-500">Matches Exitosos</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-conest-blue">97%</p>
+                  <p className="text-sm text-gray-500">Satisfacción</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-conest-blue">15+</p>
+                  <p className="text-sm text-gray-500">Ciudades</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="order-1 lg:order-2 relative">
+              <div className="relative rounded-lg overflow-hidden shadow-medium">
+                {/* Main image */}
+                <div className="relative aspect-video md:aspect-[4/3] overflow-hidden">
+                  <Image
+                    src="/images/hero.jpg"
+                    alt="Estudiante y persona mayor compartiendo experiencias en la cocina"
+                    fill
+                    style={{objectFit: "cover"}}
+                    priority
+                    className="rounded-lg"
+                  />
+                </div>
+
+                {/* Satisfaction badge */}
+                <div className="absolute top-4 right-4 bg-white rounded-lg shadow-soft py-2 px-3 flex items-center space-x-2">
+                  <Image 
+                    src="/images/logo-icon.png" 
+                    width={20} 
+                    height={20} 
+                    alt="CoNest"
+                    className="rounded"
+                  />
+                  <div>
+                    <div className="text-xs font-medium text-gray-800">97% satisfacción</div>
+                    <div className="flex items-center">
+                      {Array(5).fill(0).map((_, i) => (
+                        <svg key={i} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3 text-amber-400">
+                          <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clipRule="evenodd" />
+                        </svg>
+                      ))}
+                    </div>
                   </div>
-                  <div
-                    className="opacity-0 fade-in-delay"
-                  >
-                    <p className="text-xl text-gray-200 mb-6">Encuentra alojamiento ayudando a la comunidad y al mejor precio.</p>
-                    <div className="h-1 w-32 bg-gradient-to-r from-teal-500 to-yellow-500 rounded-full mt-2"></div>
-                  </div>
-                </CardBody>
-              </Card>
+                </div>
+
+                
+              </div>
+
+              
             </div>
           </div>
-        </div>
 
-        {/* Carrusel de Testimonios con diseño futurista */}
-        <div className="absolute top-1/4 right-10 z-20 flex justify-end">
-          <div
-            className="w-full max-w-md opacity-0 fade-in-right"
-          >
-            <Card className="bg-white/10 backdrop-blur-lg p-6 rounded-xl shadow-xl border-t border-r border-white/20 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-transparent to-teal-800/20"></div>
-              <CardBody className="relative z-10">
-                <Slider {...settings}>
-                  {testimonials.map(({ id, name, text }) => (
-                    <div key={id} className="text-center px-2">
-                      <div className="mb-4 text-yellow-400">
-                        <span 
-                          className="text-4xl quote-animation"
-                        >
-                          "
-                        </span>
-                      </div>
-                      <p className="text-xl font-medium text-white mb-6">{text}</p>
-                      <div className="mt-4 flex items-center justify-center">
-                        <div className="h-px w-8 bg-gradient-to-r from-teal-500 to-transparent mr-2"></div>
-                        <span className="block text-teal-300 font-medium">{name}</span>
-                        <div className="h-px w-8 bg-gradient-to-l from-teal-500 to-transparent ml-2"></div>
-                      </div>
-                    </div>
-                  ))}
-                </Slider>
-              </CardBody>
-            </Card>
-          </div>
-        </div>
+          {/* More info link */}
 
-        {/* Estrellas y clasificación con diseño futurista */}
-        <div className="absolute top-[calc(25%+300px)] right-10 z-20">
-          <div
-            className="w-full max-w-xs opacity-0 fade-in-up-delay"
-          >
-            <Card className="bg-white/10 backdrop-blur-lg p-6 rounded-xl shadow-xl border-b border-l border-white/20 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-transparent to-teal-800/20"></div>
-              <CardBody className="relative z-10 text-center">
-                <div className="mb-4 flex justify-center space-x-2">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <div 
-                      key={star}
-                      className="relative star-animation"
-                      style={{ animationDelay: `${0.1 * star}s` }}
-                    >
-                      <span className="text-2xl text-yellow-400 filter drop-shadow-lg">⭐</span>
-                      <div 
-                        className="absolute inset-0 text-2xl text-yellow-400 filter blur-sm star-pulse"
-                      >
-                        ⭐
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <p className="text-xl text-white font-medium mb-3">4.8/5 basado en 120 opiniones</p>
-                <div className="mt-2">
-                  <span className="inline-block px-4 py-1 bg-gradient-to-r from-teal-500/20 to-transparent backdrop-blur-md text-teal-300 rounded-full text-sm font-medium border border-teal-500/30">
-                    Proyecto para la comunidad
-                  </span>
-                </div>
-              </CardBody>
-            </Card>
-          </div>
         </div>
       </section>
 
-      {/* Central Button con diseño futurista */}
-      <div className="relative -mt-24 z-30 flex justify-center">
-        <div
-          className="opacity-0 scale-button"
-        >
-          <Button 
-            size="lg"
-            as="a"
-            href="/sign-in"
-            color="warning"
-            className="relative bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-bold py-7 px-12 rounded-full text-xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-yellow-500/20 hover:shadow-2xl overflow-hidden group"
-          >
-            <span className="relative z-10">Haz match con una mejor vida</span>
-            <div 
-              className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-amber-500 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 gradient-shift"
-            />
-            <div 
-              className="absolute -inset-1 rounded-full blur-sm bg-gradient-to-r from-yellow-400/50 to-amber-600/50 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            />
-          </Button>
-        </div>
-      </div>
-
+      {/* Rest of homepage components - keep Features, How It Works, Testimonials and CTA sections */}
       {/* Features Section */}
-      <main className="mt-36 max-w-6xl mx-auto px-6">
-        <section className="mb-20">
-          <h2 className="text-3xl font-bold text-teal-800 mb-10 text-center">Encuentra tu espacio ideal</h2>
+      <section className="py-20 relative z-10 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center mb-16">
+            <h2 className="text-3xl font-bold mb-6 text-conest-darkGray">
+              <span className="text-conest-blue">
+                Beneficios de CoNest
+              </span>
+            </h2>
+            <p className="text-conest-darkGray/80">
+              Nuestra plataforma ofrece ventajas para ambas partes, creando una relación 
+              de beneficio mutuo que va más allá del simple alojamiento.
+            </p>
+          </div>
+          
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {['Alojamiento Asequible', 'Compañía para Personas Mayores', 'Comunidad de Confianza'].map((feature, index) => (
-              <div
-                key={feature}
-                className="feature-card"
-                style={{ animationDelay: `${index * 0.2}s` }}
-              >
-                <Card className="shadow-md h-full">
-                  <CardHeader className="p-0">
-                    <div className="relative w-full h-48 overflow-hidden">
-                      <Image
-                        src={`/images/${feature.toLowerCase().replace(/\s+/g, '-')}.jpg`}
-                        alt={`${feature} Image`}
-                        layout="fill"
-                        objectFit="cover"
-                        className="transition-all duration-300 ease-in-out"
-                      />
-                    </div>
-                  </CardHeader>
-                  <CardBody>
-                    <h3 className="text-xl font-semibold mb-2">{feature}</h3>
-                    <p className="text-gray-600">
-                      {feature === 'Alojamiento Asequible' && 'Estudiantes pueden encontrar alojamiento más económico.'}
-                      {feature === 'Compañía para Personas Mayores' && 'Estudiantes ofrecen compañía a personas mayores.'}
-                      {feature === 'Comunidad de Confianza' && 'Plataforma segura y confiable.'}
-                    </p>
-                  </CardBody>
-                </Card>
+            <div className="bg-white shadow-soft border border-gray-100 rounded-lg">
+              <div className="p-8">
+                <div className="w-16 h-16 rounded-full bg-conest-lightBlue flex items-center justify-center text-conest-blue text-3xl mb-6">
+                  <span>💰</span>
+                </div>
+                <h3 className="text-xl font-bold mb-4 text-conest-darkGray">Ahorro Económico</h3>
+                <p className="text-conest-darkGray/80">
+                  Los estudiantes acceden a alojamiento a precios muy inferiores al mercado, 
+                  mientras que los anfitriones obtienen ingresos extra o ayuda en el hogar.
+                </p>
               </div>
-            ))}
-          </div>
-        </section>
-        <section className="mb-20">
-          <h2 className="text-3xl font-bold text-teal-800 mb-10 text-center">Cómo Funciona</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div>
-              <p className="text-lg text-gray-700 mb-6">
-                CoNest conecta a estudiantes con opciones de alojamiento asequible mientras brinda compañía a personas mayores.
-              </p>
-              <Link href="/about" className="bg-teal-700 text-white px-4 py-2 rounded-md">
-                Más Información
-              </Link>
             </div>
-            <div className="relative bg-gray-200 rounded-lg h-80 overflow-hidden">
-              <Image
-                src="/images/how-it-works.jpg" // Asegúrate de que la ruta sea correcta
-                alt="Cómo Funciona"
-                layout="fill"  // Ocupa todo el contenedor
-                objectFit="cover"  // Recorta y ajusta la imagen
-                className="transition-all duration-300 ease-in-out"
-              />
+
+            <div className="bg-white shadow-soft border border-gray-100 rounded-lg">
+              <div className="p-8">
+                <div className="w-16 h-16 rounded-full bg-conest-lightBlue flex items-center justify-center text-conest-blue text-3xl mb-6">
+                  <span>🤝</span>
+                </div>
+                <h3 className="text-xl font-bold mb-4 text-conest-darkGray">Compañía y Apoyo</h3>
+                <p className="text-conest-darkGray/80">
+                  Los anfitriones mayores disfrutan de compañía y ayuda en su día a día, 
+                  reduciendo la soledad y mejorando su calidad de vida.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white shadow-soft border border-gray-100 rounded-lg">
+              <div className="p-8">
+                <div className="w-16 h-16 rounded-full bg-conest-lightBlue flex items-center justify-center text-conest-blue text-3xl mb-6">
+                  <span>🔒</span>
+                </div>
+                <h3 className="text-xl font-bold mb-4 text-conest-darkGray">Seguridad Garantizada</h3>
+                <p className="text-conest-darkGray/80">
+                  Verificamos la identidad y antecedentes de todos los participantes, 
+                  facilitando acuerdos claros y seguros para ambas partes.
+                </p>
+              </div>
             </div>
           </div>
-        </section>
-
-
-        {/* Testimonios Section */}
-        <section className="mb-20">
-          <h2 className="text-3xl font-bold text-teal-800 mb-10 text-center">Lo que opinan nuestros usuarios</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[
-              { 
-                name: 'María González', 
-                role: 'Propietaria', 
-                text: 'CoNest ha sido una bendición para mí. No solo obtengo ayuda con las tareas diarias sino que me encanta la compañía de mi estudiante.', 
-                image: 'https://i.pravatar.cc/150?img=32'
-              },
-              { 
-                name: 'Carlos Rodríguez', 
-                role: 'Estudiante', 
-                text: 'Gracias a CoNest pude encontrar alojamiento asequible mientras estudio, y me encanta ayudar a mi anfitriona con sus tareas diarias.', 
-                image: 'https://i.pravatar.cc/150?img=68'
-              },
-            ].map((testimonial, index) => (
-              <div
-                key={testimonial.name}
-                className="testimonial-card"
-                style={{ animationDelay: `${index * 0.2}s` }}
-              >
-                <Card className="shadow-md h-full">
-                  <CardBody className="p-6">
-                    <div className="flex items-center mb-4">
-                      <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
-                        <img 
-                          src={testimonial.image}
-                          alt={testimonial.name}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-semibold">{testimonial.name}</h3>
-                        <p className="text-sm text-gray-500">{testimonial.role}</p>
-                      </div>
-                    </div>
-                    <p className="text-gray-700 italic">"{testimonial.text}"</p>
-                  </CardBody>
-                </Card>
-              </div>
-            ))}
+        </div>
+      </section>
+      
+      {/* How It Works Section */}
+      <section className="py-16 bg-white relative z-10">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center mb-16">
+            <h2 className="text-3xl font-bold mb-6 text-conest-darkGray">
+              <span className="text-conest-blue">
+                ¿Cómo Funciona?
+              </span>
+            </h2>
+            <p className="text-conest-darkGray/80">
+              Un proceso sencillo que conecta a estudiantes y anfitriones para crear 
+              experiencias de convivencia enriquecedoras.
+            </p>
           </div>
-        </section>
-        
-      </main>
-
-      <style jsx global>{`
-        /* Animaciones para las formas abstractas */
-        .abstract-shape {
-          animation-duration: 15s;
-          animation-iteration-count: infinite;
-          animation-timing-function: ease-in-out;
-        }
-        .shape1 {
-          animation-name: pulse1;
-        }
-        .shape2 {
-          animation-name: pulse2;
-        }
-        @keyframes pulse1 {
-          0%, 100% { transform: scale(1) rotate(0deg); }
-          50% { transform: scale(1.2) rotate(10deg); }
-        }
-        @keyframes pulse2 {
-          0%, 100% { transform: scale(1) rotate(0deg); }
-          50% { transform: scale(1.1) rotate(-5deg); }
-        }
-
-        /* Imagen con efecto 3D */
-        .image-parallax {
-          animation: image3D 25s infinite alternate ease-in-out;
-        }
-        @keyframes image3D {
-          0%, 100% { transform: scale(1.1) translateY(0) rotateX(0) rotateY(0); }
-          50% { transform: scale(1.05) translateY(-10px) rotateX(2deg) rotateY(-2deg); }
-        }
-
-        /* Animaciones para el contenido principal */
-        .fade-in-slide {
-          animation: fadeInSlide 1s forwards;
-          animation-delay: 0.3s;
-        }
-        @keyframes fadeInSlide {
-          from { opacity: 0; transform: translateX(-50px); }
-          to { opacity: 1; transform: translateX(0); }
-        }
-
-        .card-hover:hover {
-          transform: rotateY(5deg) rotateX(-5deg) scale(1.02);
-          transition: transform 0.3s ease;
-        }
-
-        .fade-in-up {
-          animation: fadeInUp 0.7s forwards;
-          animation-delay: 0.7s;
-        }
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-in-delay {
-          animation: fadeIn 0.7s forwards;
-          animation-delay: 1s;
-        }
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-
-        /* Testimoniales */
-        .fade-in-right {
-          animation: fadeInRight 0.8s forwards;
-          animation-delay: 0.5s;
-        }
-        @keyframes fadeInRight {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        .quote-animation {
-          display: inline-block;
-          opacity: 0;
-          animation: fadeInQuote 0.5s forwards;
-          animation-delay: 0.2s;
-        }
-        @keyframes fadeInQuote {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Estrellas */
-        .fade-in-up-delay {
-          animation: fadeInUpDelay 0.8s forwards;
-          animation-delay: 0.8s;
-        }
-        @keyframes fadeInUpDelay {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        .star-animation {
-          opacity: 0;
-          transform: scale(0.5);
-          animation: scaleStar 0.3s forwards;
-        }
-        @keyframes scaleStar {
-          from { opacity: 0; transform: scale(0.5); }
-          to { opacity: 1; transform: scale(1); }
-        }
-
-        .star-pulse {
-          animation: pulseStar 2s infinite;
-        }
-        @keyframes pulseStar {
-          0%, 100% { opacity: 0.5; }
-          50% { opacity: 1; }
-        }
-
-        /* Botón central */
-        .scale-button {
-          animation: scaleButton 0.5s forwards;
-          animation-delay: 1.2s;
-        }
-        @keyframes scaleButton {
-          from { opacity: 0; transform: scale(0.8); }
-          to { opacity: 1; transform: scale(1); }
-        }
-
-        .gradient-shift {
-          background-size: 200% 200%;
-          animation: gradientPosition 5s infinite linear;
-        }
-        @keyframes gradientPosition {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-
-        /* Cards de características */
-        .feature-card {
-          opacity: 0;
-          animation: fadeIn 0.5s forwards;
-        }
-
-        /* Testimonios en la sección inferior */
-        .testimonial-card {
-          opacity: 0;
-          transform: translateY(20px);
-          animation: fadeInUp 0.5s forwards;
-        }
-      `}</style>
-    </>
-  );
-}
-
-// Client-only component for animated lines to avoid hydration errors
-const ClientLines = () => {
-  const [mounted, setMounted] = useState(false);
-  const [lines, setLines] = useState<Array<{
-    id: number;
-    top: string;
-    delay: number;
-  }>>([]);
-
-  useEffect(() => {
-    setMounted(true);
-    // Generate line data once
-    const lineData = Array.from({ length: 5 }, (_, i) => ({
-      id: i,
-      top: `${i * 25}%`,
-      delay: i * 0.8
-    }));
-    setLines(lineData);
-  }, []);
-
-  if (!mounted) return null;
-
-  return (
-    <div className="absolute inset-0 z-10 overflow-hidden opacity-20">
-      {lines.map((line) => (
-        <div
-          key={line.id}
-          className="absolute h-px bg-gradient-to-r from-transparent via-teal-500 to-transparent w-full"
-          style={{ 
-            top: line.top,
-            animation: `moveX 8s ${line.delay}s infinite linear`
-          }}
-        />
-      ))}
-      <style jsx>{`
-        @keyframes moveX {
-          0% { 
-            transform: translateX(-100%);
-            opacity: 0;
-          }
-          50% {
-            opacity: 1;
-          }
-          100% { 
-            transform: translateX(100%);
-            opacity: 0;
-          }
-        }
-      `}</style>
+          
+          <div className="max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+              {/* Para Estudiantes */}
+              <div>
+                <div className="flex items-center mb-8">
+                  <div className="w-12 h-12 rounded-full bg-conest-blue flex items-center justify-center text-white text-xl font-bold mr-4">
+                    <span>👨‍🎓</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-conest-darkGray">Para Estudiantes</h3>
+                </div>
+                
+                <div className="space-y-6 relative">
+                  <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-conest-lightBlue"></div>
+                  
+                  <div className="relative pl-12">
+                    <div className="absolute left-0 w-12 h-12 rounded-full bg-conest-lightBlue flex items-center justify-center text-conest-blue text-xl font-bold">
+                      1
+                    </div>
+                    <div className="bg-white shadow-soft p-6 rounded-lg">
+                      <h4 className="text-lg font-semibold mb-2 text-conest-darkGray">Regístrate y completa tu perfil</h4>
+                      <p className="text-conest-darkGray/80">
+                        Crea tu cuenta, verifica tu identidad como estudiante y completa 
+                        tu perfil con tus preferencias y necesidades.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="relative pl-12">
+                    <div className="absolute left-0 w-12 h-12 rounded-full bg-conest-lightBlue flex items-center justify-center text-conest-blue text-xl font-bold">
+                      2
+                    </div>
+                    <div className="bg-white shadow-soft p-6 rounded-lg">
+                      <h4 className="text-lg font-semibold mb-2 text-conest-darkGray">Explora opciones disponibles</h4>
+                      <p className="text-conest-darkGray/80">
+                        Navega por los perfiles de anfitriones en tu zona de interés y 
+                        solicita conectar con aquellos que te interesen.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="relative pl-12">
+                    <div className="absolute left-0 w-12 h-12 rounded-full bg-conest-lightBlue flex items-center justify-center text-conest-blue text-xl font-bold">
+                      3
+                    </div>
+                    <div className="bg-white shadow-soft p-6 rounded-lg">
+                      <h4 className="text-lg font-semibold mb-2 text-conest-darkGray">Conoce a tus posibles anfitriones</h4>
+                      <p className="text-conest-darkGray/80">
+                        Realiza videollamadas o reuniones presenciales para asegurar 
+                        que hay buena compatibilidad antes de decidir.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="relative pl-12">
+                    <div className="absolute left-0 w-12 h-12 rounded-full bg-conest-lightBlue flex items-center justify-center text-conest-blue text-xl font-bold">
+                      4
+                    </div>
+                    <div className="bg-white shadow-soft p-6 rounded-lg">
+                      <h4 className="text-lg font-semibold mb-2 text-conest-darkGray">Formaliza el acuerdo y múdate</h4>
+                      <p className="text-conest-darkGray/80">
+                        Una vez encontrado el anfitrión ideal, firmad el acuerdo de 
+                        convivencia y comienza tu nueva experiencia.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Para Anfitriones */}
+              <div>
+                <div className="flex items-center mb-8">
+                  <div className="w-12 h-12 rounded-full bg-conest-blue flex items-center justify-center text-white text-xl font-bold mr-4">
+                    <span>👵</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-conest-darkGray">Para Anfitriones</h3>
+                </div>
+                
+                <div className="space-y-6 relative">
+                  <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-conest-lightBlue"></div>
+                  
+                  <div className="relative pl-12">
+                    <div className="absolute left-0 w-12 h-12 rounded-full bg-conest-lightBlue flex items-center justify-center text-conest-blue text-xl font-bold">
+                      1
+                    </div>
+                    <div className="bg-white shadow-soft p-6 rounded-lg">
+                      <h4 className="text-lg font-semibold mb-2 text-conest-darkGray">Regístrate como anfitrión</h4>
+                      <p className="text-conest-darkGray/80">
+                        Crea tu cuenta, verifica tu identidad y describe tu hogar, 
+                        la habitación disponible y tus expectativas.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="relative pl-12">
+                    <div className="absolute left-0 w-12 h-12 rounded-full bg-conest-lightBlue flex items-center justify-center text-conest-blue text-xl font-bold">
+                      2
+                    </div>
+                    <div className="bg-white shadow-soft p-6 rounded-lg">
+                      <h4 className="text-lg font-semibold mb-2 text-conest-darkGray">Recibe solicitudes de estudiantes</h4>
+                      <p className="text-conest-darkGray/80">
+                        Revisa los perfiles de estudiantes interesados y selecciona 
+                        aquellos que consideres más compatibles.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="relative pl-12">
+                    <div className="absolute left-0 w-12 h-12 rounded-full bg-conest-lightBlue flex items-center justify-center text-conest-blue text-xl font-bold">
+                      3
+                    </div>
+                    <div className="bg-white shadow-soft p-6 rounded-lg">
+                      <h4 className="text-lg font-semibold mb-2 text-conest-darkGray">Conoce a los candidatos</h4>
+                      <p className="text-conest-darkGray/80">
+                        Mantén entrevistas virtuales o presenciales para elegir al 
+                        estudiante que mejor se adapte a tus necesidades.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="relative pl-12">
+                    <div className="absolute left-0 w-12 h-12 rounded-full bg-conest-lightBlue flex items-center justify-center text-conest-blue text-xl font-bold">
+                      4
+                    </div>
+                    <div className="bg-white shadow-soft p-6 rounded-lg">
+                      <h4 className="text-lg font-semibold mb-2 text-conest-darkGray">Da la bienvenida a tu nuevo compañero</h4>
+                      <p className="text-conest-darkGray/80">
+                        Firma el acuerdo de convivencia y prepárate para recibir al 
+                        estudiante en tu hogar con todas las garantías.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="text-center mt-16">
+            <Link href="/como-funciona">
+              <Button className="bg-conest-blue hover:bg-conest-mediumBlue text-white font-bold py-3 px-8 rounded-xl shadow-soft">
+                Más información sobre el proceso
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+      
+      {/* CTA Section */}
+      <section className="py-16 bg-white relative z-10">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-medium overflow-hidden border border-gray-100">
+            <div className="grid grid-cols-1 md:grid-cols-2">
+              <div className="p-8 md:p-12 flex flex-col justify-center">
+                <h2 className="text-3xl font-bold mb-6 text-conest-darkGray">
+                  ¿Listo para comenzar?
+                </h2>
+                <p className="text-conest-darkGray/80 mb-8">
+                  Únete a nuestra comunidad y descubre una nueva forma de convivencia 
+                  que beneficia a todos los implicados.
+                </p>
+                <div className="space-y-4">
+                  <Link href="/sign-up/student" className="block">
+                    <Button 
+                      className="w-full bg-conest-blue hover:bg-conest-mediumBlue text-white font-bold py-4 rounded-xl shadow-soft"
+                    >
+                      Soy Estudiante
+                    </Button>
+                  </Link>
+                  <Link href="/sign-up/elder" className="block">
+                    <Button 
+                      className="w-full bg-white border border-conest-blue text-conest-blue hover:bg-conest-lightBlue/50 font-bold py-4 rounded-xl"
+                    >
+                      Soy Anfitrión
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+              <div className="hidden md:block">
+                <Image 
+                  src="/images/cta-image.jpg" 
+                  width={500} 
+                  height={500}
+                  alt="Anfitrión y estudiante compartiendo un momento"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
-};
+}
