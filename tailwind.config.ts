@@ -64,16 +64,16 @@ const config = {
           ring: "hsl(var(--sidebar-ring))",
         },
         conest: {
-          blue: "#007B9E", // Azul Profundo principal
-          darkGray: "#4A4A4A", // Gris Oscuro para texto
-          white: "#FFFFFF", // Blanco Puro para fondos
-          lightBlue: "#E1F5FA", // Azul claro para fondos secundarios
-          mediumBlue: "#0090B8", // Azul medio para hover
-          darkBlue: "#006380", // Azul más oscuro para efectos
-          lightGray: "#F5F5F5", // Gris claro para fondos alternativos
-          mediumGray: "#8A8A8A", // Gris medio para textos secundarios
-          beige: "#F8F4E9", // Añadiendo beige para mantener consistencia con el hero
-          green: "#4CAF50", // Añadiendo verde para mantener consistencia con el hero
+          blue: "#007B9E", 
+          darkGray: "#4A4A4A", 
+          white: "#FFFFFF", 
+          lightBlue: "#E1F5FA", 
+          mediumBlue: "#0090B8", 
+          darkBlue: "#006380", 
+          lightGray: "#F5F5F5", 
+          mediumGray: "#8A8A8A", 
+          beige: "#F8F4E9", 
+          green: "#4CAF50", 
         },
         'conest-blue': '#1E88E5',
         'conest-mediumBlue': '#1976D2',
@@ -123,12 +123,11 @@ const config = {
           '50%': { transform: 'translateY(-10px)' },
         }
       },
-      animation: {
-      },
+      animation: {},
       fontFamily: {
         "sans": ["Inter", ...defaultTheme.fontFamily.sans],
         "serif": ["Georgia", "ui-serif", "serif"],
-        "blogger": ["Blogger Sans", "Montserrat", "sans-serif"],
+        "blogger": ["Blogger Sans", "Montserrat", "sans-serif"], // Solo si es necesario
       },
       boxShadow: {
         "soft": "0 4px 6px -1px rgba(26, 143, 143, 0.05), 0 2px 4px -1px rgba(11, 204, 230, 0.03)",
@@ -140,11 +139,11 @@ const config = {
         "gradient-soft": "linear-gradient(135deg, #F5F7FA 0%, #E4EBF5 100%)",
         "gradient-blue": "linear-gradient(135deg, #0090B8 0%, #007B9E 100%)",
         "gradient-light": "linear-gradient(135deg, #E1F5FA 0%, #F5F5F5 100%)",
-        'hero-pattern': "url('/images/hero-pattern.png')",
+        'hero-pattern': "url('/images/hero-pattern.png')", // Asegúrate de que la imagen esté optimizada
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-} satisfies Config;
+  plugins: [require("tailwindcss-animate")], // Si realmente necesitas todas las animaciones
+};
 
 export default config;

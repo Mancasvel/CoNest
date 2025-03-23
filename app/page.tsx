@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/react';
 import { useState, useEffect } from 'react';
 
 // Interfaz para el tipo de datos que se espera de la API

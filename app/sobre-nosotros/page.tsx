@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from "react";
-import { Card, CardBody, Button } from "@nextui-org/react";
+import { Card, CardBody, Button } from "@heroui/react";
 import HeroSection from '../../components/HeroSection_1';
 
 export default function SobreNosotrosPage() {
