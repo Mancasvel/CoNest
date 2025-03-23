@@ -1,0 +1,26 @@
+{
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.profiles.windows": {
+        "Command Prompt": {
+            "path": "C:\\Windows\\System32\\cmd.exe",
+            "icon": "terminal-cmd",
+            "env": {
+                "PATH": "${env:PATH};C:\\Program Files\\nodejs;${env:APPDATA}\\npm"
+            }
+        },
+        "PowerShell": {
+            "source": "PowerShell",
+            "icon": "terminal-powershell",
+            "env": {
+                "PATH": "${env:PATH};C:\\Program Files\\nodejs;${env:APPDATA}\\npm"
+            }
+        }
+    },
+    "terminal.integrated.env.windows": {
+        "PATH": "${env:PATH};C:\\Program Files\\nodejs;${env:APPDATA}\\npm",
+        "NODE_PATH": "${env:APPDATA}\\npm\\node_modules"
+    },
+    "terminal.integrated.windowsEnableConpty": true,
+    "terminal.integrated.cwd": "${workspaceFolder}",
+    "terminal.integrated.inheritEnv": true
+} 
