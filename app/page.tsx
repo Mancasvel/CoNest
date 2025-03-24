@@ -114,18 +114,23 @@ export default function Home() {
             </div>
 
             <div className="order-1 lg:order-2 relative">
-              <div className="relative rounded-lg overflow-hidden shadow-medium">
-                {/* Main image */}
-                <div className="relative aspect-video md:aspect-[4/3] overflow-hidden">
-                  <Image
-                    src="/images/hero.jpg"
-                    alt="Estudiante y persona mayor compartiendo experiencias en la cocina"
-                    fill
-                    style={{objectFit: "cover"}}
-                    priority
-                    className="rounded-lg"
-                  />
-                </div>
+
+
+  {/* Contenido principal */}
+  <div className="max-w-5xl mx-auto bg-gradient-to-br from-conest-blue to-conest-mediumBlue rounded-2xl overflow-hidden shadow-medium relative">
+    <div className="relative rounded-lg overflow-hidden shadow-medium">
+      {/* Imagen principal */}
+      <div className="relative aspect-video md:aspect-[4/3] overflow-hidden">
+        <Image
+          src="/images/us.jpg"
+          alt="Estudiante y persona mayor compartiendo experiencias en la cocina"
+          fill
+          style={{ objectFit: "cover" }}
+          priority
+          className="rounded-lg"
+        />
+      </div>
+    </div>
 
                 {/* Satisfaction badge */}
                 <div className="absolute top-4 right-4 bg-white rounded-lg shadow-soft py-2 px-3 flex items-center space-x-2">
