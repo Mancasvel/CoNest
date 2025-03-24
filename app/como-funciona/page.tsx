@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from "react";
-import { Card, CardBody, CardHeader, Divider, Button, Tabs, Tab, Accordion, AccordionItem } from "@nextui-org/react";
+import { Card, CardBody, CardHeader, Divider, Button, Tabs, Tab, Accordion, AccordionItem } from "@heroui/react";
 
 export default function ComoFuncionaPage() {
   const [activeTab, setActiveTab] = useState("hosts");

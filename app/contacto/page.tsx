@@ -1,5 +1,5 @@
 'use client';
-import { Card, CardBody, Input, Textarea, Button, Chip } from "@nextui-org/react";
+import { Card, CardBody, Input, Textarea, Button, Chip } from "@heroui/react";
 import Image from 'next/image';
 import Link from 'next/link';
 
