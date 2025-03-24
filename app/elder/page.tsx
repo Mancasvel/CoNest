@@ -1,5 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
+import { Key } from "react";
 
 export default async function ElderPage() {
   const supabase = await createClient();
@@ -64,15 +65,19 @@ export default async function ElderPage() {
                   <p><strong>Monthly Rent:</strong> ${elder.monthly_rent.toFixed(2)}</p>
                   <p><strong>Apartment Photos:</strong></p>
                   <div className="grid grid-cols-2 gap-4">
-                    {elder.apartment_photos?.map((photo, index) => (
-                      <div key={index} className="w-full h-32 rounded-md overflow-hidden border-2 border-gray-200">
+                  {elder.apartment_photos?.map((photo: string | undefined, index: number) => {
+                    const safeIndex = index ?? 0; // Si index es null o undefined, asignamos un valor seguro (0)
+                    return (
+                      <div key={safeIndex} className="w-full h-32 rounded-md overflow-hidden border-2 border-gray-200">
                         <img
                           src={photo}
-                          alt={`Apartment photo ${index + 1}`}
+                          alt={`Apartment photo ${safeIndex + 1}`} // Usamos safeIndex en lugar de index
                           className="w-full h-full object-cover"
                         />
                       </div>
-                    ))}
+                    );
+                  })}
+                      
                   </div>
                 </div>
               </div>

@@ -1,5 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
+import { Key } from "react";
 
 export default async function AdminPage() {
   const supabase = await createClient();
@@ -97,7 +98,7 @@ export default async function AdminPage() {
                   <td className="p-3">${e.monthly_rent}</td>
                   <td className="p-3">{e.interests?.join(", ")}</td>
                   <td className="p-3">
-                    {e.apartment_photos?.length ? e.apartment_photos.map((photo, idx) => <img key={idx} src={photo} alt="Apartment" className="w-10 h-10 rounded" />) : "No photos"}
+                    {e.apartment_photos?.length ? e.apartment_photos.map((photo: string | undefined, idx: Key | null | undefined) => <img key={idx} src={photo} alt="Apartment" className="w-10 h-10 rounded" />) : "No photos"}
                   </td>
                   <td className="p-3">{e.status}</td>
                 </tr>
