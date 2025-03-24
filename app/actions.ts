@@ -92,7 +92,24 @@ export const signInAction = async (formData: FormData) => {
     return encodedRedirect("error", "/sign-in", error.message);
   }
 
-  return redirect("/");
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    return encodedRedirect("error", "/sign-in", "Usuario no encontrado.");
+  }
+
+  const role = user.app_metadata?.role;
+
+  switch (role) {
+    case "admin":
+      return redirect("/admin");
+    case "elder":
+      return redirect("/elder");
+    case "student":
+      return redirect("/student");
+    default:
+      return redirect("/");
+  }
 };
 
 export const forgotPasswordAction = async (formData: FormData) => {
