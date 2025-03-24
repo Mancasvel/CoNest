@@ -87,15 +87,19 @@ export default function NavbarConest() {
         ...(userRole === 'student'
           ? [
               { name: 'Buscar Alojamiento', href: '/student/housing' },
-              { name: 'Mis Solicitudes', href: '/student/applications' },
+              { name: 'Mi perfil', href: '/student/student' },
             ]
           : []),
         ...(userRole === 'elder'
           ? [
-              { name: 'Mi Vivienda', href: '/elder/housing' },
-              { name: 'Solicitudes Recibidas', href: '/elder/applications' },
+              { name: 'Mi Vivienda', href: '/protected/elder' }
             ]
           : []),
+          ...(userRole === 'admin'
+            ? [
+                { name: 'Mi Vivienda', href: '/protected/admin' }
+              ]
+            : []),
       ]
     : [];
 
