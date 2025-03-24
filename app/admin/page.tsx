@@ -74,6 +74,12 @@ export default async function AdminPage() {
       {/* Lista de Ancianos */}
       <div className="w-full">
         <h2 className="font-bold text-2xl mb-4">Elders List</h2>
+        {/* Botón que lleva a la URL /admin/registrar-mayor */}
+        <a href="/admin/registrar-mayor">
+                      <button className="px-4 py-2 bg-conest-blue text-white rounded-lg hover:bg-conest-mediumBlue transition-all duration-200">
+                        Registrar Mayor
+                      </button>
+                    </a>
         <div className="overflow-auto rounded-lg border border-gray-200">
           <table className="min-w-full bg-white">
             <thead>
