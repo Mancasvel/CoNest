@@ -3,9 +3,10 @@ import { redirect } from "next/navigation";
 import ElderProfile from "./Elder_profile";
 import { User } from "@supabase/supabase-js";
 
-// Definir el tipo para los datos de Elder
+
 type Elder = {
   id: string;
+
   profile_photo: string | null;
   apartment_address: string;
   monthly_rent: number;
@@ -46,13 +47,6 @@ export default async function ElderPage() {
       </div>
     );
   }
+  return <ElderProfile elder={elder} user={{ ...user, email: user.email ?? "email_no_disponible@example.com" }} />;
 
-  return (
-    <ElderProfile 
-      elder={elder as Elder} 
-      user={{
-        email: user.email || "",
-      }}
-    />
-  );
 }
