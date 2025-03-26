@@ -10,6 +10,8 @@ interface User {
   };
 }
 
+
+
 interface Elder {
   profile_photo: string | null;
   apartment_address: string;
@@ -35,7 +37,7 @@ export default async function ElderPage() {
   }
 
   const { data: elder, error: elderError } = await supabase
-    .from<Elder>("elders")
+    .from("elders")
     .select("*")
     .eq("id", user.id)
     .single();
@@ -44,5 +46,5 @@ export default async function ElderPage() {
     return <div>Error fetching data: {elderError?.message}</div>;
   }
 
-  return <ElderProfile elder={elder} user={user} />;
+  return <ElderProfile elder={elder} user={{ ...user, email: user.email ?? "email_no_disponible@example.com" }} />;
 }
