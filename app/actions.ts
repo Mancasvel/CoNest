@@ -188,3 +188,77 @@ export const signOutAction = async () => {
   await supabase.auth.signOut();
   return redirect("/sign-in");
 };
+
+export const registerElderAction = async (formData: FormData) => {
+  const email = formData.get("email")?.toString();
+  const password = formData.get("password")?.toString();
+  const role = "elder"
+  const birth_date = formData.get("birth_date")?.toString();
+
+
+  let additionalData = {
+      apartment_address: formData.get("apartment_address")?.toString(),
+      monthly_rent: parseFloat(formData.get("monthly_rent")?.toString() || "0"),
+    };
+
+  const supabase = await createClient();
+  const origin = (await headers()).get("origin");
+
+  if (!email || !password || !role) {
+    return encodedRedirect(
+      "error",
+      "/admin/registrar-mayor",
+      "All fields are required"
+    );
+  }
+
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      emailRedirectTo: `${origin}/auth/callback`,
+      data: { role },
+    },
+  });
+
+  if (error) {
+    console.error(error.code + " " + error.message);
+    return encodedRedirect("error", "/admin/registrar-mayor", error.message);
+  }
+
+  const userId = data.user?.id;
+  if (!userId) {
+    return encodedRedirect("error", "/admin/registrar-mayor", "User ID not found");
+  }
+
+  const { error: insertError } = await supabase.from("elders").insert({
+    id: userId,
+    birth_date,
+    status: "MATCHMAKING",
+    ...additionalData,
+  });
+
+  if (insertError) {
+    console.error(insertError.message);
+    return encodedRedirect("error", "/admin/registrar-mayor", "Error creating profile");
+  }
+
+  return encodedRedirect(
+    "success",
+    "/admin",
+    "Un nuevo mayor se ha unido al programa Conest"
+  );
+};
+
+// ROLES
+
+export const checkAdminAction = async () => {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  const role = user?.app_metadata?.role;
+
+  if (!user || user.app_metadata?.role !== "admin") {
+    redirect("/");
+  }
+
+};
