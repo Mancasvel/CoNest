@@ -1,16 +1,11 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import ElderProfile from "./Elder_profile";
+import { User } from "@supabase/supabase-js";
 
-// Definir tipos para las propiedades de `ElderPage`
-interface User {
-  email: string;
-  app_metadata: {
-    role: string;
-  };
-}
-
-interface Elder {
+// Definir el tipo para los datos de Elder
+type Elder = {
+  id: string;
   profile_photo: string | null;
   apartment_address: string;
   monthly_rent: number;
@@ -30,19 +25,34 @@ export default async function ElderPage() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user || user.app_metadata?.role !== "elder") {
+  if (!user || user.user_metadata?.role !== "elder") {
     redirect("/");
   }
 
+  // Obtener los datos específicos del elder desde la tabla elders
   const { data: elder, error: elderError } = await supabase
-    .from<Elder>("elders")
+    .from("elders")
     .select("*")
     .eq("id", user.id)
     .single();
 
   if (elderError || !elder) {
-    return <div>Error fetching data: {elderError?.message}</div>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-conest-darkGray mb-4">Error al cargar el perfil</h2>
+          <p className="text-conest-darkGray/70">{elderError?.message || "No se encontraron datos para este usuario"}</p>
+        </div>
+      </div>
+    );
   }
 
-  return <ElderProfile elder={elder} user={user} />;
+  return (
+    <ElderProfile 
+      elder={elder as Elder} 
+      user={{
+        email: user.email || "",
+      }}
+    />
+  );
 }

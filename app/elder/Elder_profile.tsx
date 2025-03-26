@@ -74,7 +74,7 @@ const ElderProfile: React.FC<ElderProfileProps> = ({ elder, user }) => {
               </div>
               <h3 className="text-xl font-bold text-white">Adulto Mayor</h3>
               <Chip 
-                className="capitalize mt-2 text-conest-white" 
+                className="capitalize mt-2" 
                 color={statusColorMap[elder.status] || "default"}
                 size="sm" 
                 variant="flat"

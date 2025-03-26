@@ -8,7 +8,7 @@ export default async function AdminPage() {
 
   const { data: { user } } = await supabase.auth.getUser();
 
-  if (!user || user.app_metadata?.role !== "admin") {
+  if (!user || user.user_metadata?.role !== "admin") {
     redirect("/");  // Redirige si no es admin
   }
 
