@@ -223,12 +223,12 @@ export const registerElderAction = async (formData: FormData) => {
 
   if (error) {
     console.error(error.code + " " + error.message);
-    return encodedRedirect("error", "/sign-up", error.message);
+    return encodedRedirect("error", "/admin/registrar-mayor", error.message);
   }
 
   const userId = data.user?.id;
   if (!userId) {
-    return encodedRedirect("error", "/sign-up", "User ID not found");
+    return encodedRedirect("error", "/admin/registrar-mayor", "User ID not found");
   }
 
   const { error: insertError } = await supabase.from("elders").insert({
