@@ -1,0 +1,60 @@
+-- Drop existing tables if they exist
+-- DROP TABLE IF EXISTS matches, admins, elders, students CASCADE;
+-- DROP TYPE IF EXISTS matchmaking_status;
+
+-- Create ENUM for matchmaking status
+CREATE TYPE matchmaking_status AS ENUM ('REGISTERED', 'MATCHMAKING', 'MATCHED', 'RENTED');
+
+-- Create students table
+CREATE TABLE students (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4() REFERENCES auth.users(id) ON DELETE CASCADE,
+  university TEXT NOT NULL,
+  course TEXT NOT NULL,
+  birth_date DATE NOT NULL,
+  interests TEXT[],
+  status matchmaking_status DEFAULT 'REGISTERED',
+  profile_photo TEXT -- Nuevo campo para la foto de perfil
+);
+
+-- Create elders table
+CREATE TABLE elders (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4() REFERENCES auth.users(id) ON DELETE CASCADE,
+  birth_date DATE NOT NULL,
+  interests TEXT[],
+  apartment_address TEXT NOT NULL,
+  apartment_description TEXT,
+  monthly_rent DECIMAL(10,2) NOT NULL,
+  apartment_photos TEXT[],
+  status matchmaking_status DEFAULT 'REGISTERED',
+  profile_photo TEXT
+);
+
+-- Create admins table
+CREATE TABLE admins (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4() REFERENCES auth.users(id) ON DELETE CASCADE
+);
+
+-- Create matches table
+CREATE TABLE matches (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  student_id UUID REFERENCES students(id) ON DELETE CASCADE,
+  elder_id UUID REFERENCES elders(id) ON DELETE CASCADE,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc', now()) NOT NULL,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc', now()) NOT NULL,
+  UNIQUE(student_id, elder_id)
+);
+
+-- Trigger for updating "updated_at"
+CREATE OR REPLACE FUNCTION update_updated_at_column()
+RETURNS TRIGGER LANGUAGE plpgsql AS $$ 
+BEGIN
+  NEW.updated_at = timezone('utc', now());
+  RETURN NEW;
+END;
+$$;
+
+-- Apply triggers
+CREATE TRIGGER update_matches_updated_at
+  BEFORE UPDATE ON matches
+  FOR EACH ROW
+  EXECUTE FUNCTION update_updated_at_column();
