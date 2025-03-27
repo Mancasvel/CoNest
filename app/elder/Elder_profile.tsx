@@ -40,14 +40,14 @@ const ElderProfile: React.FC<ElderProfileProps> = ({ elder, user }) => {
   };
 
   return (
-    <div className="flex-1 w-full flex flex-col gap-8 bg-gradient-to-br from-conest-lightBlue/10 to-white">
-      <h2 className="font-bold text-3xl text-conest-darkGray">Perfil</h2>
+    <div className="flex-1 w-full flex flex-col gap-8 bg-gradient-to-br from-conest-lightBlue/10 to-white p-8">
+      <h2 className="font-bold text-3xl text-conest-darkGray text-center">Perfil</h2>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto w-full">
         {/* Columna izquierda - Foto de perfil e info básica */}
-        <div className="md:col-span-1">
-          <Card className="shadow-soft border-none h-full relative">
-            <CardHeader className="flex flex-col items-center bg-gradient-to-r from-conest-blue to-conest-mediumBlue p-6">
+        <div className="md:col-span-1 flex justify-center">
+          <Card className="shadow-soft border-none h-full relative w-full max-w-sm rounded-2xl">
+            <CardHeader className="flex flex-col items-center bg-gradient-to-r from-conest-blue to-conest-mediumBlue p-6 rounded-t-2xl">
               <div className="relative w-32 h-32 mb-4">
                 <div className="w-full h-full rounded-full overflow-hidden border-4 border-white/50 shadow-lg">
                   {elder.profile_photo ? (
@@ -84,59 +84,86 @@ const ElderProfile: React.FC<ElderProfileProps> = ({ elder, user }) => {
             </CardHeader>
 
             <CardBody className="p-6">
-              <Button 
-                color="primary" 
-                variant="light" 
-                className="text-conest-blue mb-4"
-                size="sm"
-              >
-                Editar Perfil
-              </Button>
+              <div className="flex justify-center mb-4">
+                <Button 
+                  color="primary" 
+                  variant="light" 
+                  className="text-conest-blue"
+                  size="sm"
+                >
+                  Editar Perfil
+                </Button>
+              </div>
               <div className="space-y-4">
                 <div>
                   <p className="text-sm text-conest-darkGray/60 mb-1">Email</p>
-                  <p className="font-medium text-conest-darkGray">{user.email}</p>
+                  <p className="font-medium text-conest-darkGray text-center">{user.email}</p>
                 </div>
                 
                 <Divider className="my-2" />
                 
                 <div>
-                  <p className="text-sm text-conest-darkGray/60 mb-1">Dirección</p>
-                  <p className="font-medium text-conest-darkGray">{elder.apartment_address}</p>
+                  <p className="text-sm text-conest-darkGray/60 mb-1">Dirección del Apartamento</p>
+                  <p className="font-medium text-conest-darkGray text-center">{elder.apartment_address}</p>
                 </div>
                 
                 <Divider className="my-2" />
                 
                 <div>
-                  <p className="text-sm text-conest-darkGray/60 mb-1">Renta Mensual</p>
-                  <p className="font-medium text-conest-blue">€{elder.monthly_rent}</p>
+                  <p className="text-sm text-conest-darkGray/60 mb-1">Alquiler Mensual</p>
+                  <p className="font-medium text-conest-darkGray text-center">€{elder.monthly_rent}</p>
                 </div>
                 
                 <Divider className="my-2" />
                 
                 <div>
                   <p className="text-sm text-conest-darkGray/60 mb-1">Fecha de Nacimiento</p>
-                  <p className="font-medium text-conest-darkGray">
+                  <p className="font-medium text-conest-darkGray text-center">
                     {new Date(elder.birth_date).toLocaleDateString()}
                   </p>
                 </div>
               </div>
             </CardBody>
           </Card>
+          
+          {/* Fotos del apartamento */}
+          <Card className="shadow-soft border-none mt-6 relative w-full max-w-sm rounded-2xl">
+            <CardHeader className="bg-gradient-to-r from-conest-lightBlue/30 to-conest-lightBlue/10 p-4 rounded-t-2xl">
+              <h3 className="text-xl font-bold text-conest-darkGray text-center">Fotos del Apartamento</h3>
+            </CardHeader>
+            
+            <CardBody className="p-6">
+              <div className="grid grid-cols-2 gap-4">
+                {elder.apartment_photos && elder.apartment_photos.length > 0 ? (
+                  elder.apartment_photos.map((photo, index) => (
+                    <div key={index} className="aspect-square relative group">
+                      <img 
+                        src={photo} 
+                        alt={`Apartamento ${index + 1}`}
+                        className="w-full h-full object-cover rounded-lg border-2 border-conest-blue/20 transition-transform group-hover:scale-105"
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-conest-darkGray/60 text-sm col-span-2 text-center">No hay fotos registradas</p>
+                )}
+              </div>
+            </CardBody>
+          </Card>
         </div>
         
         {/* Columna derecha - Información detallada */}
-        <div className="md:col-span-2">
-          <Card className="shadow-soft border-none relative">
-            <CardHeader className="bg-gradient-to-r from-conest-lightBlue/30 to-conest-lightBlue/10 p-4">
-              <h3 className="text-xl font-bold text-conest-darkGray">Información Personal</h3>
+        <div className="md:col-span-2 flex flex-col gap-6">
+          <Card className="shadow-soft border-none relative rounded-2xl">
+            <CardHeader className="bg-gradient-to-r from-conest-lightBlue/30 to-conest-lightBlue/10 p-4 rounded-t-2xl">
+              <h3 className="text-xl font-bold text-conest-darkGray text-center">Información Personal</h3>
             </CardHeader>
             
             <CardBody className="p-6">
               {/* Sección de Intereses */}
               <div className="mb-6 relative">
-                <h4 className="text-md font-semibold text-conest-darkGray mb-2">Intereses</h4>
-                <div className="flex flex-wrap gap-1">
+                <h4 className="text-md font-semibold text-conest-darkGray mb-4 text-center">Intereses</h4>
+                <div className="flex flex-wrap gap-2 justify-center">
                   {elder.interests && elder.interests.length > 0 ? (
                     elder.interests.map((interest, index) => (
                       <Chip 
@@ -154,20 +181,10 @@ const ElderProfile: React.FC<ElderProfileProps> = ({ elder, user }) => {
                 </div>
               </div>
 
-              {/* Sección de descripción del apartamento */}
-              {elder.apartment_description && (
-                <div className="mb-6 relative">
-                  <h4 className="text-md font-semibold text-conest-darkGray mb-2">Descripción del Apartamento</h4>
-                  <p className="text-sm text-conest-darkGray">
-                    {elder.apartment_description}
-                  </p>
-                </div>
-              )}
-
-              {/* Sección de servicios incluidos */}
+              {/* Sección de Amenidades */}
               <div className="mb-6 relative">
-                <h4 className="text-md font-semibold text-conest-darkGray mb-2">Servicios Incluidos</h4>
-                <div className="flex flex-wrap gap-1">
+                <h4 className="text-md font-semibold text-conest-darkGray mb-4 text-center">Amenidades</h4>
+                <div className="flex flex-wrap gap-2 justify-center">
                   {elder.amenities && elder.amenities.length > 0 ? (
                     elder.amenities.map((amenity, index) => (
                       <Chip 
@@ -180,15 +197,15 @@ const ElderProfile: React.FC<ElderProfileProps> = ({ elder, user }) => {
                       </Chip>
                     ))
                   ) : (
-                    <p className="text-conest-darkGray/60 text-sm">No hay servicios registrados</p>
+                    <p className="text-conest-darkGray/60 text-sm">No hay amenidades registradas</p>
                   )}
                 </div>
               </div>
 
-              {/* Sección de normas de la casa */}
+              {/* Sección de Normas de la Casa */}
               <div className="mb-6 relative">
-                <h4 className="text-md font-semibold text-conest-darkGray mb-2">Normas de la Casa</h4>
-                <div className="flex flex-wrap gap-1">
+                <h4 className="text-md font-semibold text-conest-darkGray mb-4 text-center">Normas de la Casa</h4>
+                <div className="flex flex-wrap gap-2 justify-center">
                   {elder.house_rules && elder.house_rules.length > 0 ? (
                     elder.house_rules.map((rule, index) => (
                       <Chip 
@@ -207,48 +224,23 @@ const ElderProfile: React.FC<ElderProfileProps> = ({ elder, user }) => {
               </div>
             </CardBody>
           </Card>
-          
-          {/* Fotos del apartamento */}
-          <Card className="shadow-soft border-none mt-6 relative">
-            <CardHeader className="bg-gradient-to-r from-conest-lightBlue/30 to-conest-lightBlue/10 p-4">
-              <h3 className="text-xl font-bold text-conest-darkGray">Fotos del Apartamento</h3>
-            </CardHeader>
-            
-            <CardBody className="p-6">
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                {elder.apartment_photos && elder.apartment_photos.length > 0 ? (
-                  elder.apartment_photos.map((photo, index) => (
-                    <div key={index} className="aspect-square relative group">
-                      <img 
-                        src={photo} 
-                        alt={`Apartamento ${index + 1}`}
-                        className="w-full h-full object-cover rounded-lg border-2 border-conest-blue/20 transition-transform group-hover:scale-105"
-                      />
-                    </div>
-                  ))
-                ) : (
-                  <p className="text-conest-darkGray/60 text-sm col-span-full">No hay fotos registradas</p>
-                )}
-              </div>
-            </CardBody>
-          </Card>
-          
+
           {/* Tarjeta de Actividad */}
-          <Card className="shadow-soft border-none mt-6 relative">
-            <CardHeader className="bg-gradient-to-r from-conest-lightBlue/30 to-conest-lightBlue/10 p-4">
-              <h3 className="text-xl font-bold text-conest-darkGray">Actividad Reciente</h3>
+          <Card className="shadow-soft border-none relative rounded-2xl">
+            <CardHeader className="bg-gradient-to-r from-conest-lightBlue/30 to-conest-lightBlue/10 p-4 rounded-t-2xl">
+              <h3 className="text-xl font-bold text-conest-darkGray text-center">Actividad Reciente</h3>
             </CardHeader>
             
             <CardBody className="p-6">
-              <div className="flex items-center gap-4 p-3 rounded-lg bg-conest-lightBlue/10 border border-conest-lightBlue/20 relative">
+              <div className="flex items-center justify-center gap-4 p-3 rounded-lg bg-conest-lightBlue/10 border border-conest-lightBlue/20 relative">
                 <div className="p-2 bg-conest-blue/10 rounded-full">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-conest-blue">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z" />
                   </svg>
                 </div>
-                <div>
-                  <p className="text-sm font-medium text-conest-darkGray">Vivienda registrada correctamente</p>
-                  <p className="text-xs text-conest-darkGray/60">Tu apartamento ya está disponible para los estudiantes</p>
+                <div className="text-center">
+                  <p className="text-sm font-medium text-conest-darkGray">Perfil creado exitosamente</p>
+                  <p className="text-xs text-conest-darkGray/60">Ya puedes comenzar a recibir solicitudes</p>
                 </div>
               </div>
             </CardBody>

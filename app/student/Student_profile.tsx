@@ -42,8 +42,8 @@ const StudentProfile: React.FC<StudentProfileProps> = ({ student, user }) => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto w-full">
         {/* Columna izquierda - Foto de perfil e info básica */}
         <div className="md:col-span-1 flex justify-center">
-          <Card className="shadow-soft border-none h-full relative w-full max-w-sm">
-            <CardHeader className="flex flex-col items-center bg-gradient-to-r from-conest-blue to-conest-mediumBlue p-6">
+          <Card className="shadow-soft border-none h-full relative w-full max-w-sm rounded-2xl">
+            <CardHeader className="flex flex-col items-center bg-gradient-to-r from-conest-blue to-conest-mediumBlue p-6 rounded-t-2xl">
               <div className="relative w-32 h-32 mb-4">
                 <div className="w-full h-full rounded-full overflow-hidden border-4 border-white/50 shadow-lg">
                   {student.profile_photo ? (
@@ -92,28 +92,28 @@ const StudentProfile: React.FC<StudentProfileProps> = ({ student, user }) => {
               </div>
               <div className="space-y-4">
                 <div>
-                  <p className="text-sm text-conest-darkGray/60 mb-1">Email</p>
+                  <p className="text-sm text-conest-darkGray/60 mb-1 text-center">Email</p>
                   <p className="font-medium text-conest-darkGray text-center">{user.email}</p>
                 </div>
                 
                 <Divider className="my-2" />
                 
                 <div>
-                  <p className="text-sm text-conest-darkGray/60 mb-1">Universidad</p>
+                  <p className="text-sm text-conest-darkGray/60 mb-1 text-center">Universidad</p>
                   <p className="font-medium text-conest-darkGray text-center">{student.university}</p>
                 </div>
                 
                 <Divider className="my-2" />
                 
                 <div>
-                  <p className="text-sm text-conest-darkGray/60 mb-1">Curso</p>
+                  <p className="text-sm text-conest-darkGray/60 mb-1 text-center">Curso</p>
                   <p className="font-medium text-conest-darkGray text-center">{student.course}</p>
                 </div>
                 
                 <Divider className="my-2" />
                 
                 <div>
-                  <p className="text-sm text-conest-darkGray/60 mb-1">Fecha de Nacimiento</p>
+                  <p className="text-sm text-conest-darkGray/60 mb-1 text-center">Fecha de Nacimiento</p>
                   <p className="font-medium text-conest-darkGray text-center">
                     {new Date(student.birth_date).toLocaleDateString()}
                   </p>
@@ -125,8 +125,8 @@ const StudentProfile: React.FC<StudentProfileProps> = ({ student, user }) => {
         
         {/* Columna derecha - Información detallada */}
         <div className="md:col-span-2 flex flex-col gap-6">
-          <Card className="shadow-soft border-none relative">
-            <CardHeader className="bg-gradient-to-r from-conest-lightBlue/30 to-conest-lightBlue/10 p-4">
+          <Card className="shadow-soft border-none relative rounded-2xl">
+            <CardHeader className="bg-gradient-to-r from-conest-lightBlue/30 to-conest-lightBlue/10 p-4 rounded-t-2xl">
               <h3 className="text-xl font-bold text-conest-darkGray text-center">Información Personal</h3>
             </CardHeader>
             
@@ -154,8 +154,8 @@ const StudentProfile: React.FC<StudentProfileProps> = ({ student, user }) => {
             </CardBody>
           </Card>
 
-          <Card className="shadow-soft border-none relative">
-            <CardHeader className="bg-gradient-to-r from-conest-lightBlue/30 to-conest-lightBlue/10 p-4">
+          <Card className="shadow-soft border-none relative rounded-2xl">
+            <CardHeader className="bg-gradient-to-r from-conest-lightBlue/30 to-conest-lightBlue/10 p-4 rounded-t-2xl">
               <h3 className="text-xl font-bold text-conest-darkGray text-center">Actividad Reciente</h3>
             </CardHeader>
             
