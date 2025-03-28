@@ -1,39 +1,31 @@
-import { createClient } from "@/utils/supabase/server";
+// app/admin/page.tsx (Componente de servidor)
 import { redirect } from "next/navigation";
-import { Key } from "react";
+import { createClient } from "@/utils/supabase/server";  // Importa el cliente del servidor
+import ClientComponent from "./client-component";
 
 export default async function AdminPage() {
-  const supabase = await createClient();
+  const supabase = await createClient();  // Aquí se obtiene el cliente de Supabase desde el servidor
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { data: { user } } = await supabase.auth.getUser();
 
-  if (!user || user.app_metadata?.role !== "admin") {
-    redirect("/");
+  if (!user || user.user_metadata?.role !== "admin") {
+    redirect("/");  // Redirige si no es admin
   }
 
+  // Obtener los datos de los administradores, estudiantes y ancianos
   let { data: admins, error: adminsError } = await supabase.from("admins").select("*");
   let { data: students, error: studentsError } = await supabase.from("students").select("*");
   let { data: elders, error: eldersError } = await supabase.from("elders").select("*");
   let { data: matches, error: matchesError } = await supabase.from("matches").select("*");
 
-  if (adminsError || studentsError || eldersError || matchesError || students == null || elders == null || admins == null || matches == null) {
+  // Verifica si hay algún error
+  if (adminsError || studentsError || eldersError || matchesError) {
     return <div>Error fetching data: {adminsError?.message || studentsError?.message || eldersError?.message || matchesError?.message}</div>;
   }
 
-  // Crear un mapa de IDs a nombres para los matches
-  const studentMap = students.reduce((acc, student) => {
-    acc[student.id] = student.nombre;
-    return acc;
-  }, {});
-
-  const elderMap = elders.reduce((acc, elder) => {
-    acc[elder.id] = elder.nombre;
-    return acc;
-  }, {});
-
+  // Devuelve los datos que se usarán en el componente del cliente
   return (
+
     <div className="flex-1 w-full flex flex-col gap-12">
 
       {/* Lista de Estudiantes */}

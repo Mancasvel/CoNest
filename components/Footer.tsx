@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';  
+import { FaInstagram, FaLinkedin } from 'react-icons/fa';  
 
 const Footer = () => {
   return (
@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="flex flex-wrap justify-between">
           <div className="mb-6 w-full md:w-auto">
             <h3 className="text-xl font-bold text-teal-800 mb-4">CoNest</h3>
-            <p className="text-gray-600 max-w-xs">Conectando personas, creando hogares.</p>
+            <p className="text-gray-600 max-w-xs">Un hogar, dos generaciones, un proposito.</p>
           </div>
           
           <div className="mb-6 w-full md:w-auto">
@@ -36,14 +36,11 @@ const Footer = () => {
           <div className="mb-6 w-full md:w-auto">
             <h4 className="font-semibold mb-3">Síguenos</h4>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-600 hover:text-teal-800">
-                <FaFacebook size={24} />
-              </a>
-              <a href="#" className="text-gray-600 hover:text-teal-800">
+              <a href="https://instagram.com/conest_home" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-teal-800">
                 <FaInstagram size={24} />
               </a>
-              <a href="#" className="text-gray-600 hover:text-teal-800">
-                <FaTwitter size={24} />
+              <a href="https://www.linkedin.com/company/itsconest/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-teal-800">
+                <FaLinkedin size={24} />
               </a>
             </div>
           </div>

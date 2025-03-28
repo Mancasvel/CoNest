@@ -56,7 +56,7 @@ export default function ContactoPage() {
       </section>
       
       {/* Contact Form Section */}
-      <section className="py-20 relative z-10">
+      <section className="py-20 relative z-10 mb-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="flex flex-col lg:flex-row gap-12">
@@ -68,8 +68,8 @@ export default function ContactoPage() {
                 >
                   <div className="p-1 bg-gradient-to-r from-conest-blue via-conest-mediumBlue to-conest-lightBlue rounded-2xl">
                     <div className="bg-white p-8 sm:p-10 rounded-2xl h-full">
-                      <h2 className="text-2xl md:text-3xl font-bold mb-6 text-conest-darkGray">Envíanos un mensaje</h2>
-                      <p className="text-conest-darkGray/80 mb-8">
+                      <h2 className="text-2xl md:text-3xl font-bold mb-16 text-conest-darkGray">Envíanos un mensaje</h2>
+                      <p className="text-conest-darkGray/80 mb-14">
                         Rellena el siguiente formulario y nos pondremos en contacto contigo lo antes posible.
                       </p>
                       
@@ -169,7 +169,7 @@ export default function ContactoPage() {
                         </div>
                         <div>
                           <h4 className="font-semibold text-conest-darkGray mb-1">Email</h4>
-                          <p className="text-conest-darkGray/80">info@conest.es</p>
+                          <p className="text-conest-darkGray/80">conesthome@gmail.com</p>
                           <p className="text-conest-darkGray/60 text-sm">Respondemos en 24-48 horas</p>
                         </div>
                       </div>
@@ -183,8 +183,8 @@ export default function ContactoPage() {
                         </div>
                         <div>
                           <h4 className="font-semibold text-conest-darkGray mb-1">Dirección</h4>
-                          <p className="text-conest-darkGray/80">Calle Innovación, 123</p>
-                          <p className="text-conest-darkGray/80">28001 Madrid, España</p>
+                          <p className="text-conest-darkGray/80">Av. República Argentina, 25, planta 9</p>
+                          <p className="text-conest-darkGray/80">41011 Sevilla</p>
                         </div>
                       </div>
                     </div>
@@ -192,21 +192,7 @@ export default function ContactoPage() {
                     <div className="mt-10">
                       <h4 className="font-semibold text-conest-darkGray mb-4">Síguenos en redes sociales</h4>
                       <div className="flex gap-3">
-                        <Link href="https://twitter.com/conest" target="_blank" rel="noopener noreferrer">
-                          <div className="w-10 h-10 bg-conest-blue/10 rounded-full flex items-center justify-center text-conest-blue hover:bg-conest-blue hover:text-white transition-colors duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
-                            </svg>
-                          </div>
-                        </Link>
-                        <Link href="https://facebook.com/conest" target="_blank" rel="noopener noreferrer">
-                          <div className="w-10 h-10 bg-conest-blue/10 rounded-full flex items-center justify-center text-conest-blue hover:bg-conest-blue hover:text-white transition-colors duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                            </svg>
-                          </div>
-                        </Link>
-                        <Link href="https://instagram.com/conest" target="_blank" rel="noopener noreferrer">
+                        <Link href="https://instagram.com/conest_home" target="_blank" rel="noopener noreferrer">
                           <div className="w-10 h-10 bg-conest-blue/10 rounded-full flex items-center justify-center text-conest-blue hover:bg-conest-blue hover:text-white transition-colors duration-300">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                               <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -215,7 +201,7 @@ export default function ContactoPage() {
                             </svg>
                           </div>
                         </Link>
-                        <Link href="https://linkedin.com/company/conest" target="_blank" rel="noopener noreferrer">
+                        <Link href="https://www.linkedin.com/company/itsconest/" target="_blank" rel="noopener noreferrer">
                           <div className="w-10 h-10 bg-conest-blue/10 rounded-full flex items-center justify-center text-conest-blue hover:bg-conest-blue hover:text-white transition-colors duration-300">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                               <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
@@ -261,36 +247,49 @@ export default function ContactoPage() {
               className="bg-white rounded-2xl shadow-soft overflow-hidden relative"
               style={{ animation: 'fadeIn 0.8s ease-out 0.6s both' }}
             >
-              <div className="w-full h-[400px] relative">
-                <Image 
-                  src="/images/map.jpg" 
-                  alt="Ubicación de CoNest" 
-                  fill
-                  className="object-cover"
-                />
-              </div>
+            
               
-              <div className="absolute bottom-6 left-6 bg-white rounded-xl shadow-medium p-5 max-w-md">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-10 h-10 rounded-full bg-conest-blue flex items-center justify-center text-white shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                      <circle cx="12" cy="10" r="3"></circle>
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-conest-darkGray">Oficinas Centrales</h4>
-                    <p className="text-conest-darkGray/80 text-sm">Calle Innovación, 123, 28001 Madrid</p>
-                  </div>
-                </div>
-                <div className="mt-3 flex gap-2">
-                  <Chip color="primary" variant="flat" size="sm">Metro: Innovación (L3)</Chip>
-                  <Chip color="primary" variant="flat" size="sm">Bus: 45, 62</Chip>
-                </div>
+      <div className="flex items-center gap-3 mb-2">
+        <div className="w-10 h-10 rounded-full bg-conest-blue flex items-center justify-center text-white shrink-0">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+        </div>
+        <div>
+          <h4 className="font-semibold text-conest-darkGray">Oficinas Centrales</h4>
+          <p className="text-conest-darkGray/80 text-sm">
+            Av. República Argentina, 25, planta 9, 41011 Sevilla
+          </p>
+        </div>
+      </div>
+
+      {/* Google Maps Embed */}
+      <div className="rounded-lg overflow-hidden shadow-md mt-3">
+        <iframe
+          title="Mapa Oficinas CoNest"
+          width="100%"
+          height="200"
+          style={{ border: 0 }}
+          loading="lazy"
+          allowFullScreen
+          referrerPolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=Av.+República+Argentina,+25,+Sevilla&output=embed"
+        ></iframe>
+      </div>
+      </div>
               </div>
             </div>
-          </div>
-        </div>
       </section>
       
       {/* FAQ Teaser Section */}
