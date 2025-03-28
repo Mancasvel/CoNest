@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 
-const FilterForm = ({ initialCity, initialMinPrice, initialMaxPrice }) => {
+const FilterForm = ({ initialCity = '', initialMinPrice = '', initialMaxPrice = '' }) => {
   const [city, setCity] = useState(initialCity || '');
   const [minPrice, setMinPrice] = useState(initialMinPrice || '');
   const [maxPrice, setMaxPrice] = useState(initialMaxPrice || '');
