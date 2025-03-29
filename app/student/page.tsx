@@ -6,11 +6,12 @@ export default async function StudentPage() {
 
   const {
     data: { user },
-  } = await supabase.auth.getUser();
+  } = await supabase.auth.getUser() ;
 
-  if (!user || user.app_metadata?.role !== "student") {
-    redirect("/");
+  if (user == null) {
+    return <div>No se ha encontrado su usuario</div>;
   }
+
 
   let { data: student, error: studentError } = await supabase.from("students").select("*").eq("id", user.id).single();
 

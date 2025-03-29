@@ -1,16 +1,15 @@
 import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
-import { Key } from "react";
+
 
 export default async function ElderPage() {
   const supabase = await createClient();
 
   const {
     data: { user },
-  } = await supabase.auth.getUser();
+  } = await supabase.auth.getUser() ;
 
-  if (!user || user.app_metadata?.role !== "elder") {
-    redirect("/");
+  if (user == null) {
+    return <div>No se ha encontrado su usuario</div>;
   }
 
   let { data: elder, error: elderError } = await supabase
@@ -20,7 +19,7 @@ export default async function ElderPage() {
     .single();
 
   if (elderError || elder == null) {
-    return <div>Error fetching data: {elderError?.message}</div>;
+    return <div>No se ha encontrado su usuario: {elderError?.message}</div>;
   }
 
   return (

@@ -1,33 +1,5 @@
-import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
 
 export default async function UnirsePage() {
-  const supabase = await createClient();
-
-  // Verificación de usuario y rol
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user || user.app_metadata?.role !== "student") {
-    redirect("/");
-  }
-
-  // Verificación de estado de estudiante
-  let { data: student, error: studentError } = await supabase
-    .from("students")
-    .select("*")
-    .eq("id", user.id)
-    .single();
-
-  if (!student || student?.status !== "REGISTERED") {
-    redirect("/student");
-  }
-
-  if (studentError || student == null) {
-    return <div>Error al obtener los datos: {studentError?.message}</div>; // Manejo de errores de datos
-  }
-
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
