@@ -5,14 +5,6 @@ import { Key } from "react";
 export default async function AdminPage() {
   const supabase = await createClient();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user || user.app_metadata?.role !== "admin") {
-    redirect("/");
-  }
-
   let { data: admins, error: adminsError } = await supabase.from("admins").select("*");
   let { data: students, error: studentsError } = await supabase.from("students").select("*");
   let { data: elders, error: eldersError } = await supabase.from("elders").select("*");
