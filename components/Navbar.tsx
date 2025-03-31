@@ -75,29 +75,72 @@ export default function NavbarConest() {
     router.push('/');
   };
 
-  const menuItems = [
-    { name: 'Cómo Funciona', href: '/como-funciona' },
-    { name: 'Sobre Nosotros', href: '/sobre-nosotros' },
-    { name: 'Contacto', href: '/contacto' },
-  ];
+  const getRolePath = (path: string) => {
+    if (path.startsWith('/admin')) return 'admin';
+    if (path.startsWith('/student')) return 'student';
+    if (path.startsWith('/elder')) return 'elder';
+    return null;
+  };
 
-  const userMenuItems = user
-    ? [
-        { name: 'Mi Perfil', href: '/profile' },
-        ...(userRole === 'student'
-          ? [
-              { name: 'Buscar Alojamiento', href: '/student/housing' },
-              { name: 'Mis Solicitudes', href: '/student/applications' },
-            ]
-          : []),
-        ...(userRole === 'elder'
-          ? [
-              { name: 'Mi Vivienda', href: '/elder/housing' },
-              { name: 'Solicitudes Recibidas', href: '/elder/applications' },
-            ]
-          : []),
-      ]
-    : [];
+  const currentRolePath = getRolePath(pathname);
+
+  const getMenuItems = () => {
+    if (currentRolePath === 'admin') {
+      return [
+        { name: 'Dashboard', href: '/admin' },
+        { name: 'Estudiantes', href: '/admin/students' },
+        { name: 'Mayores', href: '/admin/elders' },
+        { name: 'Matches', href: '/admin/matches' },
+      ];
+    } else if (currentRolePath === 'student') {
+      return [
+        { name: 'Mi Perfil', href: '/student/profile' },
+        { name: 'Buscar Alojamiento', href: '/student/housing' },
+        { name: 'Mis Solicitudes', href: '/student/applications' },
+        { name: 'Mensajes', href: '/student/messages' },
+      ];
+    } else if (currentRolePath === 'elder') {
+      return [
+        { name: 'Mi Perfil', href: '/elder/profile' },
+        { name: 'Mi Vivienda', href: '/elder/housing' },
+        { name: 'Solicitudes', href: '/elder/applications' },
+        { name: 'Mensajes', href: '/elder/messages' },
+      ];
+    } else {
+      return [
+        { name: 'Cómo Funciona', href: '/como-funciona' },
+        { name: 'Sobre Nosotros', href: '/sobre-nosotros' },
+        { name: 'Contacto', href: '/contacto' },
+      ];
+    }
+  };
+
+  const menuItems = getMenuItems();
+
+  const getUserMenuItems = () => {
+    if (currentRolePath) {
+      return [{ name: 'Volver a Inicio', href: '/' }];
+    }
+
+    if (!user) return [];
+
+    const roleBasedLinks = [];
+    
+    if (userRole === 'admin') {
+      roleBasedLinks.push({ name: 'Admin Dashboard', href: '/admin' });
+    } else if (userRole === 'student') {
+      roleBasedLinks.push({ name: 'Área de Estudiante', href: '/student/profile' });
+    } else if (userRole === 'elder') {
+      roleBasedLinks.push({ name: 'Área de Mayor', href: '/elder/profile' });
+    }
+    
+    return [
+      { name: 'Mi Perfil', href: '/profile' },
+      ...roleBasedLinks
+    ];
+  };
+
+  const userMenuItems = user ? getUserMenuItems() : [];
 
   const renderAuthButtons = () => (
     <div className="flex items-center gap-3">
@@ -124,15 +167,32 @@ export default function NavbarConest() {
       <DropdownMenu aria-label="User Actions">
         <DropdownItem key="profile" textValue="profile">
           <div className="text-sm font-semibold">{user.email}</div>
-          <div className="text-xs text-gray-500">{userRole === 'student' ? 'Estudiante' : userRole === 'elder' ? 'Adulto mayor' : 'Usuario'}</div>
+          <div className="text-xs text-gray-500">
+            {userRole === 'student' ? 'Estudiante' : 
+             userRole === 'elder' ? 'Adulto mayor' : 
+             userRole === 'admin' ? 'Administrador' : 'Usuario'}
+          </div>
         </DropdownItem>
-        <DropdownItem key="settings" href="/profile">Mi Perfil</DropdownItem>
-        {userRole === 'student' ? (
+        
+        {currentRolePath ? (
+          <DropdownItem key="home" href="/">Volver a Inicio</DropdownItem>
+        ) : (
           <>
-            <DropdownItem key="applications" href="/student/applications">Mis Solicitudes</DropdownItem>
-            <DropdownItem key="housing" href="/student/housing">Buscar Alojamiento</DropdownItem>
+            <DropdownItem key="settings" href="/profile">Mi Perfil</DropdownItem>
+            {userRole === 'admin' && (
+              <DropdownItem key="admin" href="/admin">Panel Admin</DropdownItem>
+            )}
+            {userRole === 'student' && (
+              <>
+                <DropdownItem key="student-area" href="/student/profile">Área de Estudiante</DropdownItem>
+                <DropdownItem key="housing" href="/student/housing">Buscar Alojamiento</DropdownItem>
+              </>
+            )}
+            {userRole === 'elder' && (
+              <DropdownItem key="elder-area" href="/elder/profile">Área de Mayor</DropdownItem>
+            )}
           </>
-        ) : null}
+        )}
 
         <DropdownItem key="logout" color="danger" onClick={handleSignOut}>Cerrar Sesión</DropdownItem>
       </DropdownMenu>

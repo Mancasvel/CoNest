@@ -1,9 +1,10 @@
-import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import { Key } from "react";
+import { createClient } from "@/utils/supabase/server";  // Importa el cliente del servidor
+import ClientComponent from "./client-component";
 
 export default async function AdminPage() {
-  const supabase = await createClient();
+  const supabase = await createClient();  // Cliente de Supabase en el servidor
+
 
   let { data: admins, error: adminsError } = await supabase.from("admins").select("*");
   let { data: students, error: studentsError } = await supabase.from("students").select("*");
@@ -27,7 +28,6 @@ export default async function AdminPage() {
 
   return (
     <div className="flex-1 w-full flex flex-col gap-12">
-
       {/* Lista de Estudiantes */}
       <div className="w-full">
         <h2 className="font-bold text-2xl mb-4">Students List</h2>
@@ -45,16 +45,20 @@ export default async function AdminPage() {
               </tr>
             </thead>
             <tbody>
-              {students.map((s) => (
+              {(students ?? []).map((s) => (
                 <tr key={s.id} className="border-b">
                   <td className="p-3">{s.nombre}</td>
                   <td className="p-3">
-                    {s.profile_photo ? <img src={s.profile_photo} alt="Profile" className="w-10 h-10 rounded-full" /> : "No photo"}
+                    {s.profile_photo ? (
+                      <img src={s.profile_photo} alt="Profile" className="w-10 h-10 rounded-full" />
+                    ) : (
+                      "No photo"
+                    )}
                   </td>
                   <td className="p-3">{s.university}</td>
                   <td className="p-3">{s.course}</td>
                   <td className="p-3">{new Date(s.birth_date).toLocaleDateString()}</td>
-                  <td className="p-3">{s.interests?.join(", ")}</td>
+                  <td className="p-3">{s.interests?.join(", ") || "No interests"}</td>
                   <td className="p-3">{s.status}</td>
                 </tr>
               ))}
@@ -66,12 +70,11 @@ export default async function AdminPage() {
       {/* Lista de Ancianos */}
       <div className="w-full">
         <h2 className="font-bold text-2xl mb-4">Elders List</h2>
-        {/* Botón que lleva a la URL /admin/registrar-mayor */}
         <a href="/admin/registrar-mayor">
-                      <button className="px-4 py-2 bg-conest-blue text-white rounded-lg hover:bg-conest-mediumBlue transition-all duration-200">
-                        Registrar Mayor
-                      </button>
-                    </a>
+          <button className="px-4 py-2 bg-conest-blue text-white rounded-lg hover:bg-conest-mediumBlue transition-all duration-200">
+            Registrar Mayor
+          </button>
+        </a>
         <div className="overflow-auto rounded-lg border border-gray-200">
           <table className="min-w-full bg-white">
             <thead>
@@ -86,18 +89,32 @@ export default async function AdminPage() {
               </tr>
             </thead>
             <tbody>
-              {elders.map((e) => (
+              {(elders ?? []).map((e) => (
                 <tr key={e.id} className="border-b">
                   <td className="p-3">{e.nombre}</td>
                   <td className="p-3">
-                    {e.profile_photo ? <img src={e.profile_photo} alt="Profile" className="w-10 h-10 rounded-full" /> : "No photo"}
+                    {e.profile_photo ? (
+                      <img src={e.profile_photo} alt="Profile" className="w-10 h-10 rounded-full" />
+                    ) : (
+                      "No photo"
+                    )}
                   </td>
                   <td className="p-3">{e.apartment_address}</td>
-                  <td className="p-3">${e.monthly_rent}</td>
-                  <td className="p-3">{e.interests?.join(", ")}</td>
+                  <td className="p-3">€{e.monthly_rent}</td>
+                  <td className="p-3">{e.interests?.join(", ") || "No interests"}</td>
                   <td className="p-3">
-                    {e.apartment_photos?.length ? e.apartment_photos.map((photo: string | undefined, idx: Key | null | undefined) => <img key={idx} src={photo} alt="Apartment" className="w-10 h-10 rounded" />) : "No photos"}
+                    {e.apartment_photos?.filter(Boolean).length ? (
+                      e.apartment_photos
+                        .filter((photo: string) => photo !== null) // Aseguramos que cada foto sea una cadena
+                        .map((photo: string, idx: number) => (  // Definimos explícitamente 'photo' como string
+                          <img key={`${e.id}-${idx}`} src={photo} alt="Apartment" className="w-10 h-10 rounded" />
+                        ))
+                    ) : (
+                      "No photos"
+                    )}
                   </td>
+
+
                   <td className="p-3">{e.status}</td>
                 </tr>
               ))}
