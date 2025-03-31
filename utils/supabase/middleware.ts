@@ -43,11 +43,6 @@ export const updateSession = async (request: NextRequest) => {
       return NextResponse.redirect(new URL("/sign-in", request.url));
     }
 
-    if (pathname === "/" && user) {
-      console.log("🟢 Usuario autenticado, redirigiendo a /");
-      return NextResponse.redirect(new URL("/", request.url));
-    }
-
     const roleRoutes: { [key: string]: string } = {
       student: "/student",
       admin: "/admin",
