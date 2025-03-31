@@ -2,12 +2,13 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import StudentProfile from "./Student_profile";
 
+
 export default async function StudentPage() {
   const supabase = await createClient();
 
   const {
     data: { user },
-  } = await supabase.auth.getUser();
+  } = await supabase.auth.getUser() ;
 
   if (!user || user.app_metadata?.role !== "student" || !user.email) {
     redirect("/");  // Redirigir si no hay usuario o no es estudiante o no tiene email
@@ -18,6 +19,7 @@ export default async function StudentPage() {
     .select("*")
     .eq("id", user.id)
     .single();
+
 
   if (studentError || student == null) {
     return <div>Error fetching data: {studentError?.message}</div>;

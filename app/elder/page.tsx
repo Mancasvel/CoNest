@@ -19,15 +19,17 @@ type Elder = {
   status: "active" | "paused" | "vacation" | "matchmaking";
 }
 
+
 export default async function ElderPage() {
   const supabase = await createClient();
 
   const {
     data: { user },
-  } = await supabase.auth.getUser();
+  } = await supabase.auth.getUser() ;
 
   if (!user || user.user_metadata?.role !== "elder") {
     redirect("/");
+
   }
 
   // Obtener los datos específicos del elder desde la tabla elders
@@ -43,6 +45,7 @@ export default async function ElderPage() {
         <div className="text-center">
           <h2 className="text-2xl font-bold text-conest-darkGray mb-4">Error al cargar el perfil</h2>
           <p className="text-conest-darkGray/70">{elderError?.message || "No se encontraron datos para este usuario"}</p>
+
         </div>
       </div>
     );

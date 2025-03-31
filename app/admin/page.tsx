@@ -5,20 +5,26 @@ import ClientComponent from "./client-component";
 export default async function AdminPage() {
   const supabase = await createClient();  // Cliente de Supabase en el servidor
 
-  const { data: userData, error: userError } = await supabase.auth.getUser();
-  const user = userData?.user;
 
-  if (!user || user.user_metadata?.role !== "admin") {
-    redirect("/");  // Redirige si no es admin
+  let { data: admins, error: adminsError } = await supabase.from("admins").select("*");
+  let { data: students, error: studentsError } = await supabase.from("students").select("*");
+  let { data: elders, error: eldersError } = await supabase.from("elders").select("*");
+  let { data: matches, error: matchesError } = await supabase.from("matches").select("*");
+
+  if (adminsError || studentsError || eldersError || matchesError || students == null || elders == null || admins == null || matches == null) {
+    return <div>Error fetching data: {adminsError?.message || studentsError?.message || eldersError?.message || matchesError?.message}</div>;
   }
 
-  // Obtener los datos en paralelo
-  const [{ data: admins }, { data: students }, { data: elders }, { data: matches }] = await Promise.all([
-    supabase.from("admins").select("*"),
-    supabase.from("students").select("*"),
-    supabase.from("elders").select("*"),
-    supabase.from("matches").select("*"),
-  ]);
+  // Crear un mapa de IDs a nombres para los matches
+  const studentMap = students.reduce((acc, student) => {
+    acc[student.id] = student.nombre;
+    return acc;
+  }, {});
+
+  const elderMap = elders.reduce((acc, elder) => {
+    acc[elder.id] = elder.nombre;
+    return acc;
+  }, {});
 
   return (
     <div className="flex-1 w-full flex flex-col gap-12">

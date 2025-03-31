@@ -250,15 +250,3 @@ export const registerElderAction = async (formData: FormData) => {
   );
 };
 
-// ROLES
-
-export const checkAdminAction = async () => {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  const role = user?.app_metadata?.role;
-
-  if (!user || user.app_metadata?.role !== "admin") {
-    redirect("/");
-  }
-
-};

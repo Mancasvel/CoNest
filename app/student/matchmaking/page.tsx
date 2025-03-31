@@ -35,29 +35,6 @@ export default async function ExplorarPisosPage({
   const maxPrice = params?.maxPrice as string | undefined;
   const city = params?.city as string | undefined;
 
-  // Verificación de usuario y rol
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user || user.app_metadata?.role !== "student") {
-    redirect("/");
-  }
-
-  // Verificación de estado de estudiante
-  const { data: student, error: studentError } = await supabase
-    .from("students")
-    .select("*")
-    .eq("id", user.id)
-    .single();
-
-  if (!student || student?.status !== "MATCHMAKING") {
-    redirect("/student/comenzar-conest");
-  }
-
-  if (studentError || student == null) {
-    return <div>Error al obtener los datos: {studentError?.message}</div>;
-  }
 
   // Obtener datos de los ancianos
   const { data: elders, error: eldersError } = await supabase.from("elders").select("*");
