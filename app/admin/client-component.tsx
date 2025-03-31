@@ -16,25 +16,15 @@ import {
   CardHeader,
   CardBody,
 } from "@heroui/react";
-
-// Add a type for the item
-interface DataItem {
-  id: string;
-  nombre?: string;
-  email?: string;
-  avatar?: string;
-  role?: string;
-  team?: string;
-  status?: string;
-  [key: string]: any;
-}
+import { Student, Elder, Match, Admin, MatchmakingStatus } from "@/types/interfaces";
 
 // Update the statusColorMap type with specific color values
 type ChipColor = "success" | "danger" | "warning" | "default" | "primary" | "secondary";
-const statusColorMap: Record<string, ChipColor> = {
-  active: "success",
-  paused: "danger",
-  vacation: "warning",
+const statusColorMap: Record<MatchmakingStatus, ChipColor> = {
+  REGISTERED: "default",
+  MATCHMAKING: "warning",
+  MATCHED: "success",
+  RENTED: "primary"
 };
 
 // Iconos para las acciones
@@ -126,65 +116,14 @@ const EditIcon = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-export default function AdminPage({ students, elders, admins, matches }: { 
-  students: any[]; 
-  elders: any[]; 
-  admins?: any[];
-  matches?: any[];
-}) {
-  const renderCell = React.useCallback((item: DataItem, columnKey: string) => {
-    const cellValue = item[columnKey];
+interface AdminPageProps {
+  students: Student[];
+  elders: Elder[];
+  admins?: Admin[];
+  matches?: Match[];
+}
 
-    switch (columnKey) {
-      case "name":
-        return (
-          <User avatarProps={{ radius: "lg", src: item.avatar }} description={item.email} name={cellValue}>
-            {item.email}
-          </User>
-        );
-      case "role":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-sm capitalize">{cellValue}</p>
-            <p className="text-bold text-sm capitalize text-default-400">{item.team}</p>
-          </div>
-        );
-      case "status":
-        return (
-          <Chip 
-            className="capitalize" 
-            color={item.status && statusColorMap[item.status] ? statusColorMap[item.status] : "default"} 
-            size="sm" 
-            variant="flat"
-          >
-            {cellValue}
-          </Chip>
-        );
-      case "actions":
-        return (
-          <div className="relative flex items-center gap-2">
-            <Tooltip content="Details">
-              <span className="text-lg text-conest-blue cursor-pointer active:opacity-50 hover:text-conest-mediumBlue">
-                <EyeIcon />
-              </span>
-            </Tooltip>
-            <Tooltip content="Edit user">
-              <span className="text-lg text-conest-blue cursor-pointer active:opacity-50 hover:text-conest-mediumBlue">
-                <EditIcon />
-              </span>
-            </Tooltip>
-            <Tooltip color="danger" content="Delete user">
-              <span className="text-lg text-red-500 cursor-pointer active:opacity-50 hover:text-red-600">
-                <DeleteIcon />
-              </span>
-            </Tooltip>
-          </div>
-        );
-      default:
-        return cellValue;
-    }
-  }, []);
-
+export default function AdminPage({ students, elders, admins, matches }: AdminPageProps) {
   // Fix the profile photo display issue by checking for proper URL format
   const getValidImageUrl = (url: string | null | undefined): string | undefined => {
     if (!url) return undefined;
@@ -256,11 +195,11 @@ export default function AdminPage({ students, elders, admins, matches }: {
                   <TableCell>
                     <Chip 
                       className="capitalize" 
-                      color={s.status === 'active' ? 'success' : s.status === 'pending' ? 'warning' : 'default'}
+                      color={statusColorMap[s.status]}
                       size="sm" 
                       variant="flat"
                     >
-                      {s.status || "Unknown"}
+                      {s.status}
                     </Chip>
                   </TableCell>
                 </TableRow>
@@ -342,11 +281,11 @@ export default function AdminPage({ students, elders, admins, matches }: {
                   <TableCell>
                     <Chip 
                       className="capitalize" 
-                      color={e.status === 'active' ? 'success' : e.status === 'pending' ? 'warning' : 'default'}
+                      color={statusColorMap[e.status]}
                       size="sm" 
                       variant="flat"
                     >
-                      {e.status || "Unknown"}
+                      {e.status}
                     </Chip>
                   </TableCell>
                 </TableRow>
@@ -394,7 +333,7 @@ export default function AdminPage({ students, elders, admins, matches }: {
                               className="w-8 h-8 rounded-full object-cover border-2 border-conest-blue/20" 
                             />
                           ) : null}
-                          <span>{student?.nombre || m.student_id}</span>
+                          <span>{student?.id || m.student_id}</span>
                         </div>
                       </TableCell>
                       <TableCell>
@@ -406,18 +345,18 @@ export default function AdminPage({ students, elders, admins, matches }: {
                               className="w-8 h-8 rounded-full object-cover border-2 border-conest-blue/20" 
                             />
                           ) : null}
-                          <span>{elder?.nombre || m.elder_id}</span>
+                          <span>{elder?.id || m.elder_id}</span>
                         </div>
                       </TableCell>
-                      <TableCell>{m.start_date ? new Date(m.start_date).toLocaleDateString() : 'N/A'}</TableCell>
+                      <TableCell>{m.created_at ? new Date(m.created_at).toLocaleDateString() : 'N/A'}</TableCell>
                       <TableCell>
                         <Chip 
                           className="capitalize" 
-                          color={m.status === 'active' ? 'success' : m.status === 'pending' ? 'warning' : m.status === 'completed' ? 'primary' : 'default'}
+                          color={student ? statusColorMap[student.status] : "default"}
                           size="sm" 
                           variant="flat"
                         >
-                          {m.status || "Unknown"}
+                          {student?.status || 'N/A'}
                         </Chip>
                       </TableCell>
                     </TableRow>

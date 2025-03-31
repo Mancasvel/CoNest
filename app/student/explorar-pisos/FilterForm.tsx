@@ -2,23 +2,17 @@
 
 import { useState, useEffect } from 'react';
 
-interface FilterFormProps {
-  initialCity?: string;
-  initialMinPrice?: number;
-  initialMaxPrice?: number;
-}
-
-const FilterForm = ({ initialCity = "", initialMinPrice = 0, initialMaxPrice = 0 }: FilterFormProps) => {
-  const [city, setCity] = useState(initialCity);
-  const [minPrice, setMinPrice] = useState(initialMinPrice);
-  const [maxPrice, setMaxPrice] = useState(initialMaxPrice);
+const FilterForm = ({ initialCity = '', initialMinPrice = '', initialMaxPrice = '' }) => {
+  const [city, setCity] = useState(initialCity || '');
+  const [minPrice, setMinPrice] = useState(initialMinPrice || '');
+  const [maxPrice, setMaxPrice] = useState(initialMaxPrice || '');
 
   useEffect(() => {
     // Cuando se actualiza el filtro, actualizamos la URL
     const queryParams = new URLSearchParams();
     if (city) queryParams.set('city', city);
-    if (minPrice) queryParams.set('minPrice', String(minPrice));
-    if (maxPrice) queryParams.set('maxPrice', String(maxPrice));
+    if (minPrice) queryParams.set('minPrice', minPrice);
+    if (maxPrice) queryParams.set('maxPrice', maxPrice);
 
     window.history.replaceState({}, '', `?${queryParams.toString()}`);
   }, [city, minPrice, maxPrice]);
@@ -53,7 +47,7 @@ const FilterForm = ({ initialCity = "", initialMinPrice = 0, initialMaxPrice = 0
           type="number"
           id="minPrice"
           value={minPrice}
-          onChange={(e) => setMinPrice(Number(e.target.value))}
+          onChange={(e) => setMinPrice(e.target.value)}
           className="px-4 py-2 border rounded-lg"
           placeholder="Mínimo"
         />
@@ -65,7 +59,7 @@ const FilterForm = ({ initialCity = "", initialMinPrice = 0, initialMaxPrice = 0
           type="number"
           id="maxPrice"
           value={maxPrice}
-          onChange={(e) => setMaxPrice(Number(e.target.value))}
+          onChange={(e) => setMaxPrice(e.target.value)}
           className="px-4 py-2 border rounded-lg"
           placeholder="Máximo"
         />
