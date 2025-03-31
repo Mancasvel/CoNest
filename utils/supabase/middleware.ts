@@ -44,8 +44,8 @@ export const updateSession = async (request: NextRequest) => {
     }
 
     if (pathname === "/" && user) {
-      console.log("🟢 Usuario autenticado, redirigiendo a /protected");
-      return NextResponse.redirect(new URL("/protected", request.url));
+      console.log("🟢 Usuario autenticado, redirigiendo a /");
+      return NextResponse.redirect(new URL("/", request.url));
     }
 
     const roleRoutes: { [key: string]: string } = {
