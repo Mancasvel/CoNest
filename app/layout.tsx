@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import Navbar from "@/components/Navbar"; 
 import Footer from "@/components/Footer";
+import ChatButton from '@/components/chat/chat-button';
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -45,7 +46,7 @@ export default function RootLayout({
             <div className="pt-[4rem] md:pt-[5rem]">
               <main className="flex-1">{children}</main>
             </div>
-
+            <ChatButton />
             <Footer />
           </div>
         </ThemeProvider>
