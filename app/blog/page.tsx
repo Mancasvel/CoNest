@@ -219,25 +219,7 @@ export default function BlogPage() {
               
               {/* Sidebar */}
               <div className="w-full lg:w-1/3 mt-12 lg:mt-0">
-                {/* Categories */}
-                <div className="bg-white shadow-soft rounded-xl p-6 mb-8">
-                  <h3 className="text-xl font-bold mb-6 text-conest-darkGray">Categorías</h3>
-                  <ul className="space-y-3">
-                    {categories.map((category, index) => (
-                      <li key={index}>
-                        <Link 
-                          href={`/blog/categoria/${category.name.toLowerCase().replace(/\s+/g, '-')}`}
-                          className="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-gray-50 transition-colors duration-300"
-                        >
-                          <span className="text-conest-darkGray">{category.name}</span>
-                          <span className="bg-gray-100 text-conest-darkGray/70 text-xs font-medium px-2 py-1 rounded-full">
-                            {category.count}
-                          </span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                
                 
                 {/* Newsletter */}
                 <div className="bg-conest-lightBlue/30 shadow-soft rounded-xl p-6 relative overflow-hidden">
@@ -254,7 +236,7 @@ export default function BlogPage() {
                       <input 
                         type="email" 
                         placeholder="Tu correo electrónico" 
-                        className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-conest-blue/30 focus:border-transparent"
+                       className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-conest-blue/30 focus:border-transparent"
                         required
                       />
                     </div>
