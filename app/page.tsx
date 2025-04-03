@@ -331,12 +331,12 @@ export default function Home() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-5 justify-center">
-              <Link href="/elder/sign-up">
+              <Link href="/sign-up">
                 <Button className="bg-amber-400 hover:bg-amber-300 text-conest-blue font-semibold py-4 px-8 rounded-full shadow-lg transition-all duration-300 flex items-center hover:scale-105">
                   Regístrate como Mayor
                 </Button>
               </Link>
-              <Link href="/student/sign-up">
+              <Link href="/sign-up">
                 <Button className="bg-white hover:bg-gray-100 text-conest-blue font-semibold py-4 px-8 rounded-full shadow-lg transition-all duration-300 flex items-center hover:scale-105">
                   Busca Alojamiento como Estudiante
                 </Button>
