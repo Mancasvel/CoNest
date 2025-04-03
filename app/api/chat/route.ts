@@ -1,7 +1,6 @@
 import OpenAI from "openai"
 import { NextResponse } from "next/server"
 
-// Configure OpenAI client with OpenRouter endpoint
 const openai = new OpenAI({
   baseURL: "https://openrouter.ai/api/v1",
   apiKey: process.env.OPENROUTER_API_KEY,
@@ -11,13 +10,11 @@ const openai = new OpenAI({
   },
 })
 
-// Set max duration for streaming responses
 export const maxDuration = 60
 
-// Sistema básico - instrucciones esenciales solamente
+// CONTEXTO
 const SYSTEM_PROMPT = `Eres Nestor, asistente virtual de CoNest. Responde siempre brevemente, en unas 2 frases, y directo al grano.`
 
-// Contexto adicional dividido en partes que se cargarán como mensajes previos
 const CONTEXT_PARTS = [
   {
     role: "user" as const,
@@ -44,29 +41,23 @@ export async function POST(req: Request) {
     const body = await req.json()
     const { messages } = body
 
-    // Construir mensajes para la API
     const chatMessages = []
 
-    // Añadir el sistema primero
     chatMessages.push({
       role: "system",
       content: SYSTEM_PROMPT,
     })
 
-    // Añadir el contexto pre-cargado si es la primera interacción
-    // (si solo hay un mensaje del usuario, significa que es la primera interacción)
     const userMessages = messages.filter((msg: { role: string }) => msg.role === "user")
     if (userMessages.length <= 1) {
       chatMessages.push(...CONTEXT_PARTS)
     }
 
-    // Añadir los mensajes del usuario y asistente (excluyendo mensajes de sistema)
     if (messages && messages.length > 0) {
       const userAssistantMessages = messages.filter((msg: { role: string }) => msg.role !== "system")
       chatMessages.push(...userAssistantMessages)
     }
 
-    // Imprimir para depuración
     console.log(
       "Enviando mensajes al modelo:",
       JSON.stringify(
@@ -77,7 +68,6 @@ export async function POST(req: Request) {
     )
 
     try {
-      // Intento con el modelo DeepSeek
       const completion = await openai.chat.completions.create({
         model: "deepseek/deepseek-v3-base:free",
         messages: chatMessages,
@@ -110,7 +100,6 @@ export async function POST(req: Request) {
     } catch (modelError) {
       console.warn("Error con DeepSeek, intentando con modelo alternativo:", modelError)
 
-      // Modelo de respaldo
       const fallbackCompletion = await openai.chat.completions.create({
         model: "anthropic/claude-instant-v1:free",
         messages: chatMessages,
