@@ -608,7 +608,7 @@ export default function ComoFuncionaPage() {
               Da el primer paso hacia una experiencia de convivencia que transforma vidas y crea conexiones significativas entre generaciones.
             </p>
             <div className="flex flex-col sm:flex-row gap-5 justify-center">
-              <Link href="/elder/sign-up">
+              <Link href="sign-up">
                 <Button 
                   className="bg-conest-blue hover:bg-conest-mediumBlue text-white font-semibold py-4 px-8 rounded-xl shadow-lg transition-all duration-300 hover:scale-105"
                   size="lg"
@@ -616,7 +616,7 @@ export default function ComoFuncionaPage() {
                   Soy Anfitrión
                 </Button>
               </Link>
-              <Link href="/student/sign-up">
+              <Link href="sign-up">
                 <Button 
                   className="bg-white border-2 border-conest-blue text-conest-blue hover:bg-conest-lightBlue/20 font-semibold py-4 px-8 rounded-xl transition-all duration-300 hover:scale-105"
                   size="lg"
