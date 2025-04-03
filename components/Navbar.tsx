@@ -147,7 +147,7 @@ export default function NavbarConest() {
       <Button as={Link} href="/sign-in" variant="light" className="font-medium text-conest-darkGray hover:text-conest-blue hover:bg-conest-blue/10 min-w-[80px]">
         Acceder
       </Button>
-      <Button as={Link} href="/sign-up" className="bg-conest-blue text-white shadow-soft hover:bg-conest-mediumBlue font-medium transition-transform hover:scale-105 duration-200 min-w-[120px]">
+      <Button as={Link} href="/sign-up" className="bg-conest-blue text-white shadow-soft hover:bg-conest-mediumBlue font-medium transition-transform hover:scale-105 duration-200 min-w-[120px] rounded-full">
         Registrarse
       </Button>
     </div>
