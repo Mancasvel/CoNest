@@ -1,5 +1,6 @@
 import React from 'react';
-import { FaInstagram, FaLinkedin } from 'react-icons/fa';  
+import { FaInstagram, FaLinkedin } from 'react-icons/fa';
+import Link from 'next/link';
 
 const Footer = () => {
   return (
@@ -14,22 +15,47 @@ const Footer = () => {
           <div className="mb-6 w-full md:w-auto">
             <h4 className="font-semibold mb-3">Enlaces</h4>
             <ul className="space-y-2">
-              {['Sobre Nosotros', 'Preguntas Frecuentes', 'Contacto', 'Blog'].map(link => (
-                <li key={link}>
-                  <a href="#" className="text-gray-600 hover:text-teal-800">{link}</a>
-                </li>
-              ))}
+              <li>
+                <Link href="/sobre-nosotros" className="text-gray-600 hover:text-teal-800">
+                  Sobre Nosotros
+                </Link>
+              </li>
+              <li>
+                <Link href="/preguntas-frecuentes" className="text-gray-600 hover:text-teal-800">
+                  Preguntas Frecuentes
+                </Link>
+              </li>
+              <li>
+                <Link href="/contacto" className="text-gray-600 hover:text-teal-800">
+                  Contacto
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog" className="text-gray-600 hover:text-teal-800">
+                  Blog
+                </Link>
+              </li>
             </ul>
           </div>
           
           <div className="mb-6 w-full md:w-auto">
             <h4 className="font-semibold mb-3">Legal</h4>
             <ul className="space-y-2">
-              {['Términos de Servicio', 'Política de Privacidad', 'Cookies'].map(link => (
-                <li key={link}>
-                  <a href="#" className="text-gray-600 hover:text-teal-800">{link}</a>
-                </li>
-              ))}
+              <li>
+                <Link href="/terminos-de-servicio" className="text-gray-600 hover:text-teal-800">
+                  Términos de Servicio
+                </Link>
+              </li>
+              <li>
+                <Link href="/politica-de-privacidad" className="text-gray-600 hover:text-teal-800">
+                  Política de Privacidad
+                </Link>
+              </li>
+              <li>
+                <Link href="/cookies" className="text-gray-600 hover:text-teal-800">
+                  Cookies
+                </Link>
+              </li>
             </ul>
           </div>
           
