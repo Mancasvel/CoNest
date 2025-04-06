@@ -11,7 +11,7 @@ export default async function StudentPage() {
   } = await supabase.auth.getUser() ;
 
   if (!user || user.app_metadata?.role !== "student" || !user.email) {
-    redirect("/");  // Redirigir si no hay usuario o no es estudiante o no tiene email
+    redirect("/");
   }
 
   let { data: student, error: studentError } = await supabase
