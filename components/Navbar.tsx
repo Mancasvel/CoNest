@@ -94,14 +94,14 @@ export default function NavbarConest() {
       ];
     } else if (currentRolePath === 'student') {
       return [
-        { name: 'Mi Perfil', href: '/student/profile' },
+        { name: 'Mi Perfil', href: '/student' },
         { name: 'Buscar Alojamiento', href: '/student/housing' },
         { name: 'Mis Solicitudes', href: '/student/applications' },
         { name: 'Mensajes', href: '/student/messages' },
       ];
     } else if (currentRolePath === 'elder') {
       return [
-        { name: 'Mi Perfil', href: '/elder/profile' },
+        { name: 'Mi Perfil', href: '/elder' },
         { name: 'Mi Vivienda', href: '/elder/housing' },
         { name: 'Solicitudes', href: '/elder/applications' },
         { name: 'Mensajes', href: '/elder/messages' },
@@ -131,7 +131,7 @@ export default function NavbarConest() {
     } else if (userRole === 'student') {
       roleBasedLinks.push({ name: 'Área de Estudiante', href: '/student/profile' });
     } else if (userRole === 'elder') {
-      roleBasedLinks.push({ name: 'Área de Mayor', href: '/elder/profile' });
+      roleBasedLinks.push({ name: 'Área de Mayor', href: '/elder' });
     }
     
     return [

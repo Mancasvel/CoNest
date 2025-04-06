@@ -25,8 +25,6 @@ export default async function StudentPage() {
     return <div>Error fetching data: {studentError?.message}</div>;
   }
 
-  // Asegurar que el email no es undefined antes de pasar al componente
-  const userWithEmail = { ...user, email: user.email || "" };  // Aseguramos que `email` siempre sea un string
-
+  const userWithEmail = { ...user, email: user.email || "" };
   return <StudentProfile student={student} user={userWithEmail} />;
 }

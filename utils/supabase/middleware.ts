@@ -46,7 +46,7 @@ export const updateSession = async (request: NextRequest) => {
     const roleRoutes: { [key: string]: string } = {
       student: "/student",
       admin: "/admin",
-      owner: "/elder",
+      elder: "/elder",
     };
 
     const userRole = user?.app_metadata?.role;
@@ -58,7 +58,7 @@ export const updateSession = async (request: NextRequest) => {
       return NextResponse.redirect(new URL("/forbidden", request.url));
     }
 
-    if (user && (userRole === "student" || userRole === "owner")) {
+    if (user && (userRole === "student" || userRole === "elder")) {
       const table = userRole === "student" ? "students" : "elders";
       
       if (pathname.startsWith(`${roleRoutes[userRole]}/`)) {
