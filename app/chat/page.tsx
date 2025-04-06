@@ -110,13 +110,13 @@ export default function ChatPage() {
         <div className="flex-1 overflow-y-auto p-4 md:p-6">
           {messages.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-center p-4 md:p-8">
-              <div className="w-20 h-20 mb-6 rounded-full bg-conest-lightBlue/20 flex items-center justify-center text-conest-blue text-3xl">
-                <span>🤖</span>
+              <div className="w-20 h-20 mb-6 rounded-full bg-conest-lightBlue/10 flex items-center justify-center overflow-hidden">
+                <img src="/images/nestor/nestor.png" alt="Nestor" className="w-16 h-16 object-contain" />
               </div>
-              <h2 className="text-xl font-semibold text-conest-darkGray mb-2">¡Bienvenido al asistente de CoNest!</h2>
+              <h2 className="text-xl font-semibold text-conest-darkGray mb-2">¡Hola! Soy Nestor</h2>
               <p className="text-conest-darkGray/70 mb-6 max-w-md">
-                Estoy aquí para ayudarte con cualquier pregunta sobre nuestra plataforma, 
-                el proceso de matching o cómo funciona la convivencia intergeneracional.
+                Soy el asistente virtual de CoNest y estoy aquí para ayudarte con las dudas que tengas sobre 
+                nuestra plataforma, el proceso de matching o la convivencia intergeneracional.
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full max-w-md">

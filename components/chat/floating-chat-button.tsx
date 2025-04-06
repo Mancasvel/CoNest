@@ -136,12 +136,12 @@ export function FloatingChatButton() {
           <div id="chat-messages-container" className="flex-1 p-4 overflow-y-auto bg-gradient-to-br from-conest-lightBlue/5 to-white">
             {messages.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-center p-4">
-                <div className="w-16 h-16 mb-4 rounded-full bg-conest-lightBlue/20 flex items-center justify-center text-conest-blue text-2xl animate-pulse">
-                  <span>🤖</span>
+                <div className="w-16 h-16 mb-4 rounded-full bg-conest-lightBlue/10 flex items-center justify-center overflow-hidden">
+                  <img src="/images/nestor/nestor.png" alt="Nestor" className="w-14 h-14 object-contain" />
                 </div>
-                <h4 className="text-lg font-semibold text-conest-darkGray mb-2">¡Hola! ¿En qué puedo ayudarte?</h4>
+                <h4 className="text-lg font-semibold text-conest-darkGray mb-2">¡Hola! Soy Nestor</h4>
                 <p className="text-conest-darkGray/70 mb-4 text-sm">
-                  Estoy aquí para resolver tus dudas sobre CoNest, la convivencia intergeneracional, o cualquier pregunta sobre nuestra plataforma.
+                  Soy el asistente virtual de CoNest y estoy aquí para ayudarte con las dudas que tengas sobre nuestra plataforma.
                 </p>
                 
                 <div className="grid grid-cols-1 gap-2 w-full">

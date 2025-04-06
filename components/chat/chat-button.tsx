@@ -12,7 +12,7 @@ export default function ChatButton() {
       {isOpen ? (
         <div className="w-80 bg-white rounded-xl shadow-xl overflow-hidden border border-conest-lightBlue/20">
           <div className="flex items-center justify-between p-4 bg-gradient-to-r from-conest-blue to-conest-mediumBlue">
-            <h3 className="text-white font-semibold">Asistente Virtual</h3>
+            <h3 className="text-white font-semibold">Nestor - Asistente Virtual</h3>
             <button 
               className="text-white hover:bg-white/20 p-1.5 rounded-full transition-colors" 
               onClick={() => setIsOpen(false)}
@@ -21,6 +21,9 @@ export default function ChatButton() {
             </button>
           </div>
           <div className="p-6 bg-gradient-to-br from-conest-lightBlue/5 to-white">
+            <div className="flex items-center justify-center mb-4">
+              <img src="/images/nestor/nestor.png" alt="Nestor" className="w-12 h-12 object-contain" />
+            </div>
             <p className="text-conest-darkGray mb-4 text-center">¿Necesitas ayuda con algo?</p>
             <Link href="/chat">
               <button className="w-full bg-gradient-to-r from-conest-blue to-conest-mediumBlue text-white py-2.5 px-4 rounded-xl hover:opacity-90 transition-opacity flex items-center justify-center shadow-soft">
