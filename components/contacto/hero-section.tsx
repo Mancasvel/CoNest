@@ -1,53 +1,62 @@
 "use client"
+import Image from "next/image"
 
 export default function HeroSection() {
   return (
-    <section className="relative pt-32 pb-20 overflow-hidden">
-      {/* Background pattern */}
-      <div className="absolute inset-0 bg-gradient-to-br from-conest-lightBlue/20 to-white -z-10"></div>
-      <div className="absolute inset-0 opacity-5 -z-10" aria-hidden="true">
+    <section className="relative pt-40 pb-24 overflow-hidden">
+      {/* Background image with overlay */}
+      <div className="absolute inset-0 -z-10">
+        <Image
+          src="/images/hero.jpg"
+          alt="Contact background"
+          fill
+          priority
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-conest-blue/90 to-conest-mediumBlue/80"></div>
+      </div>
+      
+      {/* Animated particles */}
+      <div className="absolute inset-0 opacity-20 -z-5" aria-hidden="true">
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: "radial-gradient(circle, #007B9E 1px, transparent 1px)",
+            backgroundImage: "radial-gradient(circle, #ffffff 1px, transparent 1px)",
             backgroundSize: "30px 30px",
           }}
         ></div>
       </div>
 
-      <div className="container mx-auto px-6">
+      {/* Decorative elements */}
+      <div className="absolute top-1/4 left-10 w-64 h-64 rounded-full bg-white/5 blur-3xl -z-5"></div>
+      <div className="absolute bottom-1/4 right-10 w-96 h-96 rounded-full bg-white/5 blur-3xl -z-5"></div>
+      
+      <div className="container mx-auto px-6 relative">
         <div className="max-w-4xl mx-auto text-center">
           <div
-            className="inline-block rounded-full bg-conest-blue/10 px-4 py-1.5 text-sm font-medium text-conest-blue mb-4 shadow-sm"
+            className="inline-flex items-center rounded-full bg-white/10 backdrop-blur-sm px-5 py-2.5 text-sm font-medium text-white mb-6 shadow-glow animate-pulse-slow"
             style={{ animation: "fadeIn 0.8s ease-out" }}
           >
+            <span className="w-2 h-2 bg-white rounded-full mr-2"></span>
             Estamos Aquí Para Ti
           </div>
           <h1
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-conest-darkGray tracking-tight"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 text-white tracking-tight"
             style={{ animation: "fadeIn 0.8s ease-out 0.1s both" }}
           >
-            Contacta Con <span className="text-conest-blue">CoNest</span>
+            Contacta Con <span className="bg-gradient-to-r from-white to-conest-lightBlue text-transparent bg-clip-text">CoNest</span>
           </h1>
           <p
-            className="text-xl text-conest-darkGray/80 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed"
             style={{ animation: "fadeIn 0.8s ease-out 0.2s both" }}
           >
-            Si tienes preguntas sobre nuestro servicio o necesitas ayuda, estamos aquí para escucharte. Nuestro equipo
-            estará encantado de asistirte.
+            Nuestro equipo está listo para resolver tus dudas y ayudarte a formar parte 
+            de la comunidad intergeneracional que está transformando la convivencia.
           </p>
         </div>
       </div>
 
-      {/* Wave divider */}
-      <div className="absolute bottom-0 left-0 right-0 h-8 overflow-hidden">
-        <svg className="absolute bottom-0 w-full h-16 text-white" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path
-            d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
-            className="fill-white"
-          ></path>
-        </svg>
-      </div>
+
     </section>
   )
 }
