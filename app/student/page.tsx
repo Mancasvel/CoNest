@@ -1,6 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import StudentProfile from "./Student_profile";
+import StudentProfile from "./student-profile";
 
 
 export default async function StudentPage() {

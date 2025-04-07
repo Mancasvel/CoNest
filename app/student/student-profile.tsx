@@ -4,6 +4,7 @@ import type React from "react"
 import { useState } from "react"
 import { Chip, Card, CardHeader, CardBody, Divider, Button, Input, Textarea, Spinner } from "@heroui/react"
 import { updateStudentProfile } from "./update_action"
+import ImageUpload from "../../components/image-upload"
 
 // Definir tipos para las propiedades de `StudentProfile`
 interface StudentProfileProps {
@@ -36,15 +37,6 @@ const StudentProfile: React.FC<StudentProfileProps> = ({ student, user }) => {
   const [errorMessage, setErrorMessage] = useState("")
   const [successMessage, setSuccessMessage] = useState("")
 
-  // Función para validar URLs de imágenes
-  const getValidImageUrl = (url: string | null): string | undefined => {
-    if (!url) return undefined
-    if (url.startsWith("http") || url.startsWith("data:")) {
-      return url
-    }
-    return url
-  }
-
   const handleEditToggle = () => {
     if (isEditing) {
       // Si estamos cancelando la edición, restauramos los valores originales
@@ -67,6 +59,13 @@ const StudentProfile: React.FC<StudentProfileProps> = ({ student, user }) => {
 
   const handleInterestsChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setInterestsInput(e.target.value)
+  }
+
+  const handleProfilePhotoUpdate = (url: string) => {
+    setEditedStudent({
+      ...editedStudent,
+      profile_photo: url,
+    })
   }
 
   const handleSaveProfile = async () => {
@@ -141,32 +140,40 @@ const StudentProfile: React.FC<StudentProfileProps> = ({ student, user }) => {
           <Card className="shadow-soft border-none h-full relative w-full max-w-sm rounded-2xl">
             <CardHeader className="flex flex-col items-center bg-gradient-to-r from-conest-blue to-conest-mediumBlue p-6 rounded-t-2xl">
               <div className="relative w-32 h-32 mb-4">
-                <div className="w-full h-full rounded-full overflow-hidden border-4 border-white/50 shadow-lg">
-                  {editedStudent.profile_photo ? (
-                    <img
-                      src={getValidImageUrl(editedStudent.profile_photo) || "/placeholder.svg"}
-                      alt="Profile"
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex justify-center items-center bg-gray-200 text-gray-400">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-12 h-12"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-                        />
-                      </svg>
-                    </div>
-                  )}
-                </div>
+                {isEditing ? (
+                  <ImageUpload
+                    userId={student.id}
+                    currentImageUrl={student.profile_photo}
+                    onUploadComplete={handleProfilePhotoUpdate}
+                  />
+                ) : (
+                  <div className="w-full h-full rounded-full overflow-hidden border-4 border-white/50 shadow-lg">
+                    {editedStudent.profile_photo ? (
+                      <img
+                        src={editedStudent.profile_photo || "/placeholder.svg"}
+                        alt="Profile"
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex justify-center items-center bg-gray-200 text-gray-400">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-12 h-12"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                          />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
               <h3 className="text-xl font-bold text-white">Estudiante</h3>
               <Chip
@@ -238,20 +245,6 @@ const StudentProfile: React.FC<StudentProfileProps> = ({ student, user }) => {
                       type="date"
                       value={editedStudent.birth_date}
                       onChange={handleInputChange}
-                      className="w-full"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="profile_photo" className="text-sm font-medium text-conest-darkGray">
-                      URL de Foto de Perfil
-                    </label>
-                    <Input
-                      id="profile_photo"
-                      name="profile_photo"
-                      value={editedStudent.profile_photo || ""}
-                      onChange={handleInputChange}
-                      placeholder="https://ejemplo.com/mi-foto.jpg"
                       className="w-full"
                     />
                   </div>

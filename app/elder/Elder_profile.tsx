@@ -4,6 +4,8 @@ import type React from "react"
 import { useState } from "react"
 import { Chip, Card, CardHeader, CardBody, Divider, Button, Input, Textarea, Spinner } from "@heroui/react"
 import { updateElderProfile } from "./update_action"
+import ImageUpload from "../../components/image-upload"
+import MultiImageUpload from "../../components/multi-image-upload"
 
 // Definir tipos para las propiedades del perfil
 interface ElderProfileProps {
@@ -34,19 +36,11 @@ const ElderProfile: React.FC<ElderProfileProps> = ({ elder, user }) => {
   const [isEditing, setIsEditing] = useState(false)
   const [editedElder, setEditedElder] = useState({ ...elder })
   const [interestsInput, setInterestsInput] = useState(elder.interests?.join(", ") || "")
-  const [apartmentPhotosInput, setApartmentPhotosInput] = useState(elder.apartment_photos?.join(", ") || "")
   const [isSaving, setIsSaving] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
   const [successMessage, setSuccessMessage] = useState("")
 
-  // Función para validar URLs de imágenes
-  const getValidImageUrl = (url: string | null): string | undefined => {
-    if (!url) return undefined
-    if (url.startsWith("http") || url.startsWith("data:")) {
-      return url
-    }
-    return url
-  }
+
 
   const handleEditToggle = () => {
     if (isEditing) {
@@ -82,10 +76,6 @@ const ElderProfile: React.FC<ElderProfileProps> = ({ elder, user }) => {
     setInterestsInput(e.target.value)
   }
 
-  const handleApartmentPhotosChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setApartmentPhotosInput(e.target.value)
-  }
-
   const handleSaveProfile = async () => {
     try {
       setIsSaving(true)
@@ -97,12 +87,6 @@ const ElderProfile: React.FC<ElderProfileProps> = ({ elder, user }) => {
         .map((item) => item.trim())
         .filter((item) => item !== "")
 
-      // Parse apartment photos from comma-separated string to array
-      const apartmentPhotosArray = apartmentPhotosInput
-        .split(",")
-        .map((item) => item.trim())
-        .filter((item) => item !== "")
-
       const profileData = {
         profile_photo: editedElder.profile_photo,
         apartment_address: editedElder.apartment_address,
@@ -110,7 +94,7 @@ const ElderProfile: React.FC<ElderProfileProps> = ({ elder, user }) => {
         monthly_rent: editedElder.monthly_rent,
         birth_date: editedElder.birth_date,
         interests: interestsArray.length > 0 ? interestsArray : null,
-        apartment_photos: apartmentPhotosArray.length > 0 ? apartmentPhotosArray : null,
+        apartment_photos: editedElder.apartment_photos || null,
       }
 
       // Call the server action to update the profile
@@ -172,32 +156,45 @@ const ElderProfile: React.FC<ElderProfileProps> = ({ elder, user }) => {
             <Card className="shadow-soft border-none h-full relative w-full max-w-sm rounded-2xl">
               <CardHeader className="flex flex-col items-center bg-gradient-to-r from-conest-blue to-conest-mediumBlue p-6 rounded-t-2xl">
                 <div className="relative w-32 h-32 mb-4">
-                  <div className="w-full h-full rounded-full overflow-hidden border-4 border-white/50 shadow-lg">
-                    {editedElder.profile_photo ? (
-                      <img
-                        src={getValidImageUrl(editedElder.profile_photo) || "/placeholder.svg"}
-                        alt="Profile"
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex justify-center items-center bg-gray-200 text-gray-400">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="w-12 h-12"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-                          />
-                        </svg>
-                      </div>
-                    )}
-                  </div>
+                  {isEditing ? (
+                    <ImageUpload
+                      userId={elder.id}
+                      currentImageUrl={elder.profile_photo}
+                      onUploadComplete={(url) => {
+                        setEditedElder({
+                          ...editedElder,
+                          profile_photo: url,
+                        })
+                      }}
+                    />
+                  ) : (
+                    <div className="w-full h-full rounded-full overflow-hidden border-4 border-white/50 shadow-lg">
+                      {editedElder.profile_photo ? (
+                        <img
+                          src={editedElder.profile_photo || "/placeholder.svg"}
+                          alt="Profile"
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex justify-center items-center bg-gray-200 text-gray-400">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-12 h-12"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                            />
+                          </svg>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
                 <h3 className="text-xl font-bold text-white">Adulto Mayor</h3>
                 <Chip
@@ -279,20 +276,6 @@ const ElderProfile: React.FC<ElderProfileProps> = ({ elder, user }) => {
               <CardBody className="p-6">
                 {isEditing ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div>
-                      <label htmlFor="profile_photo" className="text-sm font-medium text-conest-darkGray">
-                        URL de Foto de Perfil
-                      </label>
-                      <Input
-                        id="profile_photo"
-                        name="profile_photo"
-                        value={editedElder.profile_photo || ""}
-                        onChange={handleInputChange}
-                        placeholder="https://ejemplo.com/mi-foto.jpg"
-                        className="w-full"
-                      />
-                    </div>
-
                     <div>
                       <label htmlFor="birth_date" className="text-sm font-medium text-conest-darkGray">
                         Fecha de Nacimiento
@@ -421,26 +404,43 @@ const ElderProfile: React.FC<ElderProfileProps> = ({ elder, user }) => {
                     URLs de Fotos del Apartamento
                   </h4>
                   {isEditing ? (
-                    <div className="max-w-lg mx-auto">
-                      <Textarea
-                        value={apartmentPhotosInput}
-                        onChange={handleApartmentPhotosChange}
-                        placeholder="https://ejemplo.com/foto1.jpg, https://ejemplo.com/foto2.jpg, etc."
-                        className="w-full"
+                    <div className="mb-6 relative">
+                      <h4 className="text-md font-semibold text-conest-darkGray mb-4 text-center">
+                        Fotos del Apartamento
+                      </h4>
+                      <MultiImageUpload
+                        userId={elder.id}
+                        currentImageUrls={elder.apartment_photos || []}
+                        onUploadComplete={(urls) => {
+                          setEditedElder({
+                            ...editedElder,
+                            apartment_photos: urls.length > 0 ? urls : null,
+                          })
+                        }}
                       />
-                      <p className="text-xs text-conest-darkGray/60 mt-2 text-center">
-                        Ingresa las URLs de las fotos separadas por comas
-                      </p>
                     </div>
                   ) : (
-                    <div className="flex flex-wrap gap-2 justify-center">
-                      {elder.apartment_photos && elder.apartment_photos.length > 0 ? (
-                        <p className="text-conest-darkGray/60 text-sm text-center">
-                          {elder.apartment_photos.length} foto(s) registrada(s)
-                        </p>
-                      ) : (
-                        <p className="text-conest-darkGray/60 text-sm">No hay fotos registradas</p>
-                      )}
+                    <div className="mb-6 relative">
+                      <h4 className="text-md font-semibold text-conest-darkGray mb-4 text-center">
+                        Fotos del Apartamento
+                      </h4>
+                      <div className="grid grid-cols-2 gap-4">
+                        {elder.apartment_photos && elder.apartment_photos.length > 0 ? (
+                          elder.apartment_photos.map((photo, index) => (
+                            <div key={index} className="aspect-square relative">
+                              <img
+                                src={photo}
+                                alt={`Apartamento ${index + 1}`}
+                                className="w-full h-full object-cover rounded-lg border-2 border-conest-blue/20"
+                              />
+                            </div>
+                          ))
+                        ) : (
+                          <p className="text-conest-darkGray/60 text-sm col-span-2 text-center">
+                            No hay fotos registradas
+                          </p>
+                        )}
+                      </div>
                     </div>
                   )}
                 </div>
