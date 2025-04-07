@@ -1,26 +1,28 @@
 import { createClient } from "@/utils/supabase/server"
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 
-export async function POST(request: { formData: () => any }) {
+export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData()
-    const file = formData.get("file")
-    const fileName = formData.get("fileName")
-    const userId = formData.get("userId")
+    const file = formData.get("file") as File | null
+    const fileName = formData.get("fileName") as string | null
+    const userId = formData.get("userId") as string | null
 
     if (!file || !fileName || !userId) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
-    // Create a buffer from the file
+    // Convert the file into a buffer
     const buffer = Buffer.from(await file.arrayBuffer())
 
     // Initialize Supabase client
     const supabase = await createClient()
 
-    // Upload the file
+    // Define bucket and file path
     const bucketName = "studentpicks"
     const filePath = `${fileName}`
+
+    // Upload to Supabase storage
     const { data, error } = await supabase.storage.from(bucketName).upload(filePath, buffer, {
       contentType: file.type,
       cacheControl: "3600",
@@ -34,7 +36,7 @@ export async function POST(request: { formData: () => any }) {
           error: `Error uploading file: ${error.message}`,
           details: error,
         },
-        { status: 500 },
+        { status: 500 }
       )
     }
 
@@ -54,8 +56,7 @@ export async function POST(request: { formData: () => any }) {
       {
         error: `Unexpected error: ${error}`,
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
-

@@ -47,7 +47,6 @@ const ElderProfile: React.FC<ElderProfileProps> = ({ elder, user }) => {
       // Si estamos cancelando la edición, restauramos los valores originales
       setEditedElder({ ...elder })
       setInterestsInput(elder.interests?.join(", ") || "")
-      setApartmentPhotosInput(elder.apartment_photos?.join(", ") || "")
     }
     // Reset messages
     setErrorMessage("")
