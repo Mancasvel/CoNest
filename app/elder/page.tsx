@@ -1,23 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import ElderProfile from "./Elder_profile";
-import { User } from "@supabase/supabase-js";
-
-
-type Elder = {
-  id: string;
-
-  profile_photo: string | null;
-  apartment_address: string;
-  monthly_rent: number;
-  birth_date: string;
-  interests: string[] | null;
-  apartment_photos: string[] | null;
-  apartment_description?: string;
-  amenities?: string[] | null;
-  house_rules?: string[] | null;
-  status: "active" | "paused" | "vacation" | "matchmaking";
-}
 
 
 export default async function ElderPage() {
@@ -27,7 +10,7 @@ export default async function ElderPage() {
     data: { user },
   } = await supabase.auth.getUser() ;
 
-  if (!user || user.user_metadata?.role !== "elder") {
+  if (!user) {
     redirect("/");
 
   }
