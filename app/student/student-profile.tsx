@@ -618,7 +618,7 @@ const StudentProfile: React.FC<StudentProfileProps> = ({ student, user }) => {
                     ) : (
                       <Button 
                         color="primary" 
-                        className="bg-gradient-to-r from-conest-blue to-conest-mediumBlue"
+                        className="bg-gradient-to-r from-conest-blue to-conest-mediumBlue text-white rounded-full"
                         onClick={handleSaveProfile} 
                         disabled={isSaving}
                       >
