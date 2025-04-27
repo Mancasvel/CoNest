@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar"; 
 import Footer from "@/components/Footer";
 import { FloatingChatButton } from '@/components/chat/floating-chat-button';
+import { chillax, array } from "./fonts";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -20,14 +21,19 @@ const geistSans = Geist({
   display: "swap",
   subsets: ["latin"],
 });
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={geistSans.className} suppressHydrationWarning>
-      <body className="h-screen flex flex-col bg-background text-foreground">
+    <html 
+      lang="es" 
+      className={`${chillax} ${array}`} 
+      suppressHydrationWarning
+    >
+      <body className={`${geistSans.className} h-screen flex flex-col bg-background text-foreground`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
