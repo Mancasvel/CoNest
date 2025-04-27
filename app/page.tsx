@@ -156,12 +156,12 @@ export default function Home() {
     <main className="min-h-screen">
       {/* Hero Section */}
       <section className="w-full px-4 md:px-6 lg:px-8 pt-20 md:pt-28">
-        <div className="max-w-7xl mx-auto flex flex-col items-stretch space-y-70">
+        <div className="max-w-7xl mx-auto flex flex-col items-stretch space-y-30">
           {/* Header Content */}
-          <div className="flex flex-col lg:flex-row w-full lg:space-x-[206px]">
+          <div className="flex flex-col lg:flex-row w-full lg:space-x-[16px]">
             {/* Left Content */}
             <AnimatedSection delay={0.2}>
-              <div className="w-full lg:w-1/2 flex flex-col space-y-35">
+              <div className="w-full lg:w-1/2 flex-col space-y-15">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl leading-tight text-black">
                   Encuentra el alojamiento que cambie tu vida
                 </h1>
@@ -193,23 +193,16 @@ export default function Home() {
             
             {/* Right Content - Illustration */}
             <AnimatedSection delay={0.4}>
-              <div className="w-full lg:w-1/2 mt-10 lg:mt-0 relative">
-                <div className="relative w-full h-full">
-                  {/* Main illustrations */}
-                  <div className="relative">
+              <div className=" mt-10  relative">
                     {/* House illustration */}
-                    <div className="mx-auto relative">  
                     <Image 
                                 src="/images/hero_image.png"
                                 alt="Perfil de persona mayor" 
                                 className="w-full h-full object-cover" 
-                                width={580}
+                                width={6000}
                                 height={475}
                               />
                     
-                    </div>
-                  </div>
-                </div>
               </div>
             </AnimatedSection>
             
