@@ -204,13 +204,6 @@ export default function NavbarConest() {
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
           <Link href="/" className="flex items-center gap-2">
-            <Image
-              src="/images/conest_logo.png"
-              alt="CoNest Logo"
-              width={32}
-              height={32}
-              className={`transition-all duration-300 ${scrolled ? 'w-8 h-8' : 'w-10 h-10'}`}
-            />
             <p className={`font-bold text-conest-darkGray transition-all duration-300 ${scrolled ? 'text-lg' : 'text-xl'}`}>
               Co<span className="text-conest-blue">Nest</span>
             </p>
@@ -221,13 +214,6 @@ export default function NavbarConest() {
       <NavbarContent className="hidden sm:flex gap-4" justify="start">
         <NavbarBrand>
           <Link href="/" className="flex items-center gap-2">
-            <Image
-              src="/images/conest_logo.png"
-              alt="CoNest Logo"
-              width={scrolled ? 32 : 40}
-              height={scrolled ? 32 : 40}
-              className="transition-all duration-300"
-            />
             <p className={`font-bold text-conest-darkGray transition-all duration-300 ${scrolled ? 'text-lg' : 'text-xl'}`}>
               Co<span className="text-conest-blue">Nest</span>
             </p>
